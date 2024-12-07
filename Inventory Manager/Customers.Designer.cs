@@ -197,7 +197,7 @@
             this.note.Size = new System.Drawing.Size(569, 43);
             this.note.TabIndex = 17;
             this.note.Text = "Notice: You don\'t have to enter the purchase\'s id while saving a new customer\r\n, " +
-    "you can use it to Search , Delete and Update a customer\'s";
+    "you can use it to Search , Delete and Update a customer";
             this.note.Click += new System.EventHandler(this.note_Click);
             // 
             // productBindingSource
