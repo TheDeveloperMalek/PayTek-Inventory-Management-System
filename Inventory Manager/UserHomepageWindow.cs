@@ -14,7 +14,7 @@ namespace Inventory_Manager
         }
         #endregion
 
-        #region startup_functions
+        #region startup functions
         private void KeysShortcuts(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.F) //make full screen
@@ -124,18 +124,21 @@ namespace Inventory_Manager
             ir.Show();
         }
 
-        #region shortcut guidance button
+        #region shortcut guidance 
+
         private void shortcutBtn_Click(object sender, EventArgs e)
         {
             MessageBox.Show(@"Ctrl + f => Toggle full screen
 Ctrl + m => Minimize the form
 Ctrl + e => Close the form
 Alt + s => Switch to login form (just for homepage)
+Ctrl + p => To save the table as an excel file (just for reports)
 Ctrl + i => infromation about the developer
                             ", "Shortcuts Table");
         }
+
         #endregion
-        
+
         #endregion
 
         #region entities

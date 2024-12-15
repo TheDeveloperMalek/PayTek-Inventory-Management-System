@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.searchBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.product_barcode_text_box = new System.Windows.Forms.TextBox();
             this.exportbtn = new System.Windows.Forms.Button();
@@ -65,6 +66,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(38)))), ((int)(((byte)(53)))));
+            this.groupBox1.Controls.Add(this.searchBtn);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.product_barcode_text_box);
             this.groupBox1.Controls.Add(this.exportbtn);
@@ -81,18 +83,32 @@
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.MinimumSize = new System.Drawing.Size(1112, 93);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1134, 93);
+            this.groupBox1.Size = new System.Drawing.Size(1155, 102);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // searchBtn
+            // 
+            this.searchBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.searchBtn.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBtn.ForeColor = System.Drawing.Color.Black;
+            this.searchBtn.Location = new System.Drawing.Point(941, 14);
+            this.searchBtn.Name = "searchBtn";
+            this.searchBtn.Size = new System.Drawing.Size(208, 39);
+            this.searchBtn.TabIndex = 40;
+            this.searchBtn.Text = "Reset Filter";
+            this.searchBtn.UseVisualStyleBackColor = false;
+            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click_1);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(222, 14);
+            this.label5.Location = new System.Drawing.Point(222, 19);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(214, 24);
             this.label5.TabIndex = 36;
@@ -103,10 +119,12 @@
             this.product_barcode_text_box.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.product_barcode_text_box.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.product_barcode_text_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.product_barcode_text_box.Location = new System.Drawing.Point(226, 41);
+            this.product_barcode_text_box.Location = new System.Drawing.Point(226, 46);
             this.product_barcode_text_box.Name = "product_barcode_text_box";
             this.product_barcode_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_barcode_text_box.TabIndex = 35;
+            this.product_barcode_text_box.TextChanged += new System.EventHandler(this.product_barcode_text_box_TextChanged);
+            this.product_barcode_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_barcode_text_box_KeyUp);
             // 
             // exportbtn
             // 
@@ -114,10 +132,10 @@
             this.exportbtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.exportbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exportbtn.ForeColor = System.Drawing.Color.Black;
-            this.exportbtn.Location = new System.Drawing.Point(914, 16);
+            this.exportbtn.Location = new System.Drawing.Point(941, 54);
             this.exportbtn.Name = "exportbtn";
             this.exportbtn.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.exportbtn.Size = new System.Drawing.Size(208, 55);
+            this.exportbtn.Size = new System.Drawing.Size(208, 39);
             this.exportbtn.TabIndex = 34;
             this.exportbtn.Text = "Export as excel file";
             this.exportbtn.UseVisualStyleBackColor = false;
@@ -127,7 +145,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(688, 46);
+            this.label4.Location = new System.Drawing.Point(688, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 29);
             this.label4.TabIndex = 32;
@@ -147,17 +165,20 @@
             // 
             // dateTimePickerStart
             // 
+            this.dateTimePickerStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePickerStart.Location = new System.Drawing.Point(738, 16);
             this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(152, 20);
+            this.dateTimePickerStart.Size = new System.Drawing.Size(197, 29);
             this.dateTimePickerStart.TabIndex = 29;
+            this.dateTimePickerStart.Value = new System.DateTime(2023, 9, 18, 0, 0, 0, 0);
             this.dateTimePickerStart.ValueChanged += new System.EventHandler(this.dateTimePickerStart_ValueChanged);
             // 
             // dateTimePickerEnd
             // 
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(738, 52);
+            this.dateTimePickerEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerEnd.Location = new System.Drawing.Point(738, 58);
             this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(152, 20);
+            this.dateTimePickerEnd.Size = new System.Drawing.Size(197, 29);
             this.dateTimePickerEnd.TabIndex = 28;
             this.dateTimePickerEnd.ValueChanged += new System.EventHandler(this.dateTimePickerEnd_ValueChanged);
             // 
@@ -166,7 +187,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Location = new System.Drawing.Point(6, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(154, 24);
             this.label1.TabIndex = 21;
@@ -178,7 +199,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(438, 14);
+            this.label2.Location = new System.Drawing.Point(438, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 24);
             this.label2.TabIndex = 23;
@@ -190,22 +211,24 @@
             this.product_name_text_box.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.product_name_text_box.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.product_name_text_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.product_name_text_box.Location = new System.Drawing.Point(442, 41);
+            this.product_name_text_box.Location = new System.Drawing.Point(442, 46);
             this.product_name_text_box.Name = "product_name_text_box";
             this.product_name_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_name_text_box.TabIndex = 22;
             this.product_name_text_box.TextChanged += new System.EventHandler(this.product_name_text_box_TextChanged);
+            this.product_name_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_name_text_box_KeyUp);
             // 
             // product_id_text_box
             // 
             this.product_id_text_box.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.product_id_text_box.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.product_id_text_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.product_id_text_box.Location = new System.Drawing.Point(10, 41);
+            this.product_id_text_box.Location = new System.Drawing.Point(10, 46);
             this.product_id_text_box.Name = "product_id_text_box";
             this.product_id_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_id_text_box.TabIndex = 20;
             this.product_id_text_box.TextChanged += new System.EventHandler(this.product_id_text_box_TextChanged);
+            this.product_id_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_id_text_box_KeyUp);
             // 
             // productReportBindingSource1
             // 
@@ -244,10 +267,10 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 93);
+            this.dataGridView2.Location = new System.Drawing.Point(0, 102);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 50;
-            this.dataGridView2.Size = new System.Drawing.Size(1134, 348);
+            this.dataGridView2.Size = new System.Drawing.Size(1155, 339);
             this.dataGridView2.TabIndex = 31;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
@@ -309,10 +332,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1134, 441);
+            this.ClientSize = new System.Drawing.Size(1155, 441);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.groupBox1);
-            this.MinimumSize = new System.Drawing.Size(1150, 480);
+            this.MinimumSize = new System.Drawing.Size(1171, 480);
             this.Name = "ProductsReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Products Report form";
@@ -368,5 +391,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox product_barcode_text_box;
+        private System.Windows.Forms.Button searchBtn;
     }
 }

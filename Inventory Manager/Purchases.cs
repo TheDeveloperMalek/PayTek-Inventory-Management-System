@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Inventory_Manager
 {
@@ -221,6 +222,35 @@ namespace Inventory_Manager
                 conn.Open();
             }
         }
+        #endregion
+
+        #region Functions_For_Events
+        void SearchCommand(string command, SqlCommand objCmd)
+        {
+            cmd = conn.CreateCommand();
+            cmd.CommandText = command;
+            cmd.Parameters.AddWithValue("@product_id", product_id_value + "%");
+            cmd.Parameters.AddWithValue("@purchase_id", purchase_id_value + "%");
+            cmd.Parameters.AddWithValue("@product_barcode", product_barcode_value + "%");
+            cmd.Parameters.AddWithValue("@product_name", "%" + product_name_value + "%");
+            cmd.Parameters.AddWithValue("@customer_id", customer_id_value + "%");
+            cmd.Parameters.AddWithValue("@customer_name", "%" + customer_name_value + "%");
+            cmd.Parameters.AddWithValue("@product_quantity", product_quantity_value + "%");
+            
+            cmd.ExecuteNonQuery();
+            ShowDataSearching(objCmd);
+            cmd.Parameters.Clear();
+            cmd.Dispose();
+        }
+
+        void ShowDataSearching(SqlCommand objCmd)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
         #endregion
 
         #region validation_functions
@@ -773,86 +803,18 @@ namespace Inventory_Manager
         }
         #endregion
 
-        #region search_button
+        #region Reset_button
         //searching for a purchase
         private void searchBtn_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
-            if (At_Least_Input_For_Search())
-            {
-                cmd = conn.CreateCommand();
-                if (!(product_name_text_box.Text == ""))
-                {
-
-                    product_name_value = product_name_text_box.Text;
-                    cmd.CommandText = "SELECT * FROM Purchase WHERE product_name LIKE @product_name";
-                }
-
-                else if (!(product_id_text_box.Text == ""))
-                {
-                    if (!int.TryParse(product_id_text_box.Text, out product_id_value) || product_id_value < 0)
-                    {
-                        MessageBox.Show("Please enter a valid value for product's id field");
-                        return;
-                    }
-                    cmd.CommandText = "SELECT * FROM Purchase WHERE product_id = @product_id";
-                }
-
-                else if (!(product_barcode_text_box.Text == ""))
-                {
-                    if (!int.TryParse(product_barcode_text_box.Text, out product_barcode_value) || product_barcode_value < 0)
-                    {
-                        MessageBox.Show("Please enter a valid value for product's barcode field");
-                        return;
-                    }
-                    cmd.CommandText = "SELECT * FROM Purchase WHERE product_barcode = @product_barcode";
-                }
-
-                else if (!(customer_name_text_box.Text == ""))
-                {
-                    customer_name_value = customer_name_text_box.Text;
-                    cmd.CommandText = "SELECT * FROM Purchase WHERE customer_name LIKE @customer_name";
-                }
-
-                else if (!(customer_id_text_box.Text == ""))
-                {
-                    if (!int.TryParse(customer_id_text_box.Text, out customer_id_value) || customer_id_value < 0)
-                    {
-                        MessageBox.Show("Please enter a valid value for customer's id field");
-                        return;
-                    }
-                    cmd.CommandText = "SELECT * FROM Purchase WHERE customer_id = @customer_id";
-                }
-
-                else
-                {
-                    if (!int.TryParse(purchase_id_text_box.Text, out purchase_id_value) || purchase_id_value < 0)
-                    {
-                        MessageBox.Show("Please enter a valid value for purchase's id field");
-                        return;
-                    }
-                    cmd.CommandText = "SELECT * FROM Purchase WHERE id = @purchase_id";
-                }
-
-                cmd.Parameters.AddWithValue("@purchase_id", purchase_id_value);
-                cmd.Parameters.AddWithValue("@product_barcode", product_barcode_value);
-                cmd.Parameters.AddWithValue("@product_name", "%" + product_name_value + "%");
-                cmd.Parameters.AddWithValue("@product_id", product_id_value);
-                cmd.Parameters.AddWithValue("@customer_name", "%" + customer_name_value + "%");
-                cmd.Parameters.AddWithValue("@customer_id", customer_id_value);
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dataGridView1.DataSource = dt;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-            }
+            purchase_id_text_box.Text =
+            product_id_text_box.Text =
+            product_barcode_text_box.Text =
+            product_name_text_box.Text =
+            product_quantity_text_box.Text =
+            customer_id_text_box.Text =
+            customer_name_text_box.Text = "";
+            ShowData();
         }
         #endregion
 
@@ -997,54 +959,154 @@ namespace Inventory_Manager
         #region complete for product id
         private void product_id_text_box_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                using (PublicEntities1 db = new PublicEntities1())
-                {
-                    productBindingSource.DataSource = db.Product.Where(p => p.id.ToString().Contains(product_id_text_box.Text)).ToList();
-                }
-            }
+
         }
         #endregion
 
         #region complete for product name
         private void product_name_text_box_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                using (PublicEntities1 db = new PublicEntities1())
-                {
-                    productBindingSource.DataSource = db.Product.Where(p => p.name.Contains(product_name_text_box.Text)).ToList();
-                }
-            }
+
         }
         #endregion
 
         #region complete for customer id
         private void customer_id_text_box_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                using (CustomerEntities db = new CustomerEntities())
-                {
-                    customerBindingSource.DataSource = db.Customer.Where(p => p.id.ToString().Contains(customer_id_text_box.Text)).ToList();
-                }
-            }
+
         }
         #endregion
 
         #region complete for customer name
         private void customer_name_text_box_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                using (CustomerEntities db = new CustomerEntities())
-                {
-                    customerBindingSource.DataSource = db.Customer.Where(p => p.name.Contains(customer_id_text_box.Text)).ToList();
-                }
-            }
+
         }
         #endregion
+
+        #endregion
+
+        #region Events_For_Searching
+
+        private void purchase_id_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + purchase_id_text_box.Text, out purchase_id_value) && purchase_id_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                     FROM Purchase
+                                     WHERE
+                                     id LIKE @purchase_id
+                                     ORDER BY id";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for purchase id");
+                purchase_id_text_box.Text = "0";
+                return;
+            }
+        }
+
+        private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            var command = $@"SELECT  *
+                                FROM Purchase
+                                WHERE
+                                product_name LIKE @product_name
+                                ORDER BY id";
+            product_name_value = product_name_text_box.Text;
+
+            SearchCommand(command, cmd);
+        }
+
+        private void product_barcode_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_barcode_text_box.Text, out product_barcode_value) && product_barcode_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                     FROM Purchase
+                                     WHERE
+                                     product_barcode LIKE @product_barcode
+                                     ORDER BY id";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for barcode");
+                product_barcode_text_box.Text = "0";
+                return;
+            }
+        }
+
+        private void product_id_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_id_text_box.Text, out product_id_value) && product_id_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                     FROM Purchase
+                                     WHERE
+                                     product_id LIKE @product_id
+                                     ORDER BY id";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for product id");
+                product_id_text_box.Text = "0";
+                return;
+            }
+        }
+
+        private void product_quantity_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_quantity_text_box.Text, out product_quantity_value) && product_quantity_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                     FROM Purchase
+                                     WHERE
+                                     quantity LIKE @product_quantity
+                                     ORDER BY id";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for quantity");
+                product_quantity_text_box.Text = "0";
+                return;
+            }
+        }
+
+        private void customer_name_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            var command = $@"SELECT  *
+                                FROM Purchase
+                                WHERE
+                                customer_name LIKE @customer_name
+                                ORDER BY id";
+            customer_name_value = customer_name_text_box.Text;
+
+            SearchCommand(command, cmd);
+        }
+
+        private void customer_id_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + customer_id_text_box.Text, out customer_id_value) && customer_id_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                     FROM Purchase
+                                     WHERE
+                                     customer_id LIKE @customer_id
+                                     ORDER BY id";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for customer id");
+                customer_id_text_box.Text = "0";
+                return;
+            }
+        }
+
 
         #endregion
 

@@ -124,6 +124,12 @@ namespace Inventory_Manager
             ir.Show();
         }
 
+        private void changeUserPassword_Click(object sender, EventArgs e)
+        {
+            var changeUsersPassword = new ChangeUsersPassword();
+            changeUsersPassword.Show();
+        }
+
         #region shortcut guidance button
         private void shortcutBtn_Click(object sender, EventArgs e)
         {
@@ -131,6 +137,7 @@ namespace Inventory_Manager
 Ctrl + m => Minimize the form
 Ctrl + e => Close the form
 Alt + s => Switch to login form (just for homepage)
+Ctrl + p => To save the table as an excel file (just for reports)
 Ctrl + i => infromation about the developer
                             ", "Shortcuts Table");
         }
@@ -157,17 +164,9 @@ Ctrl + i => infromation about the developer
         private void button1_Click(object sender, EventArgs e) { }
         private void panel1_Paint(object sender, PaintEventArgs e) { }
         private void button8_Click(object sender, EventArgs e) { }
+        private void changeAdminPasswordBtn_Click(object sender, EventArgs e) { }
+
         #endregion
 
-        private void changeAdminPasswordBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void changeUserPassword_Click(object sender, EventArgs e)
-        {
-            var changeUsersPassword = new ChangeUsersPassword();
-            changeUsersPassword.Show();
-        }
     }
 }

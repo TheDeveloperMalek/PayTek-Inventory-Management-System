@@ -106,6 +106,29 @@ namespace Inventory_Manager
         }
         #endregion
 
+        #region Functions_For_Events
+        void SearchCommand(string command, SqlCommand objCmd)
+        {
+            cmd = conn.CreateCommand();
+            cmd.CommandText = command;
+            cmd.Parameters.AddWithValue("@id", id_value + "%");
+            cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
+            cmd.ExecuteNonQuery();
+            ShowDataSearching(objCmd);
+            cmd.Parameters.Clear();
+            cmd.Dispose();
+        }
+
+        void ShowDataSearching(SqlCommand objCmd)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        #endregion
+
         #region validation_functions
         //Check if the text boxes were empty
         private bool Chech_If_Text_Boxes_Were_Empty()
@@ -371,29 +394,49 @@ namespace Inventory_Manager
         }
         #endregion
 
-        #region search_button
+        #region Reset_button
+        //Reset filters and view
         private void searchBtn_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
-            if (At_Least_Input_Requriements())
-            {
-                cmd = conn.CreateCommand();
-                if (!(customer_name_text_box.Text == ""))
-                    cmd.CommandText = "SELECT * FROM Customer WHERE name LIKE @name";
-                else
-                    cmd.CommandText = "SELECT * FROM Customer WHERE id = @id";
-
-                cmd.Parameters.AddWithValue("@id", id_value);
-                cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
-
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dataGridView1.DataSource = dt;
-            }
+            customer_id_text_box.Text =
+            customer_name_text_box.Text = "";
+            ShowData();
         }
         #endregion
+
+        #endregion
+
+        #region Events_For_Searching
+        private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            var command = $@"SELECT  *
+                                 FROM Customer
+                                 WHERE
+                                 name LIKE @name
+                                 ORDER BY id";
+            name_value = customer_name_text_box.Text;
+
+            SearchCommand(command, cmd);
+        }
+
+        private void customer_id_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + customer_id_text_box.Text, out id_value) && id_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                      FROM Customer
+                                      WHERE
+                                      id LIKE @id
+                                      ORDER BY id";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for id");
+                customer_id_text_box.Text = "0";
+                return;
+            }
+        }
 
         #endregion
 

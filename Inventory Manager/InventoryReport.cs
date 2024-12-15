@@ -16,14 +16,19 @@ namespace Inventory_Manager
         SqlCommand cmd = new SqlCommand();
 
         //holding data that will affect on the database
-        private int id_value , barcode_value;
+        private int id_value, barcode_value;
         private string name_value;
 
         public InventoryReport()
         {
             InitializeComponent();
 
-            #region for shrotcuts
+            #region for DatePicker
+            dateTimePickerStart.MaxDate = DateTime.Now.AddDays(-1);
+            dateTimePickerEnd.MaxDate = DateTime.Now;
+            #endregion
+
+            #region For Shrotcuts
             this.KeyDown += new KeyEventHandler(KeysShortcuts);
             this.KeyPreview = true;
             #endregion
@@ -34,12 +39,12 @@ namespace Inventory_Manager
             // TODO: This line of code loads data into the 'testDataSet.InventoryReport' table. You can move, or remove it, as needed.
             this.inventoryReportTableAdapter1.Fill(this.testDataSet.InventoryReport);
             #region establish_Connection
+
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+
             conn.ConnectionString = ("Data Source=DESKTOP-CM5BM88;Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
-            if (conn.State != ConnectionState.Open)
-            {
-                ShowData();
-                Open_Connection_If_Was_Closed();
-            }
+            ShowData();
             #endregion
 
             #region For ORM(auto Complete)
@@ -129,7 +134,7 @@ namespace Inventory_Manager
         {
             Open_Connection_If_Was_Closed();
             cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM InventoryReport ORDER BY date DESC";
+            cmd.CommandText = "SELECT * FROM InventoryReport";
             cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -156,14 +161,22 @@ namespace Inventory_Manager
                 }
                 return;
             }
+
             if (e.Control && e.KeyCode == Keys.E) //exit
             {
                 this.Close();
                 return;
             }
+
             if (e.Control && e.KeyCode == Keys.M) //minimize
             {
                 this.WindowState = FormWindowState.Minimized;
+                return;
+            }
+
+            if (e.Control && e.KeyCode == Keys.P) //print excel file
+            {
+                exportbtn_Click(sender, e);
                 return;
             }
 
@@ -187,54 +200,61 @@ namespace Inventory_Manager
             toast.Show(message, this, x, y, 1500);
         }
 
-        void QueryShow(string style)
-        {
-            {
-                Open_Connection_If_Was_Closed();
-                DateTime startDate = dateTimePickerStart.Value;
-                DateTime endDate = dateTimePickerEnd.Value;
 
-                cmd = conn.CreateCommand();
-                cmd.CommandText = $"SELECT * FROM InventoryReport WHERE date BETWEEN @StartDate AND @EndDate ORDER BY date {style}";
-                cmd.Parameters.AddWithValue("@StartDate", startDate);
-                cmd.Parameters.AddWithValue("@EndDate", endDate);
-                if (product_name_text_box.Text != "")
-                {
-                    name_value = product_name_text_box.Text;
-                    cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
-                    cmd.CommandText = $"SELECT * FROM InventoryReport WHERE date BETWEEN @StartDate AND @EndDate AND name LIKE @name ORDER BY date {style}";
-                }
-                if (product_id_text_box.Text != "")
-                {
-                    if (!int.TryParse(product_id_text_box.Text, out id_value) || id_value < 0)
-                    {
-                        MessageBox.Show("Please enter a valid value for the id field");
-                        return;
-                    }
-                    cmd.Parameters.AddWithValue("@id", id_value);
-                    cmd.CommandText = $"SELECT * FROM InventoryReport WHERE date BETWEEN @StartDate AND @EndDate AND id = @id ORDER BY date {style}";
-                }
-                if (product_barcode_text_box.Text != "")
-                {
-                    if (!int.TryParse(product_barcode_text_box.Text, out barcode_value) || barcode_value < 0)
-                    {
-                        MessageBox.Show("Please enter a valid value for the id field");
-                        return;
-                    }
-                    cmd.Parameters.AddWithValue("@barcode", barcode_value);
-                    cmd.CommandText = $"SELECT * FROM InventoryReport WHERE date BETWEEN @StartDate AND @EndDate AND barcode = @barcode ORDER BY date {style}";
-                }
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dataGridView1.DataSource = dt;
+        #endregion
+
+        #region Functions_For_Events
+        void SearchCommand(string command, SqlCommand objCmd)
+        {
+            if (dateTimePickerStart.Value > dateTimePickerEnd.Value)
+            {
+                MessageBox.Show("Starting date should not be after ending date");
+                dateTimePickerStart.Value = dateTimePickerEnd.Value.AddDays(-1);
+                return;
             }
+
+            cmd = conn.CreateCommand();
+            cmd.CommandText = command;
+            cmd.Parameters.AddWithValue("@StartDate", dateTimePickerStart.Value);
+            cmd.Parameters.AddWithValue("@EndDate", dateTimePickerEnd.Value);
+            cmd.Parameters.AddWithValue("@id", id_value + "%");
+            cmd.Parameters.AddWithValue("@barcode", barcode_value + "%");
+            cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
+            cmd.ExecuteNonQuery();
+            ShowDataSearching(objCmd);
+            cmd.Parameters.Clear();
+            cmd.Dispose();
+        }
+
+        void ShowDataSearching(SqlCommand objCmd)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
         }
 
         #endregion
 
         #region buttons
+
+        #region Reset_Filter_button
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            product_id_text_box.Text =
+            product_barcode_text_box.Text =
+            product_name_text_box.Text = "";
+
+            var command = $@"SELECT  id , barcode , name , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                      FROM InventoryReport
+                                      WHERE date 
+                                      BETWEEN @StartDate
+                                      AND @EndDate
+                                      GROUP BY  id , barcode , name
+                                      ORDER BY barcode";
+            SearchCommand(command, cmd);
+        }
+        #endregion
 
         #region Export_button
         private void exportbtn_Click(object sender, EventArgs e)
@@ -245,6 +265,7 @@ namespace Inventory_Manager
             {
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
+
                     saveFileDialog.Filter = "Excel Files|*.xlsx";
                     saveFileDialog.Title = "Save an Excel File";
                     saveFileDialog.FileName = "Inventory Report.xlsx";
@@ -253,6 +274,18 @@ namespace Inventory_Manager
                     {
                         using (XLWorkbook workbook = new XLWorkbook())
                         {
+                            workbook.Properties.Author = "Muhammad Malek Alset";
+                            workbook.Properties.Manager = "Mansour Alset & Waseem Alshmaa";
+                            workbook.Properties.Category = "Reports";
+                            workbook.Properties.Title = $"Inventory Report";
+                            workbook.Properties.Comments = $@"Report:
+from: {dateTimePickerStart.Value.ToShortDateString()}
+to: {dateTimePickerEnd.Value.ToShortDateString()} ";
+                            workbook.Properties.Company = "PayTek Company";
+                            workbook.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                            workbook.RowHeight = 33;
+                            workbook.ColumnWidth = 28;
+                            workbook.Style.Font.FontSize = 28;
                             workbook.Worksheets.Add(dataTable, "Sheet1");
                             workbook.SaveAs(saveFileDialog.FileName);
                         }
@@ -269,7 +302,7 @@ namespace Inventory_Manager
         #endregion
 
         #endregion
-        
+
         #region autocomplete textbox Functions
 
         #region complete for id
@@ -300,6 +333,68 @@ namespace Inventory_Manager
 
         #endregion
 
+        #region Events_For_Searching
+        private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            var command = $@"SELECT  id , barcode , name , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                        FROM InventoryReport
+                                        WHERE date 
+                                        BETWEEN @StartDate
+                                        AND @EndDate
+                                        AND name LIKE @name
+                                        GROUP BY  id , barcode , name
+                                        ORDER BY barcode";
+            name_value = product_name_text_box.Text;
+
+            SearchCommand(command, cmd);
+        }
+
+        private void product_barcode_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_barcode_text_box.Text, out barcode_value) && barcode_value >= 0)
+            {
+                var command = $@"SELECT  id , barcode , name , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                             FROM InventoryReport
+                                             WHERE date 
+                                             BETWEEN @StartDate
+                                             AND @EndDate 
+                                             AND barcode LIKE @barcode
+                                             GROUP BY  id , barcode , name
+                                             ORDER BY barcode";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for barcode");
+                product_barcode_text_box.Text = "0";
+                return;
+            }
+        }
+
+        private void product_id_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_id_text_box.Text, out id_value) && id_value >= 0)
+            {
+                var command = $@"SELECT  id , barcode , name , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                             FROM InventoryReport
+                                             WHERE date 
+                                             BETWEEN @StartDate
+                                             AND @EndDate 
+                                             AND id LIKE @id
+                                             GROUP BY  id , barcode , name
+                                             ORDER BY barcode";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for id");
+                product_id_text_box.Text = "0";
+                return;
+            }
+        }
+
+        #endregion
+
         #region entities
         private void groupBox1_Enter(object sender, EventArgs e) { }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
@@ -308,7 +403,9 @@ namespace Inventory_Manager
         private void product_id_text_box_TextChanged(object sender, EventArgs e) { }
         private void label5_Click(object sender, EventArgs e) { }
         private void product_barcode_text_box_TextChanged(object sender, EventArgs e) { }
-        private void label2_Click(object sender, EventArgs e){ }
+        private void product_name_text_box_KeyDown(object sender, KeyPressEventArgs e) { }
+        private void label2_Click(object sender, EventArgs e) { }
+        private void product_name_text_box_KeyPressed(object sender, KeyPressEventArgs e) { }
         #endregion
 
     }

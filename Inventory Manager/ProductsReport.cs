@@ -22,8 +22,16 @@ namespace Inventory_Manager
         public ProductsReport()
         {
             InitializeComponent();
+
+            #region For DatePicker
+            dateTimePickerStart.MaxDate = DateTime.Now.AddDays(-1);
+            dateTimePickerEnd.MaxDate = DateTime.Now;
+            #endregion
+
+            #region For Shortcuts
             this.KeyDown += new KeyEventHandler(KeysShortcuts);
             this.KeyPreview = true;
+            #endregion
         }
 
         private void ProductsReport_Load(object sender, EventArgs e)
@@ -198,14 +206,22 @@ namespace Inventory_Manager
                 }
                 return;
             }
+
             if (e.Control && e.KeyCode == Keys.E) //exit
             {
                 this.Close();
                 return;
             }
+
             if (e.Control && e.KeyCode == Keys.M) //minimize
             {
                 this.WindowState = FormWindowState.Minimized;
+                return;
+            }
+
+            if (e.Control && e.KeyCode == Keys.P) //print excel file
+            {
+                exportbtn_Click(sender, e);
                 return;
             }
 
@@ -227,6 +243,39 @@ namespace Inventory_Manager
             x = (screenWidth - toastWidth) / 2,
             y = screenHeight - toastHeight - 75;
             toast.Show(message, this, x, y, 1500);
+        }
+
+        #endregion
+
+        #region Functions_For_Events
+        void SearchCommand(string command, SqlCommand objCmd)
+        {
+            if (dateTimePickerStart.Value > dateTimePickerEnd.Value)
+            {
+                MessageBox.Show("Starting date should not be after ending date");
+                dateTimePickerStart.Value = dateTimePickerEnd.Value.AddDays(-1);
+                return;
+            }
+
+            cmd = conn.CreateCommand();
+            cmd.CommandText = command;
+            cmd.Parameters.AddWithValue("@StartDate", dateTimePickerStart.Value);
+            cmd.Parameters.AddWithValue("@EndDate", dateTimePickerEnd.Value);
+            cmd.Parameters.AddWithValue("@id", id_value + "%");
+            cmd.Parameters.AddWithValue("@barcode", barcode_value + "%");
+            cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
+            cmd.ExecuteNonQuery();
+            ShowDataSearching(objCmd);
+            cmd.Parameters.Clear();
+            cmd.Dispose();
+        }
+
+        void ShowDataSearching(SqlCommand objCmd)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView2.DataSource = dt;
         }
 
         #endregion
@@ -265,6 +314,25 @@ namespace Inventory_Manager
         }
         #endregion
 
+        #region Reset_Filter_button
+        private void searchBtn_Click_1(object sender, EventArgs e)
+        {
+            product_id_text_box.Text =
+            product_barcode_text_box.Text =
+            product_name_text_box.Text = "";
+
+            var command = $@"SELECT  product_id , product_barcode , product_name , status , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                      FROM ProductReport
+                                      WHERE date 
+                                      BETWEEN @StartDate
+                                      AND @EndDate
+                                      GROUP BY  product_id , product_barcode , product_name , status
+                                      ORDER BY product_barcode";
+            SearchCommand(command, cmd);
+        }
+
+        #endregion
+
         #endregion
 
         #region autocomplete textbox Functions
@@ -297,10 +365,71 @@ namespace Inventory_Manager
 
         #endregion
 
+        #region Events_For_Searching
+        private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            var command = $@"SELECT  product_id , product_barcode , product_name , status , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                FROM ProductReport
+                                WHERE date 
+                                BETWEEN @StartDate
+                                AND @EndDate
+                                AND product_name LIKE @name
+                                GROUP BY  product_id , product_barcode , product_name , status
+                                ORDER BY product_barcode";
+            name_value = product_name_text_box.Text;
+
+            SearchCommand(command, cmd);
+        }
+
+        private void product_barcode_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_barcode_text_box.Text, out barcode_value) && barcode_value >= 0)
+            {
+                var command = $@"SELECT  product_id , product_barcode , product_name , status , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                     FROM ProductReport
+                                     WHERE date 
+                                     BETWEEN @StartDate
+                                     AND @EndDate 
+                                     AND product_barcode LIKE @barcode
+                                     GROUP BY  product_id , product_barcode , product_name , status
+                                     ORDER BY product_barcode";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for barcode");
+                product_barcode_text_box.Text = "0";
+                return;
+            }
+        }
+        private void product_id_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_id_text_box.Text, out id_value) && id_value >= 0)
+            {
+                var command = $@"SELECT  product_id , product_barcode , product_name , status , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                     FROM ProductReport
+                                     WHERE date 
+                                     BETWEEN @StartDate
+                                     AND @EndDate 
+                                     AND product_id LIKE @id
+                                     GROUP BY  product_id , product_barcode , product_name , status
+                                     ORDER BY product_barcode";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for id");
+                product_id_text_box.Text = "0";
+                return;
+            }
+        }
+
+        #endregion
+
         #region entities
         private void groupBox1_Enter(object sender, EventArgs e) { }
-        private void productReportBindingSource_CurrentChanged(object sender, EventArgs e) { }
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void product_barcode_text_box_TextChanged(object sender, EventArgs e) { }
         private void label4_Click(object sender, EventArgs e) { }
         private void label3_Click(object sender, EventArgs e) { }
         private void dateTimePickerStart_ValueChanged(object sender, EventArgs e) { }

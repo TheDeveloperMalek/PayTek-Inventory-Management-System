@@ -36,12 +36,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.searchBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.product_barcode_text_box = new System.Windows.Forms.TextBox();
             this.exportbtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +51,6 @@
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inventoryReportBindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.testDataSet = new Inventory_Manager.InventoryReportDataSet();
-            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.inventoryReportBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.inventoryReportDataSet = new Inventory_Manager.InventoryReportDataSet();
             this.inventoryReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -59,17 +58,19 @@
             this.inventoryReportBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.inventoryReportBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.inventoryReportTableAdapter1 = new Inventory_Manager.TestDataSetTableAdapters.InventoryReportTableAdapter();
+            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.testDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // product_id_text_box
@@ -82,6 +83,7 @@
             this.product_id_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_id_text_box.TabIndex = 20;
             this.product_id_text_box.TextChanged += new System.EventHandler(this.product_id_text_box_TextChanged);
+            this.product_id_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_id_text_box_KeyUp);
             // 
             // product_name_text_box
             // 
@@ -93,6 +95,8 @@
             this.product_name_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_name_text_box.TabIndex = 22;
             this.product_name_text_box.TextChanged += new System.EventHandler(this.product_name_text_box_TextChanged);
+            this.product_name_text_box.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.product_name_text_box_KeyPressed);
+            this.product_name_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_name_text_box_KeyUp);
             // 
             // label2
             // 
@@ -120,12 +124,13 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(55)))), ((int)(((byte)(81)))));
+            this.groupBox1.Controls.Add(this.dateTimePickerStart);
+            this.groupBox1.Controls.Add(this.searchBtn);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.product_barcode_text_box);
             this.groupBox1.Controls.Add(this.exportbtn);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.dateTimePickerStart);
             this.groupBox1.Controls.Add(this.dateTimePickerEnd);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
@@ -135,11 +140,25 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1132, 95);
+            this.groupBox1.Size = new System.Drawing.Size(1257, 95);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // searchBtn
+            // 
+            this.searchBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.searchBtn.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBtn.ForeColor = System.Drawing.Color.Black;
+            this.searchBtn.Location = new System.Drawing.Point(938, 10);
+            this.searchBtn.Name = "searchBtn";
+            this.searchBtn.Size = new System.Drawing.Size(208, 39);
+            this.searchBtn.TabIndex = 39;
+            this.searchBtn.Text = "Reset Filter";
+            this.searchBtn.UseVisualStyleBackColor = false;
+            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
             // label5
             // 
@@ -163,6 +182,7 @@
             this.product_barcode_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_barcode_text_box.TabIndex = 37;
             this.product_barcode_text_box.TextChanged += new System.EventHandler(this.product_barcode_text_box_TextChanged);
+            this.product_barcode_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_barcode_text_box_KeyUp);
             // 
             // exportbtn
             // 
@@ -170,9 +190,9 @@
             this.exportbtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.exportbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exportbtn.ForeColor = System.Drawing.Color.Black;
-            this.exportbtn.Location = new System.Drawing.Point(915, 20);
+            this.exportbtn.Location = new System.Drawing.Point(938, 50);
             this.exportbtn.Name = "exportbtn";
-            this.exportbtn.Size = new System.Drawing.Size(208, 55);
+            this.exportbtn.Size = new System.Drawing.Size(208, 39);
             this.exportbtn.TabIndex = 35;
             this.exportbtn.Text = "Export as excel file";
             this.exportbtn.UseVisualStyleBackColor = false;
@@ -198,21 +218,12 @@
             this.label3.TabIndex = 31;
             this.label3.Text = "From:";
             // 
-            // dateTimePickerStart
-            // 
-            this.dateTimePickerStart.Checked = false;
-            this.dateTimePickerStart.Location = new System.Drawing.Point(735, 20);
-            this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(152, 20);
-            this.dateTimePickerStart.TabIndex = 29;
-            this.dateTimePickerStart.Value = new System.DateTime(2024, 11, 16, 11, 52, 42, 0);
-            this.dateTimePickerStart.ValueChanged += new System.EventHandler(this.dateTimePickerStart_ValueChanged);
-            // 
             // dateTimePickerEnd
             // 
+            this.dateTimePickerEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePickerEnd.Location = new System.Drawing.Point(735, 52);
             this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(152, 20);
+            this.dateTimePickerEnd.Size = new System.Drawing.Size(197, 29);
             this.dateTimePickerEnd.TabIndex = 28;
             // 
             // dataGridView1
@@ -249,7 +260,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 95);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 50;
-            this.dataGridView1.Size = new System.Drawing.Size(1132, 385);
+            this.dataGridView1.Size = new System.Drawing.Size(1257, 385);
             this.dataGridView1.TabIndex = 29;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -293,10 +304,6 @@
             this.testDataSet.DataSetName = "TestDataSet";
             this.testDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // productBindingSource
-            // 
-            this.productBindingSource.DataSource = typeof(Inventory_Manager.Product);
-            // 
             // inventoryReportBindingSource2
             // 
             this.inventoryReportBindingSource2.DataMember = "InventoryReport";
@@ -329,15 +336,28 @@
             // 
             this.inventoryReportTableAdapter1.ClearBeforeFill = true;
             // 
+            // productBindingSource
+            // 
+            this.productBindingSource.DataSource = typeof(Inventory_Manager.Product);
+            // 
+            // dateTimePickerStart
+            // 
+            this.dateTimePickerStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerStart.Location = new System.Drawing.Point(735, 17);
+            this.dateTimePickerStart.Name = "dateTimePickerStart";
+            this.dateTimePickerStart.Size = new System.Drawing.Size(197, 29);
+            this.dateTimePickerStart.TabIndex = 40;
+            this.dateTimePickerStart.Value = new System.DateTime(2023, 9, 18, 0, 0, 0, 0);
+            // 
             // InventoryReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1132, 480);
+            this.ClientSize = new System.Drawing.Size(1257, 480);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
-            this.MinimumSize = new System.Drawing.Size(1148, 519);
+            this.MinimumSize = new System.Drawing.Size(1171, 519);
             this.Name = "InventoryReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory Report form";
@@ -348,13 +368,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.testDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -365,7 +385,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
         private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource inventoryReportBindingSource;
@@ -383,10 +402,12 @@
         private InventoryReportDataSet testDataSet;
         private System.Windows.Forms.BindingSource inventoryReportBindingSource5;
         private TestDataSetTableAdapters.InventoryReportTableAdapter inventoryReportTableAdapter1;
+        private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
     }
 }

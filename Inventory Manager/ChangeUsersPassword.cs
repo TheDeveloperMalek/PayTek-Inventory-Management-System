@@ -34,7 +34,7 @@ namespace Inventory_Manager
 
             if (conn.State != ConnectionState.Open)
             {
-                conn.ConnectionString = conn.ConnectionString = "Data Source=DESKTOP-CM5BM88;Initial Catalog=Public;Integrated Security=True;Encrypt=False;";
+                conn.ConnectionString = conn.ConnectionString = $"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;";
 
                 conn.Close();
                 conn.Open();
@@ -56,7 +56,7 @@ namespace Inventory_Manager
                 return;
             }
 
-            if(e.KeyCode == Keys.Enter) //click save button when click enter
+            if (e.KeyCode == Keys.Enter) //click save button when click enter
             {
                 LogintBtn_Click(sender, e);
                 return;
@@ -251,5 +251,4 @@ namespace Inventory_Manager
         private void crrUserPass_Click(object sender, EventArgs e) { }
         #endregion
     }
-
 }

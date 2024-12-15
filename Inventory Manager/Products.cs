@@ -47,6 +47,8 @@ namespace Inventory_Manager
                 conn.Open();
             }
         }
+
+        #region for shortcuts
         //Shortcuts for window
         private void KeysShortcuts(object sender, KeyEventArgs e)
         {
@@ -83,6 +85,7 @@ namespace Inventory_Manager
                 return;
             }
         }
+        #endregion
 
         //showing a message as a toast
         private void ShowToast(string message)
@@ -109,6 +112,32 @@ namespace Inventory_Manager
             da.Fill(dt);
             dataGridView1.DataSource = dt;
         }
+        #endregion
+
+        #region Functions_For_Events
+        void SearchCommand(string command, SqlCommand objCmd)
+        {
+            cmd = conn.CreateCommand();
+            cmd.CommandText = command;
+            cmd.Parameters.AddWithValue("@id", id_value + "%");
+            cmd.Parameters.AddWithValue("@barcode", barcode_value + "%");
+            cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
+            cmd.Parameters.AddWithValue("@quantity", quantity_value + "%");
+            cmd.Parameters.AddWithValue("@price", price_value + "%");
+            cmd.ExecuteNonQuery();
+            ShowDataSearching(objCmd);
+            cmd.Parameters.Clear();
+            cmd.Dispose();
+        }
+
+        void ShowDataSearching(SqlCommand objCmd)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
         #endregion
 
         #region validation_functions
@@ -227,6 +256,7 @@ namespace Inventory_Manager
         #endregion
 
         #region buttons
+
         #region save_button
         //save product
         private void button1_Click(object sender, EventArgs e)
@@ -527,33 +557,109 @@ namespace Inventory_Manager
         }
         #endregion
 
-        #region search_button
-        //Search by name or id button
+        #region Reset_button
+        //Reset filters and view
         private void printBtn_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
-            if (At_Least_Input_Requriements())
-            {
-                cmd = conn.CreateCommand();
-                if (!(product_name_text_box.Text == ""))
-                    cmd.CommandText = "SELECT * FROM Product WHERE name LIKE @name";
-                else if (product_id_text_box.Text != "")
-                    cmd.CommandText = "SELECT * FROM Product WHERE id = @id";
-                else
-                    cmd.CommandText = "SELECT * FROM Product WHERE barcode = @barcode";
-
-                cmd.Parameters.AddWithValue("@id", id_value);
-                cmd.Parameters.AddWithValue("@barcode", barcode_value);
-                cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
-
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dataGridView1.DataSource = dt;
-            }
+            product_id_text_box.Text =
+            product_barcode_text_box.Text =
+            product_name_text_box.Text =
+            product_quantity_text_box.Text =
+            product_price_text_box.Text = "";
+            ShowData();
         }
         #endregion
+
+        #endregion
+
+        #region Events_For_Searching
+        private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            var command = $@"SELECT  *
+                                        FROM Product
+                                        WHERE
+                                        name LIKE @name
+                                        ORDER BY barcode";
+            name_value = product_name_text_box.Text;
+
+            SearchCommand(command, cmd);
+        }
+
+        private void product_barcode_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_barcode_text_box.Text, out barcode_value) && barcode_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                             FROM Product
+                                             WHERE
+                                             barcode LIKE @barcode
+                                             ORDER BY barcode";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for barcode");
+                product_barcode_text_box.Text = "0";
+                return;
+            }
+        }
+
+        private void product_id_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_id_text_box.Text, out id_value) && id_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                             FROM Product
+                                             WHERE
+                                             id LIKE @id
+                                             ORDER BY barcode";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for id");
+                product_id_text_box.Text = "0";
+                return;
+            }
+        }
+
+        private void product_quantity_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (int.TryParse("0" + product_quantity_text_box.Text, out quantity_value) && quantity_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                             FROM Product
+                                             WHERE
+                                             quantity LIKE @quantity
+                                             ORDER BY barcode";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for quantity");
+                product_quantity_text_box.Text = "0";
+                return;
+            }
+        }
+
+        private void product_price_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (double.TryParse("0" + product_price_text_box.Text, out price_value) && price_value >= 0)
+            {
+                var command = $@"SELECT  *
+                                             FROM Product
+                                             WHERE
+                                             price LIKE @price
+                                             ORDER BY barcode";
+                SearchCommand(command, cmd);
+            }
+            else
+            {
+                MessageBox.Show("Enter a valid value for price");
+                product_quantity_text_box.Text = "0";
+                return;
+            }
+        }
 
         #endregion
 
