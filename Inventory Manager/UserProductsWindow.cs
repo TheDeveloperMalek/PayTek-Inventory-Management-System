@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Inventory_Manager.ProductDataSet1TableAdapters;
 using System.Configuration;
+using System.Net;
+using System.Drawing;
+using System.IO;
 namespace Inventory_Manager
 {
     public partial class UserProductsWindow : Form
@@ -17,6 +20,9 @@ namespace Inventory_Manager
         private int id_value, quantity_value, barcode_value;
         private string name_value;
         private double price_value;
+        public static string imageExtension = "jpg";
+        public static string storeDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string DirectoryName = "PayTek Inventory Management System";
 
         public UserProductsWindow()
         {
@@ -115,6 +121,66 @@ namespace Inventory_Manager
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+        }
+        #endregion
+
+        #region Get Image Functions
+        private void ImageGetterByBarcode(string barcode = "-1")
+        {
+            var path = $@"{storeDataDirectory}\{DirectoryName}\";
+            Image noSource = null;
+            try
+            {
+                noSource = Image.FromFile($@"{path}noitem.png");
+
+            }
+            catch { }
+
+
+            if (noSource != null)
+                productPhoto.Image = noSource;
+
+            else
+            {
+                var a = new WebClient();
+                a.DownloadFile("https://cdn-icons-png.flaticon.com/512/9018/9018889.png", "noitem.png");
+                File.Copy("noitem.png", $"{path}noitem.png");
+                File.Delete("noitem.png");
+                productPhoto.Image = null;
+            }
+
+            if (barcode != null)
+                try
+                {
+                    var Source = Image.FromFile($@"{path}{barcode}.{imageExtension}");
+                    if (Source != null)
+                        productPhoto.Image = Source;
+                }
+
+                catch { }
+        }
+
+        private string BarcodeGetterById(string command, SqlCommand objCmd)
+        {
+            cmd = conn.CreateCommand();
+            cmd.CommandText = command;
+            cmd.Parameters.AddWithValue("@id", id_value);
+            if (cmd.ExecuteScalar() != null)
+                return cmd.ExecuteScalar().ToString();
+
+            return null;
+        }
+
+        private string BarcodeGetterByName(string command, SqlCommand objCmd)
+        {
+
+            cmd = conn.CreateCommand();
+            cmd.CommandText = command;
+            cmd.Parameters.AddWithValue("@name", name_value);
+            if (cmd.ExecuteScalar() != null)
+                return cmd.ExecuteScalar().ToString();
+
+            return null;
         }
         #endregion
 
@@ -272,6 +338,32 @@ namespace Inventory_Manager
                     string name_value = product_name_text_box.Text;
                     try
                     {
+                        #region Export image logic
+                        DialogResult withPhoto;
+                        withPhoto = MessageBox.Show($"Do you want to export a photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (withPhoto == DialogResult.Yes)
+                        {
+                            using (var ofd = new OpenFileDialog())
+                            {
+                                ofd.Filter = $"Image File(*.{imageExtension})|*.{imageExtension}";
+                                ofd.Title = "Export image for the product";
+                                ofd.ShowDialog();
+                                using (var svf = new SaveFileDialog())
+                                {
+                                    string selectedFilePath = ofd.FileName;
+                                    productPhoto.Image = Image.FromFile(selectedFilePath);
+                                    string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PayTek Inventory Management System");
+                                    if (!Directory.Exists(folderPath))
+                                    {
+                                        Directory.CreateDirectory(folderPath);
+                                    }
+                                    string newFilePath = Path.Combine(folderPath, $"{barcode_value}.{imageExtension}");
+                                    File.Copy(selectedFilePath, newFilePath, true);
+                                }
+                            }
+                        }
+                        #endregion
+
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
@@ -393,6 +485,33 @@ namespace Inventory_Manager
                                     }
                                     if (product_barcode_text_box.Text != "")
                                     {
+
+                                        #region Export image logic
+                                        DialogResult withPhoto;
+                                        withPhoto = MessageBox.Show($"Do you want to update the photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                        if (withPhoto == DialogResult.Yes)
+                                        {
+                                            using (var ofd = new OpenFileDialog())
+                                            {
+                                                ofd.Filter = $"Image File(*.{imageExtension})|*.{imageExtension}";
+                                                ofd.Title = "Export image for the product";
+                                                ofd.ShowDialog();
+                                                using (var svf = new SaveFileDialog())
+                                                {
+                                                    string selectedFilePath = ofd.FileName;
+                                                    productPhoto.Image = Image.FromFile(selectedFilePath);
+                                                    string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PayTek Inventory Management System");
+                                                    if (!Directory.Exists(folderPath))
+                                                    {
+                                                        Directory.CreateDirectory(folderPath);
+                                                    }
+                                                    string newFilePath = Path.Combine(folderPath, $"{barcode_value}.{imageExtension}");
+                                                    File.Copy(selectedFilePath, newFilePath, true);
+                                                }
+                                            }
+                                        }
+                                        #endregion
+
                                         updateCmd.CommandText = @"INSERT INTO ProductReport
                                                                   VALUES (
                                                                             (SELECT id from Product where barcode = @barcode) , 
@@ -472,6 +591,18 @@ namespace Inventory_Manager
                                 cmd.Parameters.AddWithValue("@status", "Deleted a product");
                                 if (product_id_text_box.Text != "")
                                 {
+                                    #region Delete icon logic
+                                    try
+                                    {
+                                        var Command = $@"SELECT  barcode
+                                             FROM Product
+                                             WHERE
+                                             id = @id";
+
+                                        File.Delete($@"{storeDataDirectory}\{DirectoryName}\{BarcodeGetterById(Command, cmd)}.{imageExtension}");
+                                    }
+                                    catch { }
+                                    #endregion
 
                                     cmd.CommandText = @"INSERT INTO ProductReport 
                                                         VALUES ( 
@@ -491,6 +622,18 @@ namespace Inventory_Manager
 
                                 else if (product_barcode_text_box.Text != "")
                                 {
+                                    #region Delete icon logic
+                                    try
+                                    {
+                                        var Command = $@"SELECT  barcode
+                                             FROM Product
+                                             WHERE
+                                             barcode = @barcode";
+                                        File.Delete($@"{storeDataDirectory}\{DirectoryName}\{product_barcode_text_box.Text}.{imageExtension}");
+                                    }
+                                    catch { }
+                                    #endregion
+
                                     cmd.CommandText = @"INSERT INTO ProductReport
                                                         VALUES (
                                                                 (SELECT id FROM Product WHERE barcode = @barcode) ,
@@ -509,6 +652,19 @@ namespace Inventory_Manager
 
                                 else if (product_name_text_box.Text != "")
                                 {
+                                    #region Delete icon logic
+                                    try
+                                    {
+                                        var Command = $@"SELECT  barcode
+                                             FROM Product
+                                             WHERE
+                                             name = @name";
+
+                                        File.Delete($@"{storeDataDirectory}\{DirectoryName}\{BarcodeGetterByName(Command, cmd)}.{imageExtension}");
+                                    }
+                                    catch { }
+                                    #endregion
+
                                     cmd.CommandText = @"INSERT INTO ProductReport 
                                                         VALUES (
                                                                 (SELECT id from Product where name = @name) ,
@@ -587,6 +743,12 @@ namespace Inventory_Manager
             name_value = product_name_text_box.Text;
 
             SearchCommand(command, cmd);
+
+            var Command = $@"SELECT  barcode
+                                             FROM Product
+                                             WHERE
+                                             name = @name";
+            ImageGetterByBarcode(BarcodeGetterByName(Command, cmd));
         }
 
         private void product_barcode_text_box_KeyUp(object sender, KeyEventArgs e)
@@ -599,6 +761,7 @@ namespace Inventory_Manager
                                       barcode LIKE @barcode
                                       ORDER BY barcode";
                 SearchCommand(command, cmd);
+                ImageGetterByBarcode(barcode_value.ToString());
             }
             else
             {
@@ -618,6 +781,12 @@ namespace Inventory_Manager
                                       id LIKE @id
                                       ORDER BY barcode";
                 SearchCommand(command, cmd);
+
+                var Command = $@"SELECT  barcode
+                                             FROM Product
+                                             WHERE
+                                             id = @id";
+                ImageGetterByBarcode(BarcodeGetterById(Command, cmd));
             }
             else
             {
