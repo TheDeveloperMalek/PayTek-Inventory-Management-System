@@ -277,7 +277,7 @@ namespace Inventory_Manager
                             workbook.Properties.Author = "Muhammad Malek Alset";
                             workbook.Properties.Manager = "Mansour Alset & Waseem Alshmaa";
                             workbook.Properties.Category = "Reports";
-                            workbook.Properties.Title = $"Inventory Report";
+                            workbook.Properties.Title = "Inventory Report";
                             workbook.Properties.Comments = $@"Report:
 from: {dateTimePickerStart.Value.ToShortDateString()}
 to: {dateTimePickerEnd.Value.ToShortDateString()} ";

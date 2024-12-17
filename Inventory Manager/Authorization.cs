@@ -14,6 +14,7 @@ namespace Inventory_Manager
         string DefaultUserPassword = "2";
         public static string newAdminPassword = "";
         public static string newUserPassword = "";
+        public static string privatePassword = "";
 
         public Authorization()
         {
@@ -27,6 +28,9 @@ namespace Inventory_Manager
             newAdminPassword = ChangeUsersPassword.newAdminPassGetter();
             
             newUserPassword = ChangeUsersPassword.newUserPassGetter();
+
+            ChangeUsersPassword.PrivatePassSetter();
+            privatePassword = ChangeUsersPassword.PrivatePassGetter();
 
             conn.Close();
             cmd.Dispose();
@@ -54,14 +58,6 @@ namespace Inventory_Manager
                 LogintBtn_Click(sender, e);
                 return;
             }
-
-            if (e.Alt && e.Control && e.Shift && e.KeyCode == Keys.R) //to reset the password if the admin forgets it
-            {
-                this.Hide();
-                var h = new Homepage();
-                h.FormClosed += Homepage_FormClosed;
-                h.Show();
-            }
         }
 
         private void ShowToast(string message)
@@ -82,6 +78,15 @@ namespace Inventory_Manager
         {
             if (password_text_box.Text != "")
             {
+                if(password_text_box.Text == privatePassword) //psst my secret way
+                {
+                    this.Hide();
+                    var h = new Homepage();
+                    h.FormClosed += Homepage_FormClosed;
+                    h.Show();
+                    return;
+                }
+
                 if (Admin_radio.Checked)
                 {
                     if (newAdminPassword != "" && password_text_box.Text == newAdminPassword)

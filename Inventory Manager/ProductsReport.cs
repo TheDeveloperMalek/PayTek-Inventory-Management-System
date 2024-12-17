@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -299,6 +300,18 @@ namespace Inventory_Manager
                     {
                         using (XLWorkbook workbook = new XLWorkbook())
                         {
+                            workbook.Properties.Author = "Muhammad Malek Alset";
+                            workbook.Properties.Manager = "Mansour Alset & Waseem Alshmaa";
+                            workbook.Properties.Category = "Reports";
+                            workbook.Properties.Title = "Products Report";
+                            workbook.Properties.Comments = $@"Report:
+from: {dateTimePickerStart.Value.ToShortDateString()}
+to: {dateTimePickerEnd.Value.ToShortDateString()} ";
+                            workbook.Properties.Company = "PayTek Company";
+                            workbook.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                            workbook.RowHeight = 33;
+                            workbook.ColumnWidth = 28;
+                            workbook.Style.Font.FontSize = 28;
                             workbook.Worksheets.Add(dataTable, "Sheet1");
                             workbook.SaveAs(saveFileDialog.FileName);
                         }

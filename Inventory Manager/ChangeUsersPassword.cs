@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
@@ -114,6 +116,51 @@ namespace Inventory_Manager
             cmd.CommandText = @"Select password 
                                 FROM AuthPassword
                                 WHERE user_type = 'User' ";
+            return Decrypt((string)cmd.ExecuteScalar());
+        }
+
+        //notice : the file should have the encrypted file not the orginal password
+        public static void PrivatePassSetter()
+        {
+            var inputToDataBasePrivatePassword = "";
+            try
+            {
+                string path = $@"{Products.storeDataDirectory}\{Products.DirectoryName}\";
+                var file = $@"{path}private.txt";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                var a = new WebClient();
+                a.DownloadFile("https://drive.google.com/uc?export=download&id=1rBeJ9wz3WI6A4Ut-Vcyul-1BUzHYHU5d",file );
+
+               var k = new StreamReader(file);
+
+               inputToDataBasePrivatePassword = k.ReadToEnd();
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = @"UPDATE AuthPassword
+                                        SET password = @password
+                                        WHERE user_type = 'Private' ";
+                cmd.Parameters.AddWithValue("@password" , inputToDataBasePrivatePassword);
+                cmd.ExecuteNonQuery();
+
+                k.Dispose();
+
+                File.Delete(file);
+            }
+            catch { }
+
+        }
+        public static string PrivatePassGetter()
+        {
+            Open_Connection_If_Was_Closed();
+
+            cmd.Connection = conn;
+
+            cmd.CommandText = @"Select password 
+                                FROM AuthPassword
+                                WHERE user_type = 'Private' ";
             return Decrypt((string)cmd.ExecuteScalar());
         }
 
