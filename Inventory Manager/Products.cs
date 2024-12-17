@@ -463,6 +463,33 @@ namespace Inventory_Manager
                                     }
                                     if (product_barcode_text_box.Text != "")
                                     {
+
+                                        #region Export image logic
+                                        DialogResult withPhoto;
+                                        withPhoto = MessageBox.Show($"Do you want to update the photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                        if (withPhoto == DialogResult.Yes)
+                                        {
+                                            using (var ofd = new OpenFileDialog())
+                                            {
+                                                ofd.Filter = $"Image File(*.{imageExtension})|*.{imageExtension}";
+                                                ofd.Title = "Export image for the product";
+                                                ofd.ShowDialog();
+                                                using (var svf = new SaveFileDialog())
+                                                {
+                                                    string selectedFilePath = ofd.FileName;
+                                                    productPhoto.Image = Image.FromFile(selectedFilePath);
+                                                    string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PayTek Inventory Management System");
+                                                    if (!Directory.Exists(folderPath))
+                                                    {
+                                                        Directory.CreateDirectory(folderPath);
+                                                    }
+                                                    string newFilePath = Path.Combine(folderPath, $"{barcode_value}.{imageExtension}");
+                                                    File.Copy(selectedFilePath, newFilePath, true);
+                                                }
+                                            }
+                                        }
+                                        #endregion
+
                                         updateCmd.CommandText = @"INSERT INTO ProductReport
                                                                   VALUES (
                                                                             (SELECT id from Product where barcode = @barcode) , 
