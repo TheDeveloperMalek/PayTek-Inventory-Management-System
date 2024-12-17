@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -21,6 +22,10 @@ namespace Inventory_Manager
             InitializeComponent();
             this.KeyDown += new KeyEventHandler(KeysShortcuts);
             this.KeyPreview = true;
+
+            string connectionString = ConfigurationManager.ConnectionStrings["Inventory_Manager.Properties.Settings.PublicConnectionString"].ConnectionString;
+            string machineName = Environment.MachineName;
+            connectionString = connectionString.Replace("{MachineName}", machineName);
         }
 
         private void Authorization_Load(object sender, EventArgs e)

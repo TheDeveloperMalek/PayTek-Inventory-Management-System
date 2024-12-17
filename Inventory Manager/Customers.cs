@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Inventory_Manager.PublicDataSet5TableAdapters;
+using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -24,8 +26,13 @@ namespace Inventory_Manager
         }
         private void Product_Load(object sender, EventArgs e)
         {
-            this.customerTableAdapter.Fill(this.publicDataSet5.Customer);
-            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
+            var customerTableAdapter = new CustomerTableAdapter();
+            string connectionString = ConfigurationManager.ConnectionStrings["Inventory_Manager.Properties.Settings.PublicConnectionString"].ConnectionString;
+            string machineName = Environment.MachineName;
+            connectionString = connectionString.Replace("{MachineName}", machineName);
+            customerTableAdapter.Connection.ConnectionString = connectionString;
+            customerTableAdapter.Fill(this.publicDataSet5.Customer);
+            conn.ConnectionString = connectionString;
             if (conn.State != ConnectionState.Open)
             {
                 ShowData();
@@ -335,7 +342,7 @@ namespace Inventory_Manager
         {
             Open_Connection_If_Was_Closed();
             DialogResult delete;
-            delete = MessageBox.Show($"Are you sure that you want to delete the record with product name '{customer_name_text_box.Text}' and id '{customer_id_text_box.Text}' ", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            delete = MessageBox.Show($"Are you sure ? ", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (delete == DialogResult.Yes)
             {
                 if (At_Least_Input_Requriements())

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Inventory_Manager.PublicDataSet9TableAdapters;
+using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -29,8 +31,14 @@ namespace Inventory_Manager
         private void Purchases_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'purchaseDataSet.Purchase' table. You can move, or remove it, as needed.
-            this.purchaseTableAdapter2.Fill(this.publicDataSet9.Purchase);
-            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
+            var purchaseTableAdapter = new PurchaseTableAdapter();
+            string connectionString = ConfigurationManager.ConnectionStrings["Inventory_Manager.Properties.Settings.PublicConnectionString"].ConnectionString;
+            string machineName = Environment.MachineName;
+            connectionString = connectionString.Replace("{MachineName}", machineName);
+            purchaseTableAdapter.Connection.ConnectionString = connectionString;
+            purchaseTableAdapter.Fill(this.publicDataSet9.Purchase);
+            conn.ConnectionString = connectionString;
+
             if (conn.State != ConnectionState.Open)
             {
                 ShowData();

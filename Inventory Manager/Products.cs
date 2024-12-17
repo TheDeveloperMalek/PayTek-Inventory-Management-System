@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using Inventory_Manager.ProductDataSet1TableAdapters;
+using System.Configuration;
 namespace Inventory_Manager
 {
     public partial class Products : Form
@@ -34,8 +36,14 @@ namespace Inventory_Manager
         private void Test_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'productDataSet1.Product' table. You can move, or remove it, as needed.
-            this.productTableAdapter.Fill(this.productDataSet1.Product);
-            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
+            var productTableAdapter = new ProductTableAdapter();
+            string connectionString = ConfigurationManager.ConnectionStrings["Inventory_Manager.Properties.Settings.PublicConnectionString"].ConnectionString;
+            string machineName = Environment.MachineName;
+            connectionString = connectionString.Replace("{MachineName}", machineName);
+            productTableAdapter.Connection.ConnectionString = connectionString;
+            productTableAdapter.Fill(this.productDataSet1.Product);
+            conn.ConnectionString = connectionString;
+
             if (conn.State != ConnectionState.Open)
             {
                 ShowData();
@@ -555,7 +563,7 @@ namespace Inventory_Manager
         {
             Open_Connection_If_Was_Closed();
             DialogResult delete;
-            delete = MessageBox.Show($"Are you sure that you want to delete the record with product name '{product_name_text_box.Text}' and id '{product_id_text_box.Text}' ", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            delete = MessageBox.Show($"Are you sure that you ?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (delete == DialogResult.Yes)
             {
                 if (At_Least_Input_Requriements())

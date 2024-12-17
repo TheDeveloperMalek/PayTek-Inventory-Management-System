@@ -1,5 +1,7 @@
 ﻿using ClosedXML.Excel;
+using Inventory_Manager.TestDataSetTableAdapters;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -37,13 +39,19 @@ namespace Inventory_Manager
         private void InventoryReport_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'testDataSet.InventoryReport' table. You can move, or remove it, as needed.
-            this.inventoryReportTableAdapter1.Fill(this.testDataSet.InventoryReport);
+            var inventoryReportTableAdapter = new InventoryReportTableAdapter();
+            string connectionString = ConfigurationManager.ConnectionStrings["Inventory_Manager.Properties.Settings.PublicConnectionString"].ConnectionString;
+            string machineName = Environment.MachineName;
+            connectionString = connectionString.Replace("{MachineName}", machineName);
+            inventoryReportTableAdapter.Connection.ConnectionString = connectionString;
+            inventoryReportTableAdapter.Fill(this.testDataSet.InventoryReport);
+            conn.ConnectionString = connectionString;
+
             #region establish_Connection
 
             if (conn.State == ConnectionState.Open)
                 conn.Close();
 
-            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
             ShowData();
             #endregion
 

@@ -1,5 +1,7 @@
 ﻿using ClosedXML.Excel;
+using Inventory_Manager.ProductReportDataSetTableAdapters;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -38,8 +40,13 @@ namespace Inventory_Manager
         private void ProductsReport_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'productReportDataSet.ProductReport' table. You can move, or remove it, as needed.
-            this.productReportTableAdapter.Fill(this.productReportDataSet.ProductReport);
-            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
+            var productReportTableAdapter = new ProductReportTableAdapter();
+            string connectionString = ConfigurationManager.ConnectionStrings["Inventory_Manager.Properties.Settings.PublicConnectionString"].ConnectionString;
+            string machineName = Environment.MachineName;
+            connectionString = connectionString.Replace("{MachineName}", machineName);
+            productReportTableAdapter.Connection.ConnectionString = connectionString;
+            productReportTableAdapter.Fill(this.productReportDataSet.ProductReport);
+            conn.ConnectionString = connectionString;
             if (conn.State != ConnectionState.Open)
             {
                 ShowData();
