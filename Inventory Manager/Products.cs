@@ -18,7 +18,7 @@ namespace Inventory_Manager
         private int id_value, quantity_value, barcode_value;
         private string name_value;
         private double price_value;
-        public static string imageExtension = "png";
+        public static string imageExtension = "jpg";
         public static string storeDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public static string DirectoryName = "PayTek Inventory Management System";
 
@@ -148,7 +148,7 @@ namespace Inventory_Manager
             if (barcode != null)
                 try
                 {
-                    var Source = Image.FromFile($@"{path}{barcode}.png");
+                    var Source = Image.FromFile($@"{path}{barcode}.{imageExtension}");
                     if (Source != null)
                         productPhoto.Image = Source;
                 }
@@ -190,6 +190,7 @@ namespace Inventory_Manager
             cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
             cmd.Parameters.AddWithValue("@quantity", quantity_value + "%");
             cmd.Parameters.AddWithValue("@price", price_value + "%");
+            Open_Connection_If_Was_Closed();
             cmd.ExecuteNonQuery();
             ShowDataSearching(objCmd);
             cmd.Parameters.Clear();
