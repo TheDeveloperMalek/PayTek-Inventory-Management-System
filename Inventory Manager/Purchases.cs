@@ -30,7 +30,7 @@ namespace Inventory_Manager
         {
             // TODO: This line of code loads data into the 'purchaseDataSet.Purchase' table. You can move, or remove it, as needed.
             this.purchaseTableAdapter2.Fill(this.publicDataSet9.Purchase);
-            conn.ConnectionString = ("Data Source=DESKTOP-CM5BM88;Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
+            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
             if (conn.State != ConnectionState.Open)
             {
                 ShowData();

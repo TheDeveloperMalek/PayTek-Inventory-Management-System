@@ -43,7 +43,7 @@ namespace Inventory_Manager
             if (conn.State == ConnectionState.Open)
                 conn.Close();
 
-            conn.ConnectionString = ("Data Source=DESKTOP-CM5BM88;Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
+            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
             ShowData();
             #endregion
 

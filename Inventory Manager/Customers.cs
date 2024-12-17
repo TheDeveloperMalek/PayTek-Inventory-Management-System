@@ -25,7 +25,7 @@ namespace Inventory_Manager
         private void Product_Load(object sender, EventArgs e)
         {
             this.customerTableAdapter.Fill(this.publicDataSet5.Customer);
-            conn.ConnectionString = ("Data Source=DESKTOP-CM5BM88;Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
+            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
             if (conn.State != ConnectionState.Open)
             {
                 ShowData();

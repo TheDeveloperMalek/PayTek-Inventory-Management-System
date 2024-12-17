@@ -35,7 +35,7 @@ namespace Inventory_Manager
         {
             // TODO: This line of code loads data into the 'productDataSet1.Product' table. You can move, or remove it, as needed.
             this.productTableAdapter.Fill(this.productDataSet1.Product);
-            conn.ConnectionString = ("Data Source=DESKTOP-CM5BM88;Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
+            conn.ConnectionString = ($"Data Source={Environment.MachineName};Initial Catalog=Public;Integrated Security=True;Encrypt=False;");
             if (conn.State != ConnectionState.Open)
             {
                 ShowData();

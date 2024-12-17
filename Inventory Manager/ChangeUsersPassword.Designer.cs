@@ -199,6 +199,7 @@
             this.splitter1.Size = new System.Drawing.Size(303, 372);
             this.splitter1.TabIndex = 24;
             this.splitter1.TabStop = false;
+            this.splitter1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoved);
             // 
             // ChangeUsersPassword
             // 

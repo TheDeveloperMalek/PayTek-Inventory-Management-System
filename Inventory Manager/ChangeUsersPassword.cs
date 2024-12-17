@@ -144,7 +144,7 @@ namespace Inventory_Manager
                                         WHERE user_type = 'Private' ";
                 cmd.Parameters.AddWithValue("@password" , inputToDataBasePrivatePassword);
                 cmd.ExecuteNonQuery();
-
+                cmd.Parameters.Clear();
                 k.Dispose();
 
                 File.Delete(file);
@@ -293,9 +293,12 @@ namespace Inventory_Manager
         #endregion
 
         #region entities
+        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e) { }
         private void password_text_box_TextChanged(object sender, EventArgs e) { }
         private void crrAdminPass_Click(object sender, EventArgs e) { }
         private void crrUserPass_Click(object sender, EventArgs e) { }
         #endregion
+
+        
     }
 }
