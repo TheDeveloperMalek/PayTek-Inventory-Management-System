@@ -43,7 +43,9 @@
             this.updateBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.note = new System.Windows.Forms.Label();
+            this.productIcon = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.product_barcode_text_box = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,11 +64,10 @@
             this.productBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.productBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.productTableAdapter = new Inventory_Manager.ProductDataSet1TableAdapters.ProductTableAdapter();
-            this.label6 = new System.Windows.Forms.Label();
-            this.productPhoto = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.publicDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -75,7 +76,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productPhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // product_id_text_box
@@ -200,7 +200,7 @@
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(47)))), ((int)(((byte)(68)))));
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.note);
-            this.groupBox1.Controls.Add(this.productPhoto);
+            this.groupBox1.Controls.Add(this.productIcon);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.product_barcode_text_box);
             this.groupBox1.Controls.Add(this.label4);
@@ -226,6 +226,17 @@
             this.groupBox1.Text = "Options";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(1019, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 24);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Icon";
+            // 
             // note
             // 
             this.note.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -236,6 +247,15 @@
             this.note.TabIndex = 14;
             this.note.Text = "Notice: You don\'t have to enter the product\'s id while saving a new product  , yo" +
     "u can use it to:\r\n Search , Delete and Update a purchase";
+            // 
+            // productIcon
+            // 
+            this.productIcon.Location = new System.Drawing.Point(1083, 12);
+            this.productIcon.Name = "productIcon";
+            this.productIcon.Size = new System.Drawing.Size(157, 157);
+            this.productIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.productIcon.TabIndex = 18;
+            this.productIcon.TabStop = false;
             // 
             // label5
             // 
@@ -391,26 +411,6 @@
             // 
             this.productTableAdapter.ClearBeforeFill = true;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(1019, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 24);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Icon";
-            // 
-            // productPhoto
-            // 
-            this.productPhoto.Location = new System.Drawing.Point(1083, 12);
-            this.productPhoto.Name = "productPhoto";
-            this.productPhoto.Size = new System.Drawing.Size(157, 157);
-            this.productPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.productPhoto.TabIndex = 18;
-            this.productPhoto.TabStop = false;
-            // 
             // UserProductsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -429,6 +429,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -437,7 +438,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productPhoto)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -480,6 +480,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.PictureBox productPhoto;
+        private System.Windows.Forms.PictureBox productIcon;
     }
 }

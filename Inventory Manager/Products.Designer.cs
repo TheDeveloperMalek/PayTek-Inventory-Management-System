@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.product_id_text_box = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,12 +43,14 @@
             this.updateBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.productIcon = new System.Windows.Forms.PictureBox();
             this.note = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.product_barcode_text_box = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.product_price_text_box = new System.Windows.Forms.TextBox();
-            this.searchBtn = new System.Windows.Forms.Button();
+            this.resetBtn = new System.Windows.Forms.Button();
             this.productBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.productBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -63,11 +65,10 @@
             this.productBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.productBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.productTableAdapter = new Inventory_Manager.ProductDataSet1TableAdapters.ProductTableAdapter();
-            this.productPhoto = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.publicDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -76,7 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productPhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // product_id_text_box
@@ -200,7 +200,7 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(47)))), ((int)(((byte)(68)))));
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.productPhoto);
+            this.groupBox1.Controls.Add(this.productIcon);
             this.groupBox1.Controls.Add(this.note);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.product_barcode_text_box);
@@ -211,7 +211,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.searchBtn);
+            this.groupBox1.Controls.Add(this.resetBtn);
             this.groupBox1.Controls.Add(this.product_quantity_text_box);
             this.groupBox1.Controls.Add(this.saveBtn);
             this.groupBox1.Controls.Add(this.deleteBtn);
@@ -226,6 +226,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(1025, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 24);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Icon";
+            // 
+            // productIcon
+            // 
+            this.productIcon.Location = new System.Drawing.Point(1089, 12);
+            this.productIcon.Name = "productIcon";
+            this.productIcon.Size = new System.Drawing.Size(157, 157);
+            this.productIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.productIcon.TabIndex = 16;
+            this.productIcon.TabStop = false;
             // 
             // note
             // 
@@ -278,21 +298,21 @@
             this.product_price_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_price_text_box.TabIndex = 4;
             this.product_price_text_box.TextChanged += new System.EventHandler(this.product_price_text_box_TextChanged);
-            this.product_price_text_box.KeyDown += new System.Windows.Forms.KeyEventHandler(this.product_price_text_box_KeyUp);
+            this.product_price_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_price_text_box_KeyUp);
             // 
-            // searchBtn
+            // resetBtn
             // 
-            this.searchBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.searchBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBtn.ForeColor = System.Drawing.Color.Black;
-            this.searchBtn.Location = new System.Drawing.Point(677, 81);
-            this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(140, 44);
-            this.searchBtn.TabIndex = 6;
-            this.searchBtn.Text = "Reset";
-            this.searchBtn.UseVisualStyleBackColor = false;
-            this.searchBtn.Click += new System.EventHandler(this.printBtn_Click);
+            this.resetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.resetBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetBtn.ForeColor = System.Drawing.Color.Black;
+            this.resetBtn.Location = new System.Drawing.Point(677, 81);
+            this.resetBtn.Name = "resetBtn";
+            this.resetBtn.Size = new System.Drawing.Size(140, 44);
+            this.resetBtn.TabIndex = 6;
+            this.resetBtn.Text = "Reset";
+            this.resetBtn.UseVisualStyleBackColor = false;
+            this.resetBtn.Click += new System.EventHandler(this.printBtn_Click);
             // 
             // productBindingSource1
             // 
@@ -313,14 +333,14 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(84)))), ((int)(((byte)(112)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
@@ -329,14 +349,14 @@
             this.quantityDataGridViewTextBoxColumn,
             this.priceDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.productBindingSource6;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 182);
             this.dataGridView1.Name = "dataGridView1";
@@ -398,26 +418,6 @@
             // 
             this.productTableAdapter.ClearBeforeFill = true;
             // 
-            // productPhoto
-            // 
-            this.productPhoto.Location = new System.Drawing.Point(1089, 12);
-            this.productPhoto.Name = "productPhoto";
-            this.productPhoto.Size = new System.Drawing.Size(157, 157);
-            this.productPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.productPhoto.TabIndex = 16;
-            this.productPhoto.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(1025, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 24);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Icon";
-            // 
             // Products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,6 +436,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -444,7 +445,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productPhoto)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -465,7 +465,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.BindingSource productBindingSource1;
         private System.Windows.Forms.BindingSource productBindingSource2;
-        private System.Windows.Forms.Button searchBtn;
+        private System.Windows.Forms.Button resetBtn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox product_price_text_box;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -487,7 +487,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label note;
-        private System.Windows.Forms.PictureBox productPhoto;
+        private System.Windows.Forms.PictureBox productIcon;
         private System.Windows.Forms.Label label6;
     }
 }

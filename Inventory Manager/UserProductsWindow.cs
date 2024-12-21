@@ -29,6 +29,7 @@ namespace Inventory_Manager
             InitializeComponent();
             this.KeyDown += new KeyEventHandler(KeysShortcuts);
             this.KeyPreview = true;
+            ImageSetterByBarcode();
         }
 
         //database table dataview 
@@ -125,39 +126,68 @@ namespace Inventory_Manager
         #endregion
 
         #region Get Image Functions
-        private void ImageGetterByBarcode(string barcode = "-1")
+        private void ImageSetterByBarcode(string barcode = "none")
         {
             var path = $@"{storeDataDirectory}\{DirectoryName}\";
             Image noSource = null;
+
+            #region default icon
             try
             {
                 noSource = Image.FromFile($@"{path}noitem.png");
-
             }
             catch { }
 
 
             if (noSource != null)
-                productPhoto.Image = noSource;
+                productIcon.Image = noSource;
 
             else
             {
-                var a = new WebClient();
-                a.DownloadFile("https://cdn-icons-png.flaticon.com/512/9018/9018889.png", "noitem.png");
-                File.Copy("noitem.png", $"{path}noitem.png");
-                File.Delete("noitem.png");
-                productPhoto.Image = null;
-            }
-
-            if (barcode != null)
                 try
                 {
-                    var Source = Image.FromFile($@"{path}{barcode}.{imageExtension}");
+                    var a = new WebClient();
+                    a.DownloadFile("https://cdn-icons-png.flaticon.com/512/9018/9018889.png", "noitem.png");
+                    File.Copy("noitem.png", $"{path}noitem.png");
+                    File.Delete("noitem.png");
+                }
+                catch (Exception a) { MessageBox.Show(a.Message); }
+
+                productIcon.Image = null;
+            }
+            #endregion
+
+            #region custom icon
+
+            if (barcode != "none")
+            {
+                FileStream customSource = null;
+                try
+                {
+                    customSource = new FileStream($@"{path}{barcode}.{imageExtension}", FileMode.Open);
+                    var Source = Image.FromStream(customSource);
                     if (Source != null)
-                        productPhoto.Image = Source;
+                        productIcon.Image = Source;
+                    else if (noSource != null)
+                        productIcon.Image = noSource;
+                    else
+                        productIcon.Image = null;
                 }
 
                 catch { }
+                finally
+                {
+                    if (customSource != null)
+                    {
+                        customSource.Close();
+                        customSource.Dispose();
+
+                    }
+                }
+
+            }
+            #endregion
+
         }
 
         private string BarcodeGetterById(string command, SqlCommand objCmd)
@@ -351,7 +381,7 @@ namespace Inventory_Manager
                                 using (var svf = new SaveFileDialog())
                                 {
                                     string selectedFilePath = ofd.FileName;
-                                    productPhoto.Image = Image.FromFile(selectedFilePath);
+                                    productIcon.Image = Image.FromFile(selectedFilePath);
                                     string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PayTek Inventory Management System");
                                     if (!Directory.Exists(folderPath))
                                     {
@@ -439,15 +469,69 @@ namespace Inventory_Manager
                             updateCmd.Parameters.AddWithValue("@date", DateTime.Now);
                             updateCmd.Parameters.AddWithValue("@status", "Updated product's quantity");
 
-                            if (product_quantity_text_box.Text != ""
-                                || product_name_text_box.Text != ""
-                                    || product_barcode_text_box.Text != ""
-                                    || product_price_text_box.Text != "")
-                            {
-                                if (!(product_quantity_text_box.Text == "")
-                                    )
-                                {
 
+
+                            #region Export image logic
+
+                            DialogResult withPhoto = MessageBox.Show("Do you want to update the photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (withPhoto == DialogResult.Yes)
+                            {
+                                string newFilePath = "";
+                                using (var ofd = new OpenFileDialog())
+                                {
+                                    ofd.Filter = $"Image File(*.{imageExtension})|*.{imageExtension}";
+                                    ofd.Title = "Export image for the product";
+
+                                    if (ofd.ShowDialog() == DialogResult.OK)
+                                    {
+                                        string selectedFilePath = ofd.FileName;
+
+
+
+                                        string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PayTek Inventory Management System\\");
+                                        if (!Directory.Exists(folderPath))
+                                        {
+                                            Directory.CreateDirectory(folderPath);
+                                        }
+
+                                        if (!string.IsNullOrEmpty(product_id_text_box.Text))
+                                        {
+                                            var Command = @"SELECT barcode FROM Product WHERE id = @id";
+                                            newFilePath = Path.Combine(folderPath, $"{BarcodeGetterById(Command, cmd)}.{imageExtension}");
+                                        }
+                                        else if (!string.IsNullOrEmpty(product_barcode_text_box.Text))
+                                        {
+                                            newFilePath = Path.Combine(folderPath, $"{barcode_value}.{imageExtension}");
+                                        }
+                                        else
+                                        {
+                                            var Command = @"SELECT barcode FROM Product WHERE name = @name";
+                                            newFilePath = Path.Combine(folderPath, $"{BarcodeGetterByName(Command, cmd)}.{imageExtension}");
+
+                                        }
+                                        File.Copy(selectedFilePath, newFilePath, true);
+                                        var changeOnForm = new FileStream(newFilePath, FileMode.Open);
+                                        productIcon.Image = Image.FromStream(changeOnForm);
+                                        changeOnForm.Close();
+                                        changeOnForm.Dispose();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("You did not choose an image!");
+                                    }
+
+                                }
+                            }
+
+                            #endregion
+
+
+                            #region Update quantity logic
+                            DialogResult updateQuantityOrPrice = MessageBox.Show("Do you want to update quantity of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (updateQuantityOrPrice == DialogResult.Yes)
+                            {
+                                if (product_quantity_text_box.Text != "")
+                                {
                                     if (!int.TryParse(product_quantity_text_box.Text, out quantity_value))
                                     {
                                         MessageBox.Show("Please enter a valid value for the id field");
@@ -467,8 +551,12 @@ namespace Inventory_Manager
                                                                 ";
                                         updateCmd.Parameters.AddWithValue("@quantity", quantity_value);
                                         updateCmd.ExecuteNonQuery();
+
+                                        updateCmd.CommandText = @"UPDATE Product 
+                                                              SET quantity = @quantity 
+                                                              WHERE name = @name";
                                     }
-                                    if (product_id_text_box.Text != "")
+                                    else if (product_id_text_box.Text != "")
                                     {
                                         updateCmd.CommandText = @"INSERT INTO ProductReport
                                                                  VALUES (
@@ -482,35 +570,14 @@ namespace Inventory_Manager
                                                                  ";
                                         updateCmd.Parameters.AddWithValue("@quantity", quantity_value);
                                         updateCmd.ExecuteNonQuery();
+
+                                        updateCmd.CommandText = @"UPDATE Product 
+                                                              SET quantity = @quantity 
+                                                              WHERE id = @id";
                                     }
-                                    if (product_barcode_text_box.Text != "")
+                                    else if (product_barcode_text_box.Text != "")
                                     {
 
-                                        #region Export image logic
-                                        DialogResult withPhoto;
-                                        withPhoto = MessageBox.Show($"Do you want to update the photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                        if (withPhoto == DialogResult.Yes)
-                                        {
-                                            using (var ofd = new OpenFileDialog())
-                                            {
-                                                ofd.Filter = $"Image File(*.{imageExtension})|*.{imageExtension}";
-                                                ofd.Title = "Export image for the product";
-                                                ofd.ShowDialog();
-                                                using (var svf = new SaveFileDialog())
-                                                {
-                                                    string selectedFilePath = ofd.FileName;
-                                                    productPhoto.Image = Image.FromFile(selectedFilePath);
-                                                    string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PayTek Inventory Management System");
-                                                    if (!Directory.Exists(folderPath))
-                                                    {
-                                                        Directory.CreateDirectory(folderPath);
-                                                    }
-                                                    string newFilePath = Path.Combine(folderPath, $"{barcode_value}.{imageExtension}");
-                                                    File.Copy(selectedFilePath, newFilePath, true);
-                                                }
-                                            }
-                                        }
-                                        #endregion
 
                                         updateCmd.CommandText = @"INSERT INTO ProductReport
                                                                   VALUES (
@@ -524,39 +591,32 @@ namespace Inventory_Manager
                                                                  ";
                                         updateCmd.Parameters.AddWithValue("@quantity", quantity_value);
                                         updateCmd.ExecuteNonQuery();
+
+                                        updateCmd.CommandText = @"UPDATE Product 
+                                                              SET quantity = @quantity 
+                                                              WHERE barcode = @barcode";
                                     }
-                                    updateCmd.CommandText = "UPDATE Product SET quantity = @quantity WHERE name = @name OR id = @id or barcode = @barcode";
                                     updateCmd.ExecuteNonQuery();
                                 }
-                                if (!(product_price_text_box.Text == ""))
+                                else
                                 {
+                                    MessageBox.Show("Type atleast something to update the data");
+                                    return;
+                                }
 
-                                    if (!double.TryParse(product_price_text_box.Text, out price_value))
-                                    {
-                                        MessageBox.Show("Please enter a valid value for the id field");
-                                        return;
-                                    }
-                                    updateCmd.CommandText = "UPDATE Product SET price = @price   WHERE name = @name OR id = @id OR barcode = @barcode";
-                                    updateCmd.Parameters.AddWithValue("@price", price_value);
-                                    updateCmd.ExecuteNonQuery();
+                                int.TryParse(updateCmd.ExecuteNonQuery().ToString(), out int rowsAffected);
+
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("Product updated successfully.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No product was updated.");
                                 }
                             }
-                            else
-                            {
-                                MessageBox.Show("Type atleast something to update the data");
-                                return;
-                            }
-
-                            int.TryParse(updateCmd.ExecuteNonQuery().ToString(), out int rowsAffected);
-
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("Product updated successfully.");
-                            }
-                            else
-                            {
-                                MessageBox.Show("No product was updated.");
-                            }
+                                
+                            #endregion
                         }
                     }
                     else
@@ -726,6 +786,7 @@ namespace Inventory_Manager
             product_name_text_box.Text =
             product_quantity_text_box.Text =
             product_price_text_box.Text = "";
+            ImageSetterByBarcode();
             ShowData();
         }
         #endregion
@@ -748,7 +809,7 @@ namespace Inventory_Manager
                                              FROM Product
                                              WHERE
                                              name = @name";
-            ImageGetterByBarcode(BarcodeGetterByName(Command, cmd));
+            ImageSetterByBarcode(BarcodeGetterByName(Command, cmd));
         }
 
         private void product_barcode_text_box_KeyUp(object sender, KeyEventArgs e)
@@ -761,7 +822,7 @@ namespace Inventory_Manager
                                       barcode LIKE @barcode
                                       ORDER BY barcode";
                 SearchCommand(command, cmd);
-                ImageGetterByBarcode(barcode_value.ToString());
+                ImageSetterByBarcode(barcode_value.ToString());
             }
             else
             {
@@ -786,7 +847,7 @@ namespace Inventory_Manager
                                              FROM Product
                                              WHERE
                                              id = @id";
-                ImageGetterByBarcode(BarcodeGetterById(Command, cmd));
+                ImageSetterByBarcode(BarcodeGetterById(Command, cmd));
             }
             else
             {
