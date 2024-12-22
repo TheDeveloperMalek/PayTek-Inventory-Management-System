@@ -124,6 +124,13 @@ namespace Inventory_Manager
             ir.Show();
         }
 
+        private void changeUserPassword_Click(object sender, EventArgs e)
+        {
+            var ch = new ChangeUserPassword();
+            ch.ShowDialog();
+        }
+
+
         #region shortcut guidance 
 
         private void shortcutBtn_Click(object sender, EventArgs e)

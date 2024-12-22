@@ -48,6 +48,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.shortcutBtn = new System.Windows.Forms.Button();
+            this.changeUserPassword = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -273,7 +274,7 @@
             this.shortcutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.shortcutBtn.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shortcutBtn.ForeColor = System.Drawing.Color.Black;
-            this.shortcutBtn.Location = new System.Drawing.Point(477, 459);
+            this.shortcutBtn.Location = new System.Drawing.Point(599, 450);
             this.shortcutBtn.Name = "shortcutBtn";
             this.shortcutBtn.Size = new System.Drawing.Size(162, 44);
             this.shortcutBtn.TabIndex = 6;
@@ -281,12 +282,28 @@
             this.shortcutBtn.UseVisualStyleBackColor = false;
             this.shortcutBtn.Click += new System.EventHandler(this.shortcutBtn_Click);
             // 
+            // changeUserPassword
+            // 
+            this.changeUserPassword.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.changeUserPassword.BackColor = System.Drawing.Color.Silver;
+            this.changeUserPassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.changeUserPassword.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeUserPassword.ForeColor = System.Drawing.Color.Black;
+            this.changeUserPassword.Location = new System.Drawing.Point(431, 450);
+            this.changeUserPassword.Name = "changeUserPassword";
+            this.changeUserPassword.Size = new System.Drawing.Size(162, 44);
+            this.changeUserPassword.TabIndex = 25;
+            this.changeUserPassword.Text = "Change password";
+            this.changeUserPassword.UseVisualStyleBackColor = false;
+            this.changeUserPassword.Click += new System.EventHandler(this.changeUserPassword_Click);
+            // 
             // UserHomepageWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1098, 506);
+            this.Controls.Add(this.changeUserPassword);
             this.Controls.Add(this.shortcutBtn);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox1);
@@ -339,6 +356,7 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button shortcutBtn;
+        private System.Windows.Forms.Button changeUserPassword;
     }
 }
 

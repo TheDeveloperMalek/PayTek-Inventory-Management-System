@@ -84,7 +84,7 @@ namespace Inventory_Manager
             {
                 for (int i = 0; i < input.Length; i++)
                 {
-                    if (i % 8 == 0)
+                    if (i % 23 == 0)
                         output += "\n";
                     output += input[i];
                 }
@@ -298,7 +298,6 @@ namespace Inventory_Manager
         private void crrAdminPass_Click(object sender, EventArgs e) { }
         private void crrUserPass_Click(object sender, EventArgs e) { }
         #endregion
-
         
     }
 }
