@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using static System.Math;
 
 namespace Inventory_Manager
 {
@@ -125,29 +126,42 @@ namespace Inventory_Manager
             var inputToDataBasePrivatePassword = "";
             try
             {
-                string path = $@"{Products.storeDataDirectory}\{Products.DirectoryName}\";
-                var file = $@"{path}private.txt";
-                if (!Directory.Exists(path))
+                if(PrivatePasswordMustBeUpdated())
                 {
-                    Directory.CreateDirectory(path);
-                }
-                var a = new WebClient();
-                a.DownloadFile("https://drive.google.com/uc?export=download&id=1rBeJ9wz3WI6A4Ut-Vcyul-1BUzHYHU5d",file );
+                    string path = $@"{Products.storeDataDirectory}\{Products.DirectoryName}\";
+                    var file = $@"{path}private.txt";
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    var a = new WebClient();
+                    a.DownloadFile("https://drive.google.com/uc?export=download&id=1rBeJ9wz3WI6A4Ut-Vcyul-1BUzHYHU5d", file);
 
-               var k = new StreamReader(file);
+                    var k = new StreamReader(file);
 
-               inputToDataBasePrivatePassword = k.ReadToEnd();
+                    inputToDataBasePrivatePassword = k.ReadToEnd();
 
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = @"UPDATE AuthPassword
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"UPDATE AuthPassword
                                         SET password = @password
                                         WHERE user_type = 'Private' ";
-                cmd.Parameters.AddWithValue("@password" , inputToDataBasePrivatePassword);
-                cmd.ExecuteNonQuery();
-                cmd.Parameters.Clear();
-                k.Dispose();
+                    cmd.Parameters.AddWithValue("@password", inputToDataBasePrivatePassword);
+                    cmd.ExecuteNonQuery();
 
-                File.Delete(file);
+
+                    cmd.CommandText = @"UPDATE AuthPassword
+                                        SET password = @UpDate
+                                        WHERE user_type = 'LastUpdate' ";
+                    cmd.Parameters.AddWithValue("@UpDate", DateTime.Now.ToShortDateString());
+                    cmd.ExecuteNonQuery();
+
+
+                    cmd.Parameters.Clear();
+                    k.Dispose();
+
+                    File.Delete(file);
+                }
+                
             }
             catch { }
 
@@ -164,6 +178,25 @@ namespace Inventory_Manager
             return Decrypt((string)cmd.ExecuteScalar());
         }
 
+        private static bool PrivatePasswordMustBeUpdated()
+        {
+            Open_Connection_If_Was_Closed();
+            cmd.Connection = conn;
+
+            cmd.CommandText = @"Select password 
+                                FROM AuthPassword
+                                WHERE user_type = 'LastUpdate' ";
+            var lastTimeOfGettingPrivatePasswordFromWeb = 
+                DateTime.Parse((string)cmd.ExecuteScalar());
+            
+            var TimeOfNow = DateTime.Now;
+           
+            var DifferenceBetwenLastUpdateOfPrivatePasswordAndNow = Abs
+                ((TimeOfNow - lastTimeOfGettingPrivatePasswordFromWeb).TotalDays);
+           
+            return DifferenceBetwenLastUpdateOfPrivatePasswordAndNow > 30;
+        }
+
         public static string Encrypt(string plaintext, int shift = 3)
         {
             StringBuilder asciiValues = new StringBuilder();
@@ -174,11 +207,11 @@ namespace Inventory_Manager
 
                 if (char.IsUpper(c))
                 {
-                    encryptedChar = (char)((((c + shift) - 'A') % 26) + 'A');
+                    encryptedChar = (char)(((c + shift - 'A') % 26) + 'A');
                 }
                 else if (char.IsLower(c))
                 {
-                    encryptedChar = (char)((((c + shift) - 'a') % 26) + 'a');
+                    encryptedChar = (char)(((c + shift - 'a') % 26) + 'a');
                 }
                 else
                 {

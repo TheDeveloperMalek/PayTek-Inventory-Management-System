@@ -525,7 +525,6 @@ namespace Inventory_Manager
 
                             #endregion
 
-
                             #region Update quantity logic
                             DialogResult updateQuantityOrPrice = MessageBox.Show("Do you want to update quantity of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (updateQuantityOrPrice == DialogResult.Yes)
@@ -615,8 +614,80 @@ namespace Inventory_Manager
                                     MessageBox.Show("No product was updated.");
                                 }
                             }
-                                
+
                             #endregion
+
+                            #region Update name logic
+
+                            DialogResult updateNameOfTheProduct = MessageBox.Show("Do you want to update name of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                            if (updateNameOfTheProduct == DialogResult.Yes)
+                            {
+                                if (product_id_text_box.Text != ""
+                                    || product_barcode_text_box.Text != "")
+                                {
+                                    if (product_name_text_box.Text != "")
+                                    {
+                                        if (product_id_text_box.Text != "")
+                                        {
+                                            if (!int.TryParse(product_id_text_box.Text, out id_value))
+                                            {
+                                                MessageBox.Show("Please enter a valid value for the id field");
+                                                return;
+                                            }
+                                            updateCmd.CommandText = @"UPDATE Product 
+                                      SET name = @name 
+                                      WHERE id = @id";
+                                            updateCmd.ExecuteNonQuery();
+
+                                            updateCmd.CommandText = @"UPDATE ProductReport 
+                                      SET product_name = @name 
+                                      WHERE product_id = @id";
+                                        }
+                                        else
+                                        {
+                                            if (!int.TryParse(product_barcode_text_box.Text, out barcode_value))
+                                            {
+                                                MessageBox.Show("Please enter a valid value for the barcode field");
+                                                return;
+                                            }
+                                            updateCmd.CommandText = @"UPDATE Product 
+                                      SET name = @name 
+                                      WHERE barcode = @barcode";
+                                            updateCmd.ExecuteNonQuery();
+
+                                            updateCmd.CommandText = @"UPDATE ProductReport 
+                                            SET product_name = @name 
+                                            WHERE product_barcode = @barcode";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Product name can not be empty");
+                                        return;
+                                    }
+                                }
+
+                                else
+                                {
+                                    MessageBox.Show("Type id or barcode to update the name");
+                                    return;
+                                }
+
+                                int.TryParse(updateCmd.ExecuteNonQuery().ToString(), out int rowsAffected);
+
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("Product updated successfully.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No product was updated.");
+                                }
+                            }
+
+                            #endregion
+                        
                         }
                     }
                     else
