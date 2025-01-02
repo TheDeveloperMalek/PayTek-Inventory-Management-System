@@ -38,121 +38,8 @@ namespace Inventory_Manager
             purchaseTableAdapter.Connection.ConnectionString = connectionString;
             purchaseTableAdapter.Fill(this.publicDataSet9.Purchase);
             conn.ConnectionString = connectionString;
-
-            if (conn.State != ConnectionState.Open)
-            {
-                ShowData();
                 Open_Connection_If_Was_Closed();
-            }
-            #region For ORM(auto Complete)
-
-            #region from product
-
-            var t1 = new Thread(() =>
-            {
-                using (PublicEntities1 db = new PublicEntities1())
-                {
-                    var products = db.Product.ToList();
-
-                    var AutoCompleteProductId = new AutoCompleteStringCollection();
-                    var AutoCompleteProductBarcode = new AutoCompleteStringCollection();
-                    var AutoCompleteProductName = new AutoCompleteStringCollection();
-
-                    foreach (Product p in products)
-                    {
-                        AutoCompleteProductId.Add(p.id.ToString());
-                        AutoCompleteProductBarcode.Add(p.barcode.ToString());
-                        AutoCompleteProductName.Add(p.name);
-                    }
-
-                    if (product_id_text_box.IsHandleCreated)
-                    {
-                        if (product_id_text_box.InvokeRequired)
-                        {
-                            product_id_text_box.Invoke(new Action(() =>
-                            {
-                                product_id_text_box.AutoCompleteCustomSource = AutoCompleteProductId;
-                            }));
-                        }
-                        else
-                        {
-                            product_id_text_box.AutoCompleteCustomSource = AutoCompleteProductId;
-                        }
-                    }
-
-                    if (product_name_text_box.IsHandleCreated)
-                    {
-                        if (product_name_text_box.InvokeRequired)
-                        {
-                            product_name_text_box.Invoke(new Action(() =>
-                            {
-                                product_name_text_box.AutoCompleteCustomSource = AutoCompleteProductName;
-                            }));
-                        }
-                        else
-                        {
-                            product_name_text_box.AutoCompleteCustomSource = AutoCompleteProductName;
-                        }
-                    }
-
-                    if (product_barcode_text_box.IsHandleCreated)
-                    {
-                        if (product_barcode_text_box.InvokeRequired)
-                        {
-                            product_barcode_text_box.Invoke(new Action(() =>
-                            {
-                                product_barcode_text_box.AutoCompleteCustomSource = AutoCompleteProductBarcode;
-                            }));
-                        }
-                        else
-                        {
-                            product_barcode_text_box.AutoCompleteCustomSource = AutoCompleteProductBarcode;
-                        }
-                    }
-                }
-            });
-
-            t1.Start();
-            #endregion
-
-            #region from customer
-
-            var t2 = new Thread(() =>
-            {
-                using (CustomerEntities dbc = new CustomerEntities())
-                {
-                    var customers = dbc.Customer.ToList();
-                    var AutoCompleteCustomerId = new AutoCompleteStringCollection();
-                    var AutoCompleteCustomerName = new AutoCompleteStringCollection();
-
-                    foreach (var customer in customers)
-                    {
-                        AutoCompleteCustomerId.Add(customer.id.ToString());
-                        AutoCompleteCustomerName.Add(customer.name);
-                    }
-
-                    Action setupAutoComplete = () =>
-                    {
-                        purchaseBindingSource2.DataSource = customers;
-                        customer_id_text_box.AutoCompleteCustomSource = AutoCompleteCustomerId;
-                        customer_name_text_box.AutoCompleteCustomSource = AutoCompleteCustomerName;
-                    };
-
-                    if (customer_id_text_box.InvokeRequired)
-                    {
-                        customer_id_text_box.Invoke(setupAutoComplete);
-                    }
-                    else
-                    {
-                        setupAutoComplete();
-                    }
-                }
-            });
-
-            t2.Start();
-            #endregion
-
-            #endregion
+                ShowData();
         }
         #endregion
 
@@ -961,38 +848,6 @@ namespace Inventory_Manager
 
         #endregion
 
-        #region autocomplete textbox Functions
-
-        #region complete for product id
-        private void product_id_text_box_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region complete for product name
-        private void product_name_text_box_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region complete for customer id
-        private void customer_id_text_box_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region complete for customer name
-        private void customer_name_text_box_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-        #endregion
-
-        #endregion
-
         #region Events_For_Searching
 
         private void purchase_id_text_box_KeyUp(object sender, KeyEventArgs e)
@@ -1117,21 +972,5 @@ namespace Inventory_Manager
 
         #endregion
 
-        #region entities
-        private void Purchase_Load(object sender, EventArgs e) { }
-        private void note_Click(object sender, EventArgs e) { }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void label4_Click(object sender, EventArgs e) { }
-        private void label5_Click(object sender, EventArgs e) { }
-        private void product_id_text_box_TextChanged(object sender, EventArgs e) { }
-        private void textBox3_TextChanged(object sender, EventArgs e) { }
-        private void dataGridView1_CellContentClick_2(object sender, DataGridViewCellEventArgs e) { }
-        private void pictureBox1_Click(object sender, EventArgs e) { }
-        private void groupBox1_Enter(object sender, EventArgs e) { }
-        private void customer_name_text_box_TextChanged(object sender, EventArgs e) { }
-        private void purchase_id_text_box_TextChanged(object sender, EventArgs e) { }
-        #endregion
     }
 }

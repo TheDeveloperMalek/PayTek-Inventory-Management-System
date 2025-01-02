@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.product_id_text_box = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -86,7 +86,6 @@
             this.product_id_text_box.Name = "product_id_text_box";
             this.product_id_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_id_text_box.TabIndex = 0;
-            this.product_id_text_box.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.product_id_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_id_text_box_KeyUp);
             // 
             // label1
@@ -99,7 +98,6 @@
             this.label1.Size = new System.Drawing.Size(154, 24);
             this.label1.TabIndex = 1;
             this.label1.Text = "Product\'s Id";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -111,7 +109,6 @@
             this.label2.Size = new System.Drawing.Size(178, 24);
             this.label2.TabIndex = 3;
             this.label2.Text = "Product\'s Name";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // product_name_text_box
             // 
@@ -120,7 +117,6 @@
             this.product_name_text_box.Name = "product_name_text_box";
             this.product_name_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_name_text_box.TabIndex = 1;
-            this.product_name_text_box.TextChanged += new System.EventHandler(this.product_name_text_box_TextChanged);
             this.product_name_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_name_text_box_KeyUp);
             // 
             // label3
@@ -133,7 +129,6 @@
             this.label3.Size = new System.Drawing.Size(106, 24);
             this.label3.TabIndex = 5;
             this.label3.Text = "Quantity";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // product_quantity_text_box
             // 
@@ -142,7 +137,6 @@
             this.product_quantity_text_box.Name = "product_quantity_text_box";
             this.product_quantity_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_quantity_text_box.TabIndex = 3;
-            this.product_quantity_text_box.TextChanged += new System.EventHandler(this.product_quantity_text_box_TextChanged);
             this.product_quantity_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_quantity_text_box_KeyUp);
             // 
             // publicDataSetBindingSource
@@ -164,7 +158,7 @@
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(140, 44);
             this.saveBtn.TabIndex = 5;
-            this.saveBtn.Text = "Save";
+            this.saveBtn.Text = "Add";
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -178,7 +172,7 @@
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(140, 44);
             this.updateBtn.TabIndex = 7;
-            this.updateBtn.Text = "Update";
+            this.updateBtn.Text = "Edit";
             this.updateBtn.UseVisualStyleBackColor = false;
             this.updateBtn.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -225,7 +219,6 @@
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label6
             // 
@@ -256,7 +249,7 @@
             this.note.Size = new System.Drawing.Size(676, 37);
             this.note.TabIndex = 14;
             this.note.Text = "Notice: You don\'t have to enter the product\'s id while saving a new product  , yo" +
-    "u can use it to:\r\nDelete and Update a product";
+    "u can use it to:\r\nDelete and Edit a product";
             // 
             // label5
             // 
@@ -288,7 +281,6 @@
             this.label4.Size = new System.Drawing.Size(70, 24);
             this.label4.TabIndex = 13;
             this.label4.Text = "Price";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // product_price_text_box
             // 
@@ -297,7 +289,6 @@
             this.product_price_text_box.Name = "product_price_text_box";
             this.product_price_text_box.Size = new System.Drawing.Size(210, 31);
             this.product_price_text_box.TabIndex = 4;
-            this.product_price_text_box.TextChanged += new System.EventHandler(this.product_price_text_box_TextChanged);
             this.product_price_text_box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.product_price_text_box_KeyUp);
             // 
             // resetBtn
@@ -333,14 +324,14 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(84)))), ((int)(((byte)(112)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
@@ -349,21 +340,21 @@
             this.quantityDataGridViewTextBoxColumn,
             this.priceDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.productBindingSource6;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 182);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 50;
             this.dataGridView1.Size = new System.Drawing.Size(1252, 256);
             this.dataGridView1.TabIndex = 13;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // idDataGridViewTextBoxColumn
             // 

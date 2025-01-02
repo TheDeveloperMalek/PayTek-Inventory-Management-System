@@ -43,11 +43,7 @@ namespace Inventory_Manager
             productTableAdapter.Connection.ConnectionString = connectionString;
             productTableAdapter.Fill(this.productDataSet1.Product);
             conn.ConnectionString = connectionString;
-            if (conn.State != ConnectionState.Open)
-            {
                 ShowData();
-                Open_Connection_If_Was_Closed();
-            }
         }
 
         #endregion
@@ -122,6 +118,14 @@ namespace Inventory_Manager
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+        }
+        public void ResetFields()
+        {
+            product_id_text_box.Text =
+            product_barcode_text_box.Text =
+            product_name_text_box.Text =
+            product_quantity_text_box.Text =
+            product_price_text_box.Text = "";
         }
         #endregion
 
@@ -370,7 +374,7 @@ namespace Inventory_Manager
                     {
                         #region Export image logic
                         DialogResult withPhoto;
-                        withPhoto = MessageBox.Show($"Do you want to export a photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        withPhoto = MessageBox.Show($"Do you want to import photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (withPhoto == DialogResult.Yes)
                         {
                             using (var ofd = new OpenFileDialog())
@@ -852,11 +856,7 @@ namespace Inventory_Manager
         //Reset filters and view
         private void printBtn_Click(object sender, EventArgs e)
         {
-            product_id_text_box.Text =
-            product_barcode_text_box.Text =
-            product_name_text_box.Text =
-            product_quantity_text_box.Text =
-            product_price_text_box.Text = "";
+            ResetFields();
             ImageSetterByBarcode();
             ShowData();
         }
@@ -865,6 +865,8 @@ namespace Inventory_Manager
         #endregion
 
         #region Events_For_Searching
+
+        #region while typing
         private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
         {
             var command = $@"SELECT  *
@@ -946,26 +948,48 @@ namespace Inventory_Manager
                 return;
             }
         }
+        #endregion
+
+        #region Click on a cell
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ResetFields();
+            var text = dataGridView1.CurrentCell.Value.ToString();
+            var columnIndex = dataGridView1.CurrentCellAddress.X;
+            var rowIndex = dataGridView1.CurrentCellAddress.Y;
+            var c = new KeyEventArgs(Keys.NoName);
+
+            switch (columnIndex)
+            {
+                case 0:
+                    product_id_text_box.Text = text;
+                    product_id_text_box_KeyUp(sender, c);
+                    break;
+                case 1:
+                    product_barcode_text_box.Text = text;
+                    product_barcode_text_box_KeyUp(sender, c);
+                    break;
+                case 2:
+                    product_name_text_box.Text = text;
+                    product_name_text_box_KeyUp(sender, c);
+                    break;
+                case 3:
+                    product_quantity_text_box.Text = text;
+                    product_quantity_text_box_KeyUp(sender, c);
+                    break;
+            }
+            ShowData();
+            dataGridView1.CurrentCell = dataGridView1[columnIndex , rowIndex];
+        }
+        #endregion
 
         #endregion
 
         #region entities
-        private void label1_Click(object sender, EventArgs e) { }
-        private void product_name_text_box_TextChanged(object sender, EventArgs e) { }
-        private void product_quantity_text_box_TextChanged(object sender, EventArgs e) { }
-        private void textBox1_TextChanged(object sender, EventArgs e) { }
-        private void label3_Click(object sender, EventArgs e) { }
         private void publicDataSetBindingSource_CurrentChanged(object sender, EventArgs e) { }
         private void productBindingSource_CurrentChanged(object sender, EventArgs e) { }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void label4_Click(object sender, EventArgs e) { }
-        private void product_price_text_box_TextChanged(object sender, EventArgs e) { }
         private void productBindingSource1_CurrentChanged(object sender, EventArgs e) { }
         private void productBindingSource2_CurrentChanged(object sender, EventArgs e) { }
-        private void pictureBox1_Click(object sender, EventArgs e) { }
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e) { }
-        private void groupBox1_Enter(object sender, EventArgs e) { }
-        private void label2_Click(object sender, EventArgs e) { }
         #endregion
     }
 }

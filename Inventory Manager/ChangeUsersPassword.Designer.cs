@@ -120,7 +120,6 @@
             this.password_text_box.Name = "password_text_box";
             this.password_text_box.Size = new System.Drawing.Size(227, 31);
             this.password_text_box.TabIndex = 15;
-            this.password_text_box.TextChanged += new System.EventHandler(this.password_text_box_TextChanged);
             // 
             // Autohrization
             // 
@@ -174,7 +173,6 @@
             this.crrAdminPass.TabIndex = 22;
             this.crrAdminPass.Tag = "";
             this.crrAdminPass.Text = "  ";
-            this.crrAdminPass.Click += new System.EventHandler(this.crrAdminPass_Click);
             // 
             // crrUserPass
             // 
@@ -189,7 +187,6 @@
             this.crrUserPass.TabIndex = 23;
             this.crrUserPass.Tag = "";
             this.crrUserPass.Text = "  ";
-            this.crrUserPass.Click += new System.EventHandler(this.crrUserPass_Click);
             // 
             // splitter1
             // 
@@ -199,7 +196,6 @@
             this.splitter1.Size = new System.Drawing.Size(303, 372);
             this.splitter1.TabIndex = 24;
             this.splitter1.TabStop = false;
-            this.splitter1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoved);
             // 
             // ChangeUsersPassword
             // 

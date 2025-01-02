@@ -72,7 +72,6 @@
             this.password_text_box.Name = "password_text_box";
             this.password_text_box.Size = new System.Drawing.Size(227, 31);
             this.password_text_box.TabIndex = 15;
-            this.password_text_box.TextChanged += new System.EventHandler(this.password_text_box_TextChanged);
             // 
             // Autohrization
             // 
@@ -113,7 +112,6 @@
             this.crrUserPass.TabIndex = 23;
             this.crrUserPass.Tag = "";
             this.crrUserPass.Text = "  ";
-            this.crrUserPass.Click += new System.EventHandler(this.crrUserPass_Click);
             // 
             // ChangeUserPassword
             // 

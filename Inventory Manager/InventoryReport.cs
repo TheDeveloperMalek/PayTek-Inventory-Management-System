@@ -403,18 +403,5 @@ to: {dateTimePickerEnd.Value.ToShortDateString()} ";
 
         #endregion
 
-        #region entities
-        private void groupBox1_Enter(object sender, EventArgs e) { }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void dateTimePickerStart_ValueChanged(object sender, EventArgs e) { }
-        private void product_name_text_box_TextChanged(object sender, EventArgs e) { }
-        private void product_id_text_box_TextChanged(object sender, EventArgs e) { }
-        private void label5_Click(object sender, EventArgs e) { }
-        private void product_barcode_text_box_TextChanged(object sender, EventArgs e) { }
-        private void product_name_text_box_KeyDown(object sender, KeyPressEventArgs e) { }
-        private void label2_Click(object sender, EventArgs e) { }
-        private void product_name_text_box_KeyPressed(object sender, KeyPressEventArgs e) { }
-        #endregion
-
     }
 }

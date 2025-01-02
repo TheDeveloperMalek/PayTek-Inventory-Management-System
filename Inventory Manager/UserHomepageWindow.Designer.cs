@@ -127,7 +127,6 @@
             this.label1.Size = new System.Drawing.Size(465, 106);
             this.label1.TabIndex = 9;
             this.label1.Text = " Paytek Inventory \r\nManagement System";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox2
             // 
@@ -139,7 +138,6 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // label2
             // 
@@ -151,7 +149,6 @@
             this.label2.Size = new System.Drawing.Size(119, 27);
             this.label2.TabIndex = 11;
             this.label2.Text = "Products";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label4
             // 
@@ -163,7 +160,6 @@
             this.label4.Size = new System.Drawing.Size(132, 27);
             this.label4.TabIndex = 14;
             this.label4.Text = "Purchases";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label6
             // 
@@ -176,7 +172,6 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "Products\'s \nReport";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -188,7 +183,6 @@
             this.label7.Size = new System.Drawing.Size(135, 27);
             this.label7.TabIndex = 15;
             this.label7.Text = "Customers";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label3
             // 
@@ -201,7 +195,6 @@
             this.label3.Size = new System.Drawing.Size(84, 84);
             this.label3.TabIndex = 17;
             this.label3.Text = "V1.0\r\nBeta";
-            this.label3.Click += new System.EventHandler(this.label3_Click_1);
             // 
             // label5
             // 
@@ -214,7 +207,6 @@
             this.label5.TabIndex = 19;
             this.label5.Text = "Inventory\'s\r\nReport";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label5.Click += new System.EventHandler(this.label5_Click_1);
             // 
             // button2
             // 
@@ -241,7 +233,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
             // 
             // pictureBox3
             // 
@@ -265,7 +256,6 @@
             this.label9.Size = new System.Drawing.Size(110, 45);
             this.label9.TabIndex = 23;
             this.label9.Text = "2024©";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // shortcutBtn
             // 

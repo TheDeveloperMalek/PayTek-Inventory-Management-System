@@ -1,11 +1,11 @@
 USE [master]
 GO
 
-/****** Object:  Database [Public]    Script Date: 21/12/2024 11:06:05 م ******/
+/****** Object:  Database [Public]    Script Date: 28/12/2024 11:08:56 ص ******/
 DROP DATABASE [Public]
 GO
 
-/****** Object:  Database [Public]    Script Date: 21/12/2024 11:06:05 م ******/
+/****** Object:  Database [Public]    Script Date: 28/12/2024 11:08:56 ص ******/
 CREATE DATABASE [Public]
  CONTAINMENT = NONE
  ON  PRIMARY 

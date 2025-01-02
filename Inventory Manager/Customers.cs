@@ -116,6 +116,7 @@ namespace Inventory_Manager
         #region Functions_For_Events
         void SearchCommand(string command, SqlCommand objCmd)
         {
+            Open_Connection_If_Was_Closed();
             cmd = conn.CreateCommand();
             cmd.CommandText = command;
             cmd.Parameters.AddWithValue("@id", id_value + "%");
@@ -219,6 +220,24 @@ namespace Inventory_Manager
             }
         }
 
+        //Chech if the current customer exists or not
+        private bool Check_If_Customer_Name_Already_Exists()
+        {
+            string checkQuery = "SELECT COUNT(*) FROM Customer WHERE name = @name";
+            using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+            {
+                checkCmd.Parameters.AddWithValue("@name", name_value);
+
+                int.TryParse(checkCmd.ExecuteScalar().ToString(), out int productCount);
+
+                if (productCount > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         private bool Check_If_CustomerId_Already_Exists()
         {
             string checkQuery = "SELECT COUNT(*) FROM Customer WHERE id = @id";
@@ -244,7 +263,7 @@ namespace Inventory_Manager
         {
             Open_Connection_If_Was_Closed();
             if (At_Least_Input_Name())
-                if (!Check_If_Customer_Already_Exists())
+                if (!Check_If_Customer_Name_Already_Exists())
                 {
                     string name_value = customer_name_text_box.Text;
                     try
@@ -275,7 +294,7 @@ namespace Inventory_Manager
                     ShowData();
                     return;
                 }
-                else if (Check_If_Customer_Already_Exists())
+                else if (Check_If_Customer_Name_Already_Exists())
                 {
                     MessageBox.Show("The customer already exists , please update it using update button");
                 }
@@ -414,17 +433,6 @@ namespace Inventory_Manager
         #endregion
 
         #region Events_For_Searching
-        private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
-        {
-            var command = $@"SELECT  *
-                                 FROM Customer
-                                 WHERE
-                                 name LIKE @name
-                                 ORDER BY id";
-            name_value = customer_name_text_box.Text;
-
-            SearchCommand(command, cmd);
-        }
 
         private void customer_id_text_box_KeyUp(object sender, KeyEventArgs e)
         {
@@ -445,14 +453,18 @@ namespace Inventory_Manager
             }
         }
 
-        #endregion
+        private void customer_name_text_box_KeyUp(object sender, KeyEventArgs e)
+        {
+            var command = $@"SELECT  *
+                                 FROM Customer
+                                 WHERE
+                                 name LIKE @name
+                                 ORDER BY id";
+            name_value = customer_name_text_box.Text;
 
-        #region entities
-        private void label1_Click(object sender, EventArgs e) { }
-        private void product_name_text_box_TextChanged(object sender, EventArgs e) { }
-        private void customer_id_text_box_TextChanged(object sender, EventArgs e) { }
-        private void note_Click(object sender, EventArgs e) { }
-        private void groupBox1_Enter(object sender, EventArgs e) { }
+            SearchCommand(command, cmd);
+        }
+
         #endregion
     }
 }
