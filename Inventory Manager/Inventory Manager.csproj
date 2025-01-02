@@ -272,24 +272,6 @@
     <Compile Include="ChangeUsersPassword.Designer.cs">
       <DependentUpon>ChangeUsersPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>CustomerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="UserProductsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,43 +302,10 @@
     <Compile Include="InventoryReport.Designer.cs">
       <DependentUpon>InventoryReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ProductDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ProductModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Product.cs">
-      <DependentUpon>ProductModel0.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductModel0.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductModel0.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductModel0.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductModel0.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductModel0.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductModel0.edmx</DependentUpon>
     </Compile>
     <Compile Include="ProductReportDataSet3.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -440,17 +389,6 @@
     <EmbeddedResource Include="Purchases.resx">
       <DependentUpon>Purchases.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="CustomerModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CustomerModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="CustomerModel.edmx.diagram">
-      <DependentUpon>CustomerModel.edmx</DependentUpon>
-    </None>
-    <EntityDeploy Include="ProductModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Database Template\Template DB.bak" />
     <None Include="ProductDataSet.xsc">
       <DependentUpon>ProductDataSet.xsd</DependentUpon>
@@ -463,17 +401,7 @@
     <None Include="ProductDataSet.xss">
       <DependentUpon>ProductDataSet.xsd</DependentUpon>
     </None>
-    <None Include="ProductModel.edmx.diagram">
-      <DependentUpon>ProductModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-    <EntityDeploy Include="ProductModel0.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductModel0.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="ProductModel0.edmx.diagram">
-      <DependentUpon>ProductModel0.edmx</DependentUpon>
-    </None>
     <None Include="ProductReportDataSet3.xsc">
       <DependentUpon>ProductReportDataSet3.xsd</DependentUpon>
     </None>
@@ -533,38 +461,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CustomerModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomerModel.edmx</DependentUpon>
-      <LastGenOutput>CustomerModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="CustomerModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomerModel.edmx</DependentUpon>
-      <LastGenOutput>CustomerModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Database Template\Template script.sql" />
     <Content Include="PayTek_Inventory_Management_System_Icon.ico" />
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductModel.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductModel.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
-    <Content Include="ProductModel0.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductModel0.edmx</DependentUpon>
-      <LastGenOutput>ProductModel0.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ProductModel0.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductModel0.edmx</DependentUpon>
-      <LastGenOutput>ProductModel0.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
