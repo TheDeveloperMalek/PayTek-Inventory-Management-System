@@ -338,9 +338,6 @@
             this.inventoryReportTableAdapter1.ClearBeforeFill = true;
             // 
             // productBindingSource
-            // 
-            this.productBindingSource.DataSource = typeof(Inventory_Manager.Product);
-            // 
             // InventoryReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

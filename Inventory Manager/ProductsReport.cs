@@ -53,76 +53,6 @@ namespace Inventory_Manager
                 Open_Connection_If_Was_Closed();
             }
 
-            #region For ORM(auto Complete)
-
-            var t1 = new Thread(() =>
-            {
-                using (var db = new PublicEntities2())
-                {
-                    var products = db.Product.ToList();
-
-                    var AutoCompleteProductId = new AutoCompleteStringCollection();
-                    var AutoCompleteProductBarcode = new AutoCompleteStringCollection();
-                    var AutoCompleteProductName = new AutoCompleteStringCollection();
-
-                    foreach (Product p in products)
-                    {
-                        AutoCompleteProductId.Add(p.id.ToString());
-                        AutoCompleteProductName.Add(p.name);
-                        AutoCompleteProductBarcode.Add(p.barcode.ToString());
-
-                    }
-
-                    if (product_id_text_box.IsHandleCreated)
-                    {
-                        if (product_id_text_box.InvokeRequired)
-                        {
-                            product_id_text_box.Invoke(new Action(() =>
-                            {
-                                product_id_text_box.AutoCompleteCustomSource = AutoCompleteProductId;
-                            }));
-                        }
-                        else
-                        {
-                            product_id_text_box.AutoCompleteCustomSource = AutoCompleteProductId;
-                        }
-                    }
-
-                    if (product_name_text_box.IsHandleCreated)
-                    {
-                        if (product_name_text_box.InvokeRequired)
-                        {
-                            product_name_text_box.Invoke(new Action(() =>
-                            {
-                                product_name_text_box.AutoCompleteCustomSource = AutoCompleteProductName;
-                            }));
-                        }
-                        else
-                        {
-                            product_name_text_box.AutoCompleteCustomSource = AutoCompleteProductName;
-                        }
-                    }
-
-                    if (product_barcode_text_box.IsHandleCreated)
-                    {
-                        if (product_name_text_box.InvokeRequired)
-                        {
-                            product_barcode_text_box.Invoke(new Action(() =>
-                            {
-                                product_barcode_text_box.AutoCompleteCustomSource = AutoCompleteProductBarcode;
-                            }));
-                        }
-                        else
-                        {
-                            product_barcode_text_box.AutoCompleteCustomSource = AutoCompleteProductBarcode;
-                        }
-                    }
-                }
-            });
-
-            t1.Start();
-            #endregion
-
         }
 
         private void Open_Connection_If_Was_Closed()
@@ -351,36 +281,6 @@ to: {dateTimePickerEnd.Value.ToShortDateString()} ";
             SearchCommand(command, cmd);
         }
 
-        #endregion
-
-        #endregion
-
-        #region autocomplete textbox Functions
-
-        #region complete for id
-        private void product_id_text_box_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                using (PublicEntities1 db = new PublicEntities1())
-                {
-                    productReportBindingSource1.DataSource = db.Product.Where(p => p.id.ToString().Contains(product_id_text_box.Text)).ToList();
-                }
-            }
-        }
-        #endregion
-
-        #region complete for name
-        private void product_name_text_box_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                using (PublicEntities1 db = new PublicEntities1())
-                {
-                    productReportBindingSource1.DataSource = db.Product.Where(p => p.name.Contains(product_name_text_box.Text)).ToList();
-                }
-            }
-        }
         #endregion
 
         #endregion
