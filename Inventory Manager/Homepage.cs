@@ -108,7 +108,7 @@ namespace Inventory_Manager
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Purchases p = new Purchases();
+            Sales p = new Sales();
             p.Show();
         }
 

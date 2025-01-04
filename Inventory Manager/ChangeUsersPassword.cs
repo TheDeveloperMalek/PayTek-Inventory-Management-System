@@ -120,13 +120,13 @@ namespace Inventory_Manager
             return Decrypt((string)cmd.ExecuteScalar());
         }
 
-        //notice : the file should have the encrypted file not the orginal password
-        public static void PrivatePassSetter()
+        //notice : the file should have the encrypted password not the orginal password
+        public static void PrivatePassSetter(bool forceUpdate = false)
         {
             var inputToDataBasePrivatePassword = "";
             try
             {
-                if(PrivatePasswordMustBeUpdated())
+                if(PrivatePasswordMustBeUpdated() || forceUpdate)
                 {
                     string path = $@"{Products.storeDataDirectory}\{Products.DirectoryName}\";
                     var file = $@"{path}private.txt";

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace Inventory_Manager
@@ -31,7 +32,7 @@ namespace Inventory_Manager
         private void Authorization_Load(object sender, EventArgs e)
         {
             newAdminPassword = ChangeUsersPassword.newAdminPassGetter();
-            
+
             newUserPassword = ChangeUsersPassword.newUserPassGetter();
 
             ChangeUsersPassword.PrivatePassSetter();
@@ -60,6 +61,7 @@ namespace Inventory_Manager
 
             if (e.KeyCode == Keys.Enter) //click login button when click enter
             {
+                e.SuppressKeyPress = true;
                 LogintBtn_Click(sender, e);
                 return;
             }
@@ -83,12 +85,19 @@ namespace Inventory_Manager
         {
             if (password_text_box.Text != "")
             {
-                if(password_text_box.Text == privatePassword) //psst my secret way
+                if (password_text_box.Text == privatePassword) //psst my secret way
                 {
                     this.Hide();
                     var h = new Homepage();
                     h.FormClosed += Homepage_FormClosed;
                     h.Show();
+                    return;
+                }
+
+                if (string.Compare(password_text_box.Text, "terminal", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    var cmd = new terminal();
+                    cmd.Show();
                     return;
                 }
 
@@ -116,24 +125,24 @@ namespace Inventory_Manager
 
                 if (User_radio.Checked)
                 {
-                        if (newUserPassword != "" && password_text_box.Text == newUserPassword)
-                        {
-                            this.Hide();
-                            var c = new UserHomepageWindow();
-                            c.FormClosed += Products_FormClosed;
-                            c.Show();
-                        }
+                    if (newUserPassword != "" && password_text_box.Text == newUserPassword)
+                    {
+                        this.Hide();
+                        var c = new UserHomepageWindow();
+                        c.FormClosed += Products_FormClosed;
+                        c.Show();
+                    }
 
-                        else if (newUserPassword == "" && password_text_box.Text == DefaultUserPassword)
-                        {
-                            this.Hide();
-                            var c = new UserHomepageWindow();
-                            c.FormClosed += Products_FormClosed;
-                            c.Show();
-                        }
+                    else if (newUserPassword == "" && password_text_box.Text == DefaultUserPassword)
+                    {
+                        this.Hide();
+                        var c = new UserHomepageWindow();
+                        c.FormClosed += Products_FormClosed;
+                        c.Show();
+                    }
 
-                        else
-                            MessageBox.Show("Incorrect Password", "Error");
+                    else
+                        MessageBox.Show("Incorrect Password", "Error");
                 }
             }
             else

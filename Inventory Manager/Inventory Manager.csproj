@@ -272,6 +272,12 @@
     <Compile Include="ChangeUsersPassword.Designer.cs">
       <DependentUpon>ChangeUsersPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="terminal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="terminal.Designer.cs">
+      <DependentUpon>terminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserProductsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -336,11 +342,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Purchases.cs">
+    <Compile Include="Sales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchases.Designer.cs">
-      <DependentUpon>Purchases.cs</DependentUpon>
+    <Compile Include="Sales.Designer.cs">
+      <DependentUpon>Sales.cs</DependentUpon>
     </Compile>
     <Compile Include="InventoryReportDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -355,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeUsersPassword.resx">
       <DependentUpon>ChangeUsersPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="terminal.resx">
+      <DependentUpon>terminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserProductsWindow.resx">
       <DependentUpon>UserProductsWindow.cs</DependentUpon>
@@ -386,8 +395,8 @@
     <EmbeddedResource Include="Products.resx">
       <DependentUpon>Products.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchases.resx">
-      <DependentUpon>Purchases.cs</DependentUpon>
+    <EmbeddedResource Include="Sales.resx">
+      <DependentUpon>Sales.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Database Template\Template DB.bak" />
     <None Include="ProductDataSet.xsc">

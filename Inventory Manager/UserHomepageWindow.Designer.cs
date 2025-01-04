@@ -155,11 +155,11 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Lucida Calligraphy", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(302, 332);
+            this.label4.Location = new System.Drawing.Point(335, 332);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(132, 27);
+            this.label4.Size = new System.Drawing.Size(70, 27);
             this.label4.TabIndex = 14;
-            this.label4.Text = "Purchases";
+            this.label4.Text = "Sales";
             // 
             // label6
             // 

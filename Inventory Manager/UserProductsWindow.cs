@@ -43,7 +43,7 @@ namespace Inventory_Manager
             productTableAdapter.Connection.ConnectionString = connectionString;
             productTableAdapter.Fill(this.productDataSet1.Product);
             conn.ConnectionString = connectionString;
-                ShowData();
+            ShowData();
         }
 
         #endregion
@@ -372,27 +372,33 @@ namespace Inventory_Manager
                     string name_value = product_name_text_box.Text;
                     try
                     {
-                        #region Export image logic
-                        DialogResult withPhoto;
-                        withPhoto = MessageBox.Show($"Do you want to import photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (withPhoto == DialogResult.Yes)
+                        #region Import image logic
+
+                        if (withPhoto.Checked)
                         {
                             using (var ofd = new OpenFileDialog())
                             {
                                 ofd.Filter = $"Image File(*.{imageExtension})|*.{imageExtension}";
-                                ofd.Title = "Export image for the product";
+                                ofd.Title = "Import image for the product";
                                 ofd.ShowDialog();
                                 using (var svf = new SaveFileDialog())
                                 {
-                                    string selectedFilePath = ofd.FileName;
-                                    productIcon.Image = Image.FromFile(selectedFilePath);
-                                    string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PayTek Inventory Management System");
-                                    if (!Directory.Exists(folderPath))
+                                    if (ofd.FileName != "")
                                     {
-                                        Directory.CreateDirectory(folderPath);
+                                        string selectedFilePath = ofd.FileName;
+                                        productIcon.Image = Image.FromFile(selectedFilePath);
+                                        string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PayTek Inventory Management System");
+                                        if (!Directory.Exists(folderPath))
+                                        {
+                                            Directory.CreateDirectory(folderPath);
+                                        }
+                                        string newFilePath = Path.Combine(folderPath, $"{barcode_value}.{imageExtension}");
+                                        File.Copy(selectedFilePath, newFilePath, true);
                                     }
-                                    string newFilePath = Path.Combine(folderPath, $"{barcode_value}.{imageExtension}");
-                                    File.Copy(selectedFilePath, newFilePath, true);
+                                    else
+                                    {
+                                        MessageBox.Show("You did not choose an image!");
+                                    }
                                 }
                             }
                         }
@@ -475,10 +481,10 @@ namespace Inventory_Manager
 
 
 
-                            #region Export image logic
+                            #region Import image logic
 
-                            DialogResult withPhoto = MessageBox.Show("Do you want to update the photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (withPhoto == DialogResult.Yes)
+
+                            if (withPhoto.Checked)
                             {
                                 string newFilePath = "";
                                 using (var ofd = new OpenFileDialog())
@@ -529,7 +535,7 @@ namespace Inventory_Manager
 
                             #endregion
 
-                            #region Update quantity logic
+                            #region Edit quantity logic
                             DialogResult updateQuantityOrPrice = MessageBox.Show("Do you want to update quantity of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (updateQuantityOrPrice == DialogResult.Yes)
                             {
@@ -621,11 +627,9 @@ namespace Inventory_Manager
 
                             #endregion
 
-                            #region Update name logic
+                            #region Edit name logic
 
-                            DialogResult updateNameOfTheProduct = MessageBox.Show("Do you want to update name of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                            if (updateNameOfTheProduct == DialogResult.Yes)
+                            if (withName.Checked)
                             {
                                 if (product_id_text_box.Text != ""
                                     || product_barcode_text_box.Text != "")
@@ -667,7 +671,7 @@ namespace Inventory_Manager
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Product name can not be empty");
+                                        MessageBox.Show("Product's name can not be empty");
                                         return;
                                     }
                                 }
@@ -682,7 +686,7 @@ namespace Inventory_Manager
 
                                 if (rowsAffected > 0)
                                 {
-                                    MessageBox.Show("Product updated successfully.");
+                                    MessageBox.Show("Product's name updated successfully.");
                                 }
                                 else
                                 {
@@ -691,7 +695,7 @@ namespace Inventory_Manager
                             }
 
                             #endregion
-                        
+
                         }
                     }
                     else
@@ -979,7 +983,7 @@ namespace Inventory_Manager
                     break;
             }
             ShowData();
-            dataGridView1.CurrentCell = dataGridView1[columnIndex , rowIndex];
+            dataGridView1.CurrentCell = dataGridView1[columnIndex, rowIndex];
         }
         #endregion
 

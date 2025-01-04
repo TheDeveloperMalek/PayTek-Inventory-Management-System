@@ -363,14 +363,12 @@ namespace Inventory_Manager
                     try
                     {
                         #region Export image logic
-                        DialogResult withPhoto;
-                        withPhoto = MessageBox.Show($"Do you want to import photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (withPhoto == DialogResult.Yes)
+                        if (withPhoto.Checked)
                         {
                             using (var ofd = new OpenFileDialog())
                             {
                                 ofd.Filter = $"Image File(*.{imageExtension})|*.{imageExtension}";
-                                ofd.Title = "Export image for the product";
+                                ofd.Title = "Import image for the product";
                                 ofd.ShowDialog();
                                 using (var svf = new SaveFileDialog())
                                 {
@@ -468,20 +466,19 @@ namespace Inventory_Manager
                         updateCmd.Parameters.AddWithValue("@barcode", barcode_value);
                         updateCmd.Parameters.AddWithValue("@name", name_value);
                         updateCmd.Parameters.AddWithValue("@date", DateTime.Now);
-                        updateCmd.Parameters.AddWithValue("@status", "Updated product's quantity");
+                        updateCmd.Parameters.AddWithValue("@status", "Product's quantity has been updated");
 
 
 
-                        #region Export image logic
+                        #region Import image logic
 
-                        DialogResult withPhoto = MessageBox.Show("Do you want to update the photo of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (withPhoto == DialogResult.Yes)
+                        if (withPhoto.Checked)
                         {
                             string newFilePath = "";
                             using (var ofd = new OpenFileDialog())
                             {
                                 ofd.Filter = $"Image File(*.{imageExtension})|*.{imageExtension}";
-                                ofd.Title = "Export image for the product";
+                                ofd.Title = "Import image for the product";
 
                                 if (ofd.ShowDialog() == DialogResult.OK)
                                 {
@@ -528,7 +525,7 @@ namespace Inventory_Manager
 
                         #region Update price or quantitiy logic
 
-                        DialogResult updateQuantityOrPrice = MessageBox.Show("Do you want to update price or quantity of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        DialogResult updateQuantityOrPrice = MessageBox.Show("Do you want to edit price or quantity of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                         if (updateQuantityOrPrice == DialogResult.Yes)
                         {
@@ -645,9 +642,7 @@ namespace Inventory_Manager
 
                         #region Update name logic
 
-                        DialogResult updateNameOfTheProduct = MessageBox.Show("Do you want to update name of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        if (updateNameOfTheProduct == DialogResult.Yes)
+                        if (withName.Checked)
                         {
                             if (product_id_text_box.Text != ""
                                 || product_barcode_text_box.Text != "")
@@ -704,7 +699,7 @@ namespace Inventory_Manager
 
                             if (rowsAffected > 0)
                             {
-                                MessageBox.Show("Product updated successfully.");
+                                MessageBox.Show("Product's name updated successfully.");
                             }
                             else
                             {

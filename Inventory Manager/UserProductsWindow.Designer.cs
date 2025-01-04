@@ -64,6 +64,8 @@
             this.productBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.productBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.productTableAdapter = new Inventory_Manager.ProductDataSet1TableAdapters.ProductTableAdapter();
+            this.withPhoto = new System.Windows.Forms.CheckBox();
+            this.withName = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.publicDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -192,6 +194,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(47)))), ((int)(((byte)(68)))));
+            this.groupBox1.Controls.Add(this.withName);
+            this.groupBox1.Controls.Add(this.withPhoto);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.note);
             this.groupBox1.Controls.Add(this.productIcon);
@@ -402,6 +406,28 @@
             // 
             this.productTableAdapter.ClearBeforeFill = true;
             // 
+            // withPhoto
+            // 
+            this.withPhoto.AutoSize = true;
+            this.withPhoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.withPhoto.Location = new System.Drawing.Point(443, 84);
+            this.withPhoto.Name = "withPhoto";
+            this.withPhoto.Size = new System.Drawing.Size(131, 22);
+            this.withPhoto.TabIndex = 20;
+            this.withPhoto.Text = "Add / Edit photo";
+            this.withPhoto.UseVisualStyleBackColor = true;
+            // 
+            // withName
+            // 
+            this.withName.AutoSize = true;
+            this.withName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.withName.Location = new System.Drawing.Point(443, 112);
+            this.withName.Name = "withName";
+            this.withName.Size = new System.Drawing.Size(93, 22);
+            this.withName.TabIndex = 21;
+            this.withName.Text = "Edit name";
+            this.withName.UseVisualStyleBackColor = true;
+            // 
             // UserProductsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,5 +498,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox productIcon;
+        private System.Windows.Forms.CheckBox withName;
+        private System.Windows.Forms.CheckBox withPhoto;
     }
 }
