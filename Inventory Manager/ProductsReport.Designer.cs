@@ -277,6 +277,7 @@
             this.dataGridView2.RowTemplate.Height = 50;
             this.dataGridView2.Size = new System.Drawing.Size(1155, 339);
             this.dataGridView2.TabIndex = 31;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
             // productIDDataGridViewTextBoxColumn
             // 

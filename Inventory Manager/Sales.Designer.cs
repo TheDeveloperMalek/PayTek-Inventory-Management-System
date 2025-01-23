@@ -56,9 +56,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.note = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.saleDataSet = new Inventory_Manager.SaleDataSet();
-            this.saleBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.saleTableAdapter = new Inventory_Manager.SaleDataSetTableAdapters.SaleTableAdapter();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,10 +65,13 @@
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.saleDataSet = new Inventory_Manager.SaleDataSet();
+            this.saleTableAdapter = new Inventory_Manager.SaleDataSetTableAdapters.SaleTableAdapter();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.saleDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.saleBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.saleDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -439,20 +439,7 @@
             this.dataGridView1.RowTemplate.Height = 50;
             this.dataGridView1.Size = new System.Drawing.Size(1207, 288);
             this.dataGridView1.TabIndex = 24;
-            // 
-            // saleDataSet
-            // 
-            this.saleDataSet.DataSetName = "SaleDataSet";
-            this.saleDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // saleBindingSource
-            // 
-            this.saleBindingSource.DataMember = "Sale";
-            this.saleBindingSource.DataSource = this.saleDataSet;
-            // 
-            // saleTableAdapter
-            // 
-            this.saleTableAdapter.ClearBeforeFill = true;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // iDDataGridViewTextBoxColumn
             // 
@@ -509,6 +496,20 @@
             this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
             // 
+            // saleBindingSource
+            // 
+            this.saleBindingSource.DataMember = "Sale";
+            this.saleBindingSource.DataSource = this.saleDataSet;
+            // 
+            // saleDataSet
+            // 
+            this.saleDataSet.DataSetName = "SaleDataSet";
+            this.saleDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // saleTableAdapter
+            // 
+            this.saleTableAdapter.ClearBeforeFill = true;
+            // 
             // Sales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,8 +526,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.saleDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.saleBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.saleDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }

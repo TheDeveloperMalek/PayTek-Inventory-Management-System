@@ -350,5 +350,28 @@ namespace Inventory_Manager
         }
 
         #endregion
+
+        #region Click on a cell
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            customer_id_text_box.Text = customer_name_text_box.Text = "";
+            var text = dataGridView1.CurrentCell.Value.ToString();
+            var columnIndex = dataGridView1.CurrentCellAddress.X;
+            var rowIndex = dataGridView1.CurrentCellAddress.Y;
+            var c = new KeyEventArgs(Keys.NoName);
+
+            switch (columnIndex)
+            {
+                case 0:
+                    customer_id_text_box.Text = text;
+                    customer_id_text_box_KeyUp(sender, c);
+                    break;
+                case 1:
+                   customer_name_text_box.Text = text;
+                    customer_name_text_box_KeyUp(sender, c);
+                    break;
+            }
+        }
+        #endregion
     }
 }

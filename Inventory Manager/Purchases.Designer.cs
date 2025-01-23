@@ -56,9 +56,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.note = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.purchaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.purchaseDataSet = new Inventory_Manager.PurchaseDataSet();
-            this.purchaseTableAdapter = new Inventory_Manager.PurchaseDataSetTableAdapters.PurchaseTableAdapter();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,6 +65,9 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.purchaseDataSet = new Inventory_Manager.PurchaseDataSet();
+            this.purchaseTableAdapter = new Inventory_Manager.PurchaseDataSetTableAdapters.PurchaseTableAdapter();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.purchaseBindingSource)).BeginInit();
@@ -439,20 +439,7 @@
             this.dataGridView1.RowTemplate.Height = 50;
             this.dataGridView1.Size = new System.Drawing.Size(1207, 287);
             this.dataGridView1.TabIndex = 24;
-            // 
-            // purchaseBindingSource
-            // 
-            this.purchaseBindingSource.DataMember = "Purchase";
-            this.purchaseBindingSource.DataSource = this.purchaseDataSet;
-            // 
-            // purchaseDataSet
-            // 
-            this.purchaseDataSet.DataSetName = "PurchaseDataSet";
-            this.purchaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // purchaseTableAdapter
-            // 
-            this.purchaseTableAdapter.ClearBeforeFill = true;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -508,6 +495,20 @@
             this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
             this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            // 
+            // purchaseBindingSource
+            // 
+            this.purchaseBindingSource.DataMember = "Purchase";
+            this.purchaseBindingSource.DataSource = this.purchaseDataSet;
+            // 
+            // purchaseDataSet
+            // 
+            this.purchaseDataSet.DataSetName = "PurchaseDataSet";
+            this.purchaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // purchaseTableAdapter
+            // 
+            this.purchaseTableAdapter.ClearBeforeFill = true;
             // 
             // Purchases
             // 

@@ -124,7 +124,7 @@ Delete and Edit a {target}";
             cmd.CommandText = $@"SELECT  barcode
                                              FROM Product
                                              WHERE
-                                             {$"\"{targetColumn}\""} = '{tb.Text}'";
+                                             {$"\"{targetColumn}\""} = N'{tb.Text}'";
             if (cmd.ExecuteScalar() != null)
                 return cmd.ExecuteScalar().ToString();
             return null;

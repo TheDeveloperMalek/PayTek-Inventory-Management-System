@@ -262,6 +262,7 @@
             this.dataGridView1.RowTemplate.Height = 50;
             this.dataGridView1.Size = new System.Drawing.Size(883, 347);
             this.dataGridView1.TabIndex = 15;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -289,8 +290,7 @@
             // 
             this.customerBindingSource.DataMember = "Customer";
             // 
-            // publicDataSet5
-            // 
+            // supplierTableAdapter
             // 
             this.supplierTableAdapter.ClearBeforeFill = true;
             // 

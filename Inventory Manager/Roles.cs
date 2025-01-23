@@ -111,7 +111,32 @@ namespace Inventory_Manager
         }
 
 
+
+
         #endregion
 
+        #region Click on a cell
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            UsernameTextBox.Text =
+                PasswordTextBox.Text = "";
+            var text = dataGridView1.CurrentCell.Value.ToString();
+            var columnIndex = dataGridView1.CurrentCellAddress.X;
+            var rowIndex = dataGridView1.CurrentCellAddress.Y;
+            var c = new KeyEventArgs(Keys.NoName);
+
+            switch (columnIndex)
+            {
+                case 0:
+                    UsernameTextBox.Text = text;
+                    //UsernameTextBoxK(sender, c);
+                    break;
+                case 1:
+                    PasswordTextBox.Text = text;
+                    //product_barcode_text_box_KeyUp(sender, c);
+                    break;
+            }
+        }
+        #endregion
     }
 }

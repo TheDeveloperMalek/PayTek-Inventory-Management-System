@@ -869,5 +869,54 @@ namespace Inventory_Manager
 
         #endregion
 
+        #region Click on a cell
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            purchase_id_text_box.Text = 
+            product_id_text_box.Text =
+            product_barcode_text_box.Text =
+            product_name_text_box.Text =
+            supplier_id_text_box.Text =
+            supplier_name_text_box.Text =
+            product_quantity_text_box.Text = "";
+            var text = dataGridView1.CurrentCell.Value.ToString();
+            var columnIndex = dataGridView1.CurrentCellAddress.X;
+            var rowIndex = dataGridView1.CurrentCellAddress.Y;
+            var c = new KeyEventArgs(Keys.NoName);
+
+            switch (columnIndex)
+            {
+                case 0:
+                    purchase_id_text_box.Text = text;
+                    purchase_id_text_box_KeyUp(sender, c);
+                    break;
+                case 1:
+                    supplier_id_text_box.Text = text;
+                    supplier_id_text_box_KeyUp(sender, c);
+                    break;
+                case 2:
+                    supplier_name_text_box.Text = text;
+                    supplier_name_text_box_KeyUp(sender, c);
+                    break;
+                case 3:
+                    product_id_text_box.Text = text;
+                    product_id_text_box_KeyUp(sender, c);
+                    break;
+                case 4:
+                    product_barcode_text_box.Text = text;
+                    product_barcode_text_box_KeyUp(sender, c);
+                    break;
+                case 5:
+                    product_name_text_box.Text = text;
+                    product_name_text_box_KeyUp(sender, c);
+                    break;
+                case 6:
+                    product_quantity_text_box.Text = text;
+                    product_quantity_text_box_KeyUp(sender, c);
+                    break;
+            }
+        }
+        #endregion
+
     }
 }
