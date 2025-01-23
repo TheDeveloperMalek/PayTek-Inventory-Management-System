@@ -51,6 +51,12 @@ namespace Inventory_Manager
             this.label9 = new System.Windows.Forms.Label();
             this.shortcutBtn = new System.Windows.Forms.Button();
             this.changeUserPassword = new System.Windows.Forms.Button();
+            this.terminal = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.roles = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -63,9 +69,9 @@ namespace Inventory_Manager
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button6.Location = new System.Drawing.Point(102, 154);
+            this.button6.Location = new System.Drawing.Point(333, 195);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(175, 175);
+            this.button6.Size = new System.Drawing.Size(140, 140);
             this.button6.TabIndex = 1;
             this.button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button6.UseVisualStyleBackColor = true;
@@ -78,9 +84,9 @@ namespace Inventory_Manager
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(826, 154);
+            this.button1.Location = new System.Drawing.Point(553, 375);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(175, 175);
+            this.button1.Size = new System.Drawing.Size(140, 140);
             this.button1.TabIndex = 5;
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.UseVisualStyleBackColor = true;
@@ -92,9 +98,9 @@ namespace Inventory_Manager
             this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Location = new System.Drawing.Point(464, 154);
+            this.button4.Location = new System.Drawing.Point(479, 195);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(175, 175);
+            this.button4.Size = new System.Drawing.Size(140, 140);
             this.button4.TabIndex = 3;
             this.button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button4.UseVisualStyleBackColor = true;
@@ -107,9 +113,9 @@ namespace Inventory_Manager
             this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Location = new System.Drawing.Point(283, 154);
+            this.button5.Location = new System.Drawing.Point(625, 195);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(175, 175);
+            this.button5.Size = new System.Drawing.Size(140, 140);
             this.button5.TabIndex = 2;
             this.button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button5.UseVisualStyleBackColor = true;
@@ -124,7 +130,7 @@ namespace Inventory_Manager
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Showcard Gothic", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(454, -3);
+            this.label1.Location = new System.Drawing.Point(473, -3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(465, 106);
             this.label1.TabIndex = 9;
@@ -145,10 +151,10 @@ namespace Inventory_Manager
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Lucida Calligraphy", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(132, 332);
+            this.label2.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(355, 338);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 27);
+            this.label2.Size = new System.Drawing.Size(93, 21);
             this.label2.TabIndex = 11;
             this.label2.Text = "Products";
             // 
@@ -156,10 +162,10 @@ namespace Inventory_Manager
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Lucida Calligraphy", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(332, 332);
+            this.label4.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(671, 338);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 27);
+            this.label4.Size = new System.Drawing.Size(56, 21);
             this.label4.TabIndex = 14;
             this.label4.Text = "Sales";
             // 
@@ -167,10 +173,10 @@ namespace Inventory_Manager
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Lucida Calligraphy", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(838, 332);
+            this.label6.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(570, 518);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(143, 54);
+            this.label6.Size = new System.Drawing.Size(112, 42);
             this.label6.TabIndex = 16;
             this.label6.Text = "Products\'s \nReport";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -179,10 +185,10 @@ namespace Inventory_Manager
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Lucida Calligraphy", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(481, 332);
+            this.label7.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(497, 338);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(135, 27);
+            this.label7.Size = new System.Drawing.Size(105, 21);
             this.label7.TabIndex = 15;
             this.label7.Text = "Customers";
             // 
@@ -191,7 +197,7 @@ namespace Inventory_Manager
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Harlow Solid Italic", 24.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(57, 419);
+            this.label3.Location = new System.Drawing.Point(57, 584);
             this.label3.MaximumSize = new System.Drawing.Size(90, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 84);
@@ -202,10 +208,10 @@ namespace Inventory_Manager
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Lucida Calligraphy", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(658, 332);
+            this.label5.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(710, 518);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(151, 54);
+            this.label5.Size = new System.Drawing.Size(117, 42);
             this.label5.TabIndex = 19;
             this.label5.Text = "Inventory\'s\r\nReport";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -216,9 +222,9 @@ namespace Inventory_Manager
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(645, 154);
+            this.button2.Location = new System.Drawing.Point(699, 375);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(175, 175);
+            this.button2.Size = new System.Drawing.Size(140, 140);
             this.button2.TabIndex = 4;
             this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button2.UseVisualStyleBackColor = true;
@@ -231,7 +237,7 @@ namespace Inventory_Manager
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(60, 506);
+            this.pictureBox1.Size = new System.Drawing.Size(60, 671);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
@@ -241,9 +247,9 @@ namespace Inventory_Manager
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Right;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(1038, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(1077, 0);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(60, 506);
+            this.pictureBox3.Size = new System.Drawing.Size(60, 671);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 21;
             this.pictureBox3.TabStop = false;
@@ -253,7 +259,7 @@ namespace Inventory_Manager
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Harlow Solid Italic", 26.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(937, 464);
+            this.label9.Location = new System.Drawing.Point(976, 629);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(110, 45);
             this.label9.TabIndex = 23;
@@ -263,10 +269,11 @@ namespace Inventory_Manager
             // 
             this.shortcutBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.shortcutBtn.BackColor = System.Drawing.Color.Silver;
+            this.shortcutBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.shortcutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.shortcutBtn.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shortcutBtn.ForeColor = System.Drawing.Color.Black;
-            this.shortcutBtn.Location = new System.Drawing.Point(594, 450);
+            this.shortcutBtn.Location = new System.Drawing.Point(574, 624);
             this.shortcutBtn.Name = "shortcutBtn";
             this.shortcutBtn.Size = new System.Drawing.Size(162, 44);
             this.shortcutBtn.TabIndex = 6;
@@ -278,10 +285,11 @@ namespace Inventory_Manager
             // 
             this.changeUserPassword.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.changeUserPassword.BackColor = System.Drawing.Color.Silver;
+            this.changeUserPassword.Cursor = System.Windows.Forms.Cursors.Hand;
             this.changeUserPassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.changeUserPassword.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeUserPassword.ForeColor = System.Drawing.Color.Black;
-            this.changeUserPassword.Location = new System.Drawing.Point(426, 450);
+            this.changeUserPassword.Location = new System.Drawing.Point(406, 624);
             this.changeUserPassword.Name = "changeUserPassword";
             this.changeUserPassword.Size = new System.Drawing.Size(162, 44);
             this.changeUserPassword.TabIndex = 24;
@@ -289,12 +297,101 @@ namespace Inventory_Manager
             this.changeUserPassword.UseVisualStyleBackColor = false;
             this.changeUserPassword.Click += new System.EventHandler(this.changeUserPassword_Click);
             // 
+            // terminal
+            // 
+            this.terminal.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.terminal.BackColor = System.Drawing.Color.Silver;
+            this.terminal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.terminal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.terminal.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.terminal.ForeColor = System.Drawing.Color.Black;
+            this.terminal.Location = new System.Drawing.Point(406, 574);
+            this.terminal.Name = "terminal";
+            this.terminal.Size = new System.Drawing.Size(162, 44);
+            this.terminal.TabIndex = 25;
+            this.terminal.Text = "Terminal";
+            this.terminal.UseVisualStyleBackColor = false;
+            this.terminal.Click += new System.EventHandler(this.terminal_Click);
+            // 
+            // button7
+            // 
+            this.button7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button7.BackgroundImage")));
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button7.Location = new System.Drawing.Point(407, 375);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(140, 140);
+            this.button7.TabIndex = 27;
+            this.button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button8.Location = new System.Drawing.Point(261, 375);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(140, 140);
+            this.button8.TabIndex = 28;
+            this.button8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click_1);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(434, 518);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 21);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Suppliers";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(281, 518);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 21);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "Purchases";
+            // 
+            // roles
+            // 
+            this.roles.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.roles.BackColor = System.Drawing.Color.Silver;
+            this.roles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.roles.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.roles.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roles.ForeColor = System.Drawing.Color.Black;
+            this.roles.Location = new System.Drawing.Point(574, 574);
+            this.roles.Name = "roles";
+            this.roles.Size = new System.Drawing.Size(162, 44);
+            this.roles.TabIndex = 32;
+            this.roles.Text = "Roles";
+            this.roles.UseVisualStyleBackColor = false;
+            this.roles.Visible = false;
+            this.roles.Click += new System.EventHandler(this.roles_Click);
+            // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1098, 506);
+            this.ClientSize = new System.Drawing.Size(1137, 671);
+            this.Controls.Add(this.roles);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.terminal);
             this.Controls.Add(this.changeUserPassword);
             this.Controls.Add(this.shortcutBtn);
             this.Controls.Add(this.pictureBox3);
@@ -349,6 +446,12 @@ namespace Inventory_Manager
         private System.Windows.Forms.Label label9;
         private Button shortcutBtn;
         private Button changeUserPassword;
+        private Button terminal;
+        private Button button7;
+        private Button button8;
+        private Label label8;
+        private Label label11;
+        private Button roles;
     }
 }
 

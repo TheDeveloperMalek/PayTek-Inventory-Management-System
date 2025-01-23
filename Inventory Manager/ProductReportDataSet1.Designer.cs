@@ -279,15 +279,17 @@ namespace Inventory_Manager {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class ProductReportDataTable : global::System.Data.TypedTableBase<ProductReportRow> {
             
-            private global::System.Data.DataColumn columnproduct_id;
+            private global::System.Data.DataColumn columnProduct_ID;
             
-            private global::System.Data.DataColumn columnproduct_barcode;
+            private global::System.Data.DataColumn columnProduct_Barcode;
             
-            private global::System.Data.DataColumn columnproduct_name;
+            private global::System.Data.DataColumn columnProduct_Name;
             
-            private global::System.Data.DataColumn columnstatus;
+            private global::System.Data.DataColumn columnStatus;
             
-            private global::System.Data.DataColumn columnquantity;
+            private global::System.Data.DataColumn columnQuantity;
+            
+            private global::System.Data.DataColumn columnDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -324,41 +326,49 @@ namespace Inventory_Manager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn product_idColumn {
+            public global::System.Data.DataColumn Product_IDColumn {
                 get {
-                    return this.columnproduct_id;
+                    return this.columnProduct_ID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn product_barcodeColumn {
+            public global::System.Data.DataColumn Product_BarcodeColumn {
                 get {
-                    return this.columnproduct_barcode;
+                    return this.columnProduct_Barcode;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn product_nameColumn {
+            public global::System.Data.DataColumn Product_NameColumn {
                 get {
-                    return this.columnproduct_name;
+                    return this.columnProduct_Name;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn statusColumn {
+            public global::System.Data.DataColumn StatusColumn {
                 get {
-                    return this.columnstatus;
+                    return this.columnStatus;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn quantityColumn {
+            public global::System.Data.DataColumn QuantityColumn {
                 get {
-                    return this.columnquantity;
+                    return this.columnQuantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
                 }
             }
             
@@ -399,14 +409,15 @@ namespace Inventory_Manager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public ProductReportRow AddProductReportRow(int product_id, int product_barcode, string product_name, string status, int quantity) {
+            public ProductReportRow AddProductReportRow(int Product_ID, int Product_Barcode, string Product_Name, string Status, int Quantity, System.DateTime Date) {
                 ProductReportRow rowProductReportRow = ((ProductReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        product_id,
-                        product_barcode,
-                        product_name,
-                        status,
-                        quantity};
+                        Product_ID,
+                        Product_Barcode,
+                        Product_Name,
+                        Status,
+                        Quantity,
+                        Date};
                 rowProductReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowProductReportRow);
                 return rowProductReportRow;
@@ -429,33 +440,37 @@ namespace Inventory_Manager {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnproduct_id = base.Columns["product_id"];
-                this.columnproduct_barcode = base.Columns["product_barcode"];
-                this.columnproduct_name = base.Columns["product_name"];
-                this.columnstatus = base.Columns["status"];
-                this.columnquantity = base.Columns["quantity"];
+                this.columnProduct_ID = base.Columns["Product ID"];
+                this.columnProduct_Barcode = base.Columns["Product Barcode"];
+                this.columnProduct_Name = base.Columns["Product Name"];
+                this.columnStatus = base.Columns["Status"];
+                this.columnQuantity = base.Columns["Quantity"];
+                this.columnDate = base.Columns["Date"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnproduct_id = new global::System.Data.DataColumn("product_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnproduct_id);
-                this.columnproduct_barcode = new global::System.Data.DataColumn("product_barcode", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnproduct_barcode);
-                this.columnproduct_name = new global::System.Data.DataColumn("product_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnproduct_name);
-                this.columnstatus = new global::System.Data.DataColumn("status", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnstatus);
-                this.columnquantity = new global::System.Data.DataColumn("quantity", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnquantity);
-                this.columnproduct_id.AllowDBNull = false;
-                this.columnproduct_barcode.AllowDBNull = false;
-                this.columnproduct_name.AllowDBNull = false;
-                this.columnproduct_name.MaxLength = 50;
-                this.columnstatus.AllowDBNull = false;
-                this.columnstatus.MaxLength = 70;
-                this.columnquantity.AllowDBNull = false;
+                this.columnProduct_ID = new global::System.Data.DataColumn("Product ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduct_ID);
+                this.columnProduct_Barcode = new global::System.Data.DataColumn("Product Barcode", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduct_Barcode);
+                this.columnProduct_Name = new global::System.Data.DataColumn("Product Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduct_Name);
+                this.columnStatus = new global::System.Data.DataColumn("Status", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStatus);
+                this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantity);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnProduct_ID.AllowDBNull = false;
+                this.columnProduct_Barcode.AllowDBNull = false;
+                this.columnProduct_Name.AllowDBNull = false;
+                this.columnProduct_Name.MaxLength = 50;
+                this.columnStatus.AllowDBNull = false;
+                this.columnStatus.MaxLength = 70;
+                this.columnQuantity.AllowDBNull = false;
+                this.columnDate.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -598,56 +613,67 @@ namespace Inventory_Manager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int product_id {
+            public int Product_ID {
                 get {
-                    return ((int)(this[this.tableProductReport.product_idColumn]));
+                    return ((int)(this[this.tableProductReport.Product_IDColumn]));
                 }
                 set {
-                    this[this.tableProductReport.product_idColumn] = value;
+                    this[this.tableProductReport.Product_IDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int product_barcode {
+            public int Product_Barcode {
                 get {
-                    return ((int)(this[this.tableProductReport.product_barcodeColumn]));
+                    return ((int)(this[this.tableProductReport.Product_BarcodeColumn]));
                 }
                 set {
-                    this[this.tableProductReport.product_barcodeColumn] = value;
+                    this[this.tableProductReport.Product_BarcodeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string product_name {
+            public string Product_Name {
                 get {
-                    return ((string)(this[this.tableProductReport.product_nameColumn]));
+                    return ((string)(this[this.tableProductReport.Product_NameColumn]));
                 }
                 set {
-                    this[this.tableProductReport.product_nameColumn] = value;
+                    this[this.tableProductReport.Product_NameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string status {
+            public string Status {
                 get {
-                    return ((string)(this[this.tableProductReport.statusColumn]));
+                    return ((string)(this[this.tableProductReport.StatusColumn]));
                 }
                 set {
-                    this[this.tableProductReport.statusColumn] = value;
+                    this[this.tableProductReport.StatusColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int quantity {
+            public int Quantity {
                 get {
-                    return ((int)(this[this.tableProductReport.quantityColumn]));
+                    return ((int)(this[this.tableProductReport.QuantityColumn]));
                 }
                 set {
-                    this[this.tableProductReport.quantityColumn] = value;
+                    this[this.tableProductReport.QuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime Date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableProductReport.DateColumn]));
+                }
+                set {
+                    this[this.tableProductReport.DateColumn] = value;
                 }
             }
         }
@@ -811,12 +837,25 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "ProductReport";
-            tableMapping.ColumnMappings.Add("product_id", "product_id");
-            tableMapping.ColumnMappings.Add("product_barcode", "product_barcode");
-            tableMapping.ColumnMappings.Add("product_name", "product_name");
-            tableMapping.ColumnMappings.Add("status", "status");
-            tableMapping.ColumnMappings.Add("quantity", "quantity");
+            tableMapping.ColumnMappings.Add("Product ID", "Product ID");
+            tableMapping.ColumnMappings.Add("Product Barcode", "Product Barcode");
+            tableMapping.ColumnMappings.Add("Product Name", "Product Name");
+            tableMapping.ColumnMappings.Add("Status", "Status");
+            tableMapping.ColumnMappings.Add("Quantity", "Quantity");
+            tableMapping.ColumnMappings.Add("Date", "Date");
             this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[ProductReport] ([Product ID], [Product Barcode], [Product Name" +
+                "], [Status], [Quantity], [Date]) VALUES (@Product_ID, @Product_Barcode, @Product" +
+                "_Name, @Status, @Quantity, @Date)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_Barcode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Barcode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Status", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -832,8 +871,8 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT product_id, product_barcode, product_name, status, quantity FROM dbo.Produ" +
-                "ctReport";
+            this._commandCollection[0].CommandText = "SELECT [Product ID], [Product Barcode], [Product Name], Status, Quantity, Date FR" +
+                "OM dbo.ProductReport";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -860,6 +899,72 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(ProductReportDataSet.ProductReportDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(ProductReportDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "ProductReport");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int Product_ID, int Product_Barcode, string Product_Name, string Status, int Quantity, System.DateTime Date) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Product_ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Product_Barcode));
+            if ((Product_Name == null)) {
+                throw new global::System.ArgumentNullException("Product_Name");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Product_Name));
+            }
+            if ((Status == null)) {
+                throw new global::System.ArgumentNullException("Status");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Status));
+            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(Quantity));
+            this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(Date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
     }
     
     /// <summary>
@@ -874,6 +979,8 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
+        private ProductReportTableAdapter _productReportTableAdapter;
+        
         private bool _backupDataSetBeforeUpdate;
         
         private global::System.Data.IDbConnection _connection;
@@ -886,6 +993,20 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
             }
             set {
                 this._updateOrder = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public ProductReportTableAdapter ProductReportTableAdapter {
+            get {
+                return this._productReportTableAdapter;
+            }
+            set {
+                this._productReportTableAdapter = value;
             }
         }
         
@@ -908,6 +1029,10 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
+                if (((this._productReportTableAdapter != null) 
+                            && (this._productReportTableAdapter.Connection != null))) {
+                    return this._productReportTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -921,6 +1046,9 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
+                if ((this._productReportTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -932,6 +1060,15 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(ProductReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._productReportTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ProductReport.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._productReportTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -942,6 +1079,14 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(ProductReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._productReportTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ProductReport.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._productReportTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -952,6 +1097,14 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(ProductReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._productReportTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ProductReport.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._productReportTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             return result;
         }
         
@@ -991,6 +1144,11 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
+            if (((this._productReportTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._productReportTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
@@ -1023,6 +1181,15 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
+                if ((this._productReportTableAdapter != null)) {
+                    revertConnections.Add(this._productReportTableAdapter, this._productReportTableAdapter.Connection);
+                    this._productReportTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._productReportTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._productReportTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._productReportTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._productReportTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -1080,6 +1247,10 @@ namespace Inventory_Manager.ProductReportDataSetTableAdapters {
             finally {
                 if (workConnOpened) {
                     workConnection.Close();
+                }
+                if ((this._productReportTableAdapter != null)) {
+                    this._productReportTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._productReportTableAdapter]));
+                    this._productReportTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

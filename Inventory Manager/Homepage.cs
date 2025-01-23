@@ -9,35 +9,18 @@ namespace Inventory_Manager
         public Homepage()
         {
             InitializeComponent();
+            Shared.HideComponentsByUserType();
             this.KeyDown += new KeyEventHandler(KeysShortcuts);
             this.KeyPreview = true;
+            this.terminal.Visible = Shared.isVisibleForDeveloper;
+            this.roles.Visible = Shared.isVisibleForDeveloper;
         }
         #endregion
 
-        #region startup_functions
+        #region Startup Functions
         private void KeysShortcuts(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.F) //make full screen
-            {
-                if (this.FormBorderStyle == FormBorderStyle.None)
-                {
-                    this.FormBorderStyle = FormBorderStyle.Sizable;
-                    this.WindowState = FormWindowState.Maximized;
-                }
-                else
-                {
-                    this.FormBorderStyle = FormBorderStyle.None;
-                    this.WindowState = FormWindowState.Normal;
-                    this.Location = new System.Drawing.Point(0, 0);
-                    this.Size = Screen.PrimaryScreen.Bounds.Size;
-                }
-                return;
-            }
-            if (e.Control && e.KeyCode == Keys.E) //exit
-            {
-                this.Close();
-                return;
-            }
+            Shared.KeysShortcuts(sender, e, this);
             if (e.Alt && e.KeyCode == Keys.S) //switch to login form again
             {
                 this.Hide();
@@ -45,34 +28,10 @@ namespace Inventory_Manager
                 a.FormClosed += Auth_FormClosed;
                 a.Show();
             }
-            if (e.Control && e.KeyCode == Keys.M) //minimize
-            {
-                this.WindowState = FormWindowState.Minimized;
-                return;
-            }
-
-            if (e.Control && e.KeyCode == Keys.I) // show information about the devleoper
-            {
-                ShowToast("The Developer: Muhammad Malek Alset");
-                return;
-            }
-            if (e.Control && e.KeyCode == Keys.H)
-            {
-                Homepage f = new Homepage();
-                f.Show();
-            }
-        }
-
-        private void ShowToast(string message)
-        {
-            ToolTip toast = new ToolTip();
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width,
-            screenHeight = Screen.PrimaryScreen.Bounds.Height,
-            toastWidth = 300,
-            toastHeight = 50,
-            x = (screenWidth - toastWidth) / 2,
-            y = screenHeight - toastHeight - 75;
-            toast.Show(message, this, x, y, 1500);
+            if (e.Control && e.KeyCode == Keys.B)
+                MessageBox.Show(Shared.CreateDBBackup("Public"), "PayTek Inventory Management System");
+            if (e.Control && e.KeyCode == Keys.R)
+                MessageBox.Show(Shared.RestoreDBFromBakFile("Public"), "PayTek Inventory Management System");
         }
 
         private void Auth_FormClosed(object sender, EventArgs e) //event when the auth is closed
@@ -94,7 +53,11 @@ namespace Inventory_Manager
             Products s = new Products();
             s.Show();
         }
-
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var s = new Suppliers();
+            s.Show();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -126,8 +89,27 @@ namespace Inventory_Manager
 
         private void changeUserPassword_Click(object sender, EventArgs e)
         {
-            var changeUsersPassword = new ChangeUsersPassword();
-            changeUsersPassword.Show();
+            var c = new ChangeUserPassword();
+            c.Show();
+        }
+
+        private void terminal_Click(object sender, EventArgs e)
+        {
+            var cmd = new Terminal();
+            cmd.Show();
+            return;
+        }
+
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            var p = new Purchases();
+            p.Show();
+        }
+
+        private void roles_Click(object sender, EventArgs e)
+        {
+            var r = new Roles();
+            r.Show();
         }
 
         #region shortcut guidance button
@@ -136,14 +118,15 @@ namespace Inventory_Manager
             MessageBox.Show(@"Ctrl + f => Toggle full screen
 Ctrl + m => Minimize the form
 Ctrl + e => Close the form
+Ctrl + b => Create a backup of the database
+Ctrl + r => Restore data from a database's backup
 Alt + s => Switch to login form (just for homepage)
 Ctrl + p => To save the table as an excel file (just for reports)
-Ctrl + i => infromation about the developer
                             ", "Shortcuts Table");
         }
-        #endregion
 
         #endregion
 
+        #endregion
     }
 }

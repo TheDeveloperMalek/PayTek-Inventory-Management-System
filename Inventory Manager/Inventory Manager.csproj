@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\ILRepack.2.0.36\build\ILRepack.props" Condition="Exists('..\packages\ILRepack.2.0.36\build\ILRepack.props')" />
   <Import Project="..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" />
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="..\packages\ILRepack.2.0.36\build\ILRepack.props" Condition="Exists('..\packages\ILRepack.2.0.36\build\ILRepack.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -57,7 +56,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
-      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.5.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="ClosedXML, Version=0.104.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.104.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
@@ -74,14 +73,11 @@
     <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.Framework.3.2.0\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net48\Guna.UI2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.HashCode, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.HashCode.6.0.0\lib\net462\Microsoft.Bcl.HashCode.dll</HintPath>
@@ -266,29 +262,81 @@
     <Compile Include="ChangeUserPassword.Designer.cs">
       <DependentUpon>ChangeUserPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangeUsersPassword.cs">
+    <Compile Include="CustomerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EncryptorDecryptor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeUsersPassword.Designer.cs">
-      <DependentUpon>ChangeUsersPassword.cs</DependentUpon>
+    <Compile Include="EncryptorDecryptor.Designer.cs">
+      <DependentUpon>EncryptorDecryptor.cs</DependentUpon>
     </Compile>
-    <Compile Include="terminal.cs">
+    <Compile Include="InventoryReportDataSet.cs">
+      <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ProductReportDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductReportDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Purchases.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="terminal.Designer.cs">
-      <DependentUpon>terminal.cs</DependentUpon>
+    <Compile Include="Purchases.Designer.cs">
+      <DependentUpon>Purchases.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserProductsWindow.cs">
+    <Compile Include="Roles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserProductsWindow.Designer.cs">
-      <DependentUpon>UserProductsWindow.cs</DependentUpon>
+    <Compile Include="Roles.Designer.cs">
+      <DependentUpon>Roles.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserHomepageWindow.cs">
+    <Compile Include="RolesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RolesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SaleDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Shared.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserHomepageWindow.Designer.cs">
-      <DependentUpon>UserHomepageWindow.cs</DependentUpon>
+    <Compile Include="SupplierDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Suppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Suppliers.Designer.cs">
+      <DependentUpon>Suppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Terminal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Terminal.Designer.cs">
+      <DependentUpon>Terminal.cs</DependentUpon>
     </Compile>
     <Compile Include="Homepage.cs">
       <SubType>Form</SubType>
@@ -308,16 +356,6 @@
     <Compile Include="InventoryReport.Designer.cs">
       <DependentUpon>InventoryReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ProductReportDataSet3.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductReportDataSet3.xsd</DependentUpon>
-    </Compile>
     <Compile Include="ProductsReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,26 +370,11 @@
     <Compile Include="Products.Designer.cs">
       <DependentUpon>Products.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomerDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="PurchaseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Sales.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sales.Designer.cs">
       <DependentUpon>Sales.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InventoryReportDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
@@ -359,17 +382,20 @@
     <EmbeddedResource Include="ChangeUserPassword.resx">
       <DependentUpon>ChangeUserPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangeUsersPassword.resx">
-      <DependentUpon>ChangeUsersPassword.cs</DependentUpon>
+    <EmbeddedResource Include="EncryptorDecryptor.resx">
+      <DependentUpon>EncryptorDecryptor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="terminal.resx">
-      <DependentUpon>terminal.cs</DependentUpon>
+    <EmbeddedResource Include="Purchases.resx">
+      <DependentUpon>Purchases.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserProductsWindow.resx">
-      <DependentUpon>UserProductsWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Roles.resx">
+      <DependentUpon>Roles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserHomepageWindow.resx">
-      <DependentUpon>UserHomepageWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Suppliers.resx">
+      <DependentUpon>Suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Terminal.resx">
+      <DependentUpon>Terminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Homepage.resx">
       <DependentUpon>Homepage.cs</DependentUpon>
@@ -398,40 +424,6 @@
     <EmbeddedResource Include="Sales.resx">
       <DependentUpon>Sales.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Database Template\Template DB.bak" />
-    <None Include="ProductDataSet.xsc">
-      <DependentUpon>ProductDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ProductDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ProductDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ProductDataSet.xss">
-      <DependentUpon>ProductDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-    <None Include="ProductReportDataSet3.xsc">
-      <DependentUpon>ProductReportDataSet3.xsd</DependentUpon>
-    </None>
-    <None Include="ProductReportDataSet3.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ProductReportDataSet3.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ProductReportDataSet3.xss">
-      <DependentUpon>ProductReportDataSet3.xsd</DependentUpon>
-    </None>
-    <None Include="Properties\DataSources\Product.datasource" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <None Include="CustomerDataSet.xsc">
       <DependentUpon>CustomerDataSet.xsd</DependentUpon>
     </None>
@@ -442,17 +434,6 @@
     </None>
     <None Include="CustomerDataSet.xss">
       <DependentUpon>CustomerDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PurchaseDataSet.xsc">
-      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PurchaseDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PurchaseDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="PurchaseDataSet.xss">
-      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
     </None>
     <None Include="InventoryReportDataSet.xsc">
       <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
@@ -465,12 +446,91 @@
     <None Include="InventoryReportDataSet.xss">
       <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
+    <None Include="ProductDataSet.xsc">
+      <DependentUpon>ProductDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ProductDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProductDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ProductDataSet.xss">
+      <DependentUpon>ProductDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ProductReportDataSet1.xsc">
+      <DependentUpon>ProductReportDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ProductReportDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProductReportDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ProductReportDataSet1.xss">
+      <DependentUpon>ProductReportDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\Product.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="PurchaseDataSet.xsc">
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PurchaseDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PurchaseDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PurchaseDataSet.xss">
+      <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="RolesDataSet.xsc">
+      <DependentUpon>RolesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="RolesDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RolesDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RolesDataSet.xss">
+      <DependentUpon>RolesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SaleDataSet.xsc">
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SaleDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SaleDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SaleDataSet.xss">
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SupplierDataSet.xsc">
+      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SupplierDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SupplierDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SupplierDataSet.xss">
+      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database Template\Template script.sql" />
+    <EmbeddedResource Include="DBTemplate\TemplateScript.sql" />
+    <EmbeddedResource Include="Icons\hide.png" />
+    <EmbeddedResource Include="Icons\view.png" />
     <Content Include="PayTek_Inventory_Management_System_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -494,14 +554,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\ILRepack.2.0.36\build\ILRepack.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.2.0.36\build\ILRepack.props'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.9.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.9.1\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets'))" />
-    <Error Condition="!Exists('..\packages\Fody.6.9.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.9.1\build\Fody.targets'))" />
-    <Error Condition="!Exists('..\packages\ILRepack.2.0.36\build\ILRepack.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.2.0.36\build\ILRepack.props'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
-  <Import Project="..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />
   <Import Project="..\packages\Fody.6.9.1\build\Fody.targets" Condition="Exists('..\packages\Fody.6.9.1\build\Fody.targets')" />
+  <Import Project="..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />
 </Project>

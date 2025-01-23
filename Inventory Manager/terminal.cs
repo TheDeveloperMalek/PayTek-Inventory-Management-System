@@ -7,19 +7,22 @@ using System.Windows.Forms;
 
 namespace Inventory_Manager
 {
-    public partial class terminal : Form
+    public partial class Terminal : Form
     {
-        private const string Prompt = "PayTek Inventory Management System@{0}:~$ ";
-        Color defaultColor = Color.White;
-        Color errorColor = Color.Red;
-        private Dictionary<string, string> commandsWithDescription = new Dictionary<string, string>();
+        private const string Prompt = "PayTek Inventory Management System@{0}(developer mode):~$ ";
+        readonly Color defaultColor = Color.White;
+        readonly Color errorColor = Color.Red;
+        private readonly Dictionary<string, string> commandsWithDescription = new Dictionary<string, string>();
         bool clearCommadIsAlreadyCalled = false;
         bool exitCommandIsTyped = false;
-        public terminal()
+        public Terminal()
         {
             InitializeComponent();
             InitializeTerminal();
             InitializeCommands();
+            Shared.ConnectionInitializer();
+            this.KeyDown += new KeyEventHandler(KeysShortcuts);
+            this.KeyPreview = true;
         }
         private void InitializeTerminal()
         {
@@ -29,15 +32,20 @@ namespace Inventory_Manager
 
         private void InitializeCommands()
         {
+            commandsWithDescription.Add("bk", "Create a backup of the database");
             commandsWithDescription.Add("clear", "Clear the terminal");
             commandsWithDescription.Add("describe", "Describe what command can do");
             commandsWithDescription.Add("dir", "Show directory of the products's images");
-            commandsWithDescription.Add("exit" , "Exit the terminal");
+            commandsWithDescription.Add("ed", "Password Encryptor Decryptor");
+            commandsWithDescription.Add("exit", "Exit the terminal");
             commandsWithDescription.Add("forcePasswordUpdate", "Update developer password");
-            commandsWithDescription.Add("getAdmin", "Get admin's password");
-            commandsWithDescription.Add("getUser", "Get user's password");
             commandsWithDescription.Add("list", "Show list of the commands");
+            commandsWithDescription.Add("restore", "Restore database from a .bak file");
             commandsWithDescription.Add("terminal", "Open a new terminal window");
+        }
+        private void KeysShortcuts(object sender, KeyEventArgs e)
+        {
+            Shared.KeysShortcuts(sender, e, this);
         }
 
         private void cmdBox_KeyDown(object sender, KeyEventArgs e)
@@ -58,7 +66,7 @@ namespace Inventory_Manager
 
         private void ProcessCommand(string command)
         {
-            if(command != "")
+            if (command != "")
             {
                 if (commandsWithDescription.ContainsKey(command) || command.StartsWith("describe"))
                 {
@@ -94,8 +102,7 @@ namespace Inventory_Manager
 
                         try
                         {
-                            ChangeUsersPassword.PrivatePassSetter(true);
-                            Authorization.privatePassword = ChangeUsersPassword.PrivatePassGetter();
+                            Shared.DeveloperPasswordSetter(true);
                             AppendText("\nThe password were updated Successfully!", defaultColor);
                             return;
                         }
@@ -109,31 +116,35 @@ namespace Inventory_Manager
                         exitCommandIsTyped = true;
                         this.Dispose();
                     }
-
                     if (command == "terminal")
                     {
-                        var a = new terminal();
+                        var a = new Terminal();
                         a.Show();
                     }
-
-                    if(command == "dir")
+                    if (command == "dir")
                     {
-                        string path = $@"{Products.storeDataDirectory}\{Products.DirectoryName}\";
+                        string path = $@"{Shared.DocumentsPath}\{Shared.DirectoryName}\";
                         if (!Directory.Exists(path))
                         {
                             Directory.CreateDirectory(path);
                         }
-                        Process.Start(@"explorer.exe" , path);
+                        Process.Start(@"explorer.exe", path);
+                    }
+                    if (command == "bk")
+                    {
+                        AppendText($"{Shared.CreateDBBackup("Public")}", defaultColor);
+                    }
+                    if (command == "ed")
+                    {
+                        var EncryptorDecryptor = new EncryptorDecryptor();
+                        EncryptorDecryptor.Show();
+                        AppendText("\nOpened Encryptor Decryptor Tool Successfully", defaultColor);
+                    }
+                    if (command == "restore")
+                    {
+                        AppendText(Shared.RestoreDBFromBakFile("Public"), defaultColor);
                     }
 
-                    if (command == "getUser")
-                    {
-                        AppendText("\nUser password: " + Authorization.newUserPassword , defaultColor);
-                    }
-                    if (command == "getAdmin")
-                    {
-                        AppendText("\nAdmin password: " + Authorization.newAdminPassword, defaultColor);
-                    }
                 }
                 else
                     AppendText("\nError: command not found\nto show list of the commands type: list", errorColor);
@@ -144,16 +155,17 @@ namespace Inventory_Manager
 
         private void AppendText(string text, Color color)
         {
-            if(!exitCommandIsTyped)
+            if (!exitCommandIsTyped)
             {
-            cmdBox.SelectionStart = cmdBox.Text.Length;
-            cmdBox.SelectionLength = 0;
-            cmdBox.SelectionColor = color;
-            cmdBox.AppendText(text);
-            cmdBox.SelectionColor = cmdBox.ForeColor; 
-            cmdBox.ScrollToCaret(); 
+                cmdBox.SelectionStart = cmdBox.Text.Length;
+                cmdBox.SelectionLength = 0;
+                cmdBox.SelectionColor = color;
+                cmdBox.AppendText(text);
+                cmdBox.SelectionColor = cmdBox.ForeColor;
+                cmdBox.ScrollToCaret();
             }
         }
-    }
+
+    } 
 
 }

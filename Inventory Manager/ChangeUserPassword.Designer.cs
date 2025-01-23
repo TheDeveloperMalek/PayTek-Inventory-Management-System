@@ -28,28 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LogintBtn = new System.Windows.Forms.Button();
             this.newPassword = new System.Windows.Forms.Label();
             this.password_text_box = new System.Windows.Forms.TextBox();
             this.Autohrization = new System.Windows.Forms.Label();
             this.labelOfCurrentUserPassword = new System.Windows.Forms.Label();
             this.crrUserPass = new System.Windows.Forms.Label();
+            this.changePasswordBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
-            // 
-            // LogintBtn
-            // 
-            this.LogintBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogintBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(173)))), ((int)(((byte)(252)))));
-            this.LogintBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.LogintBtn.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LogintBtn.ForeColor = System.Drawing.Color.Black;
-            this.LogintBtn.Location = new System.Drawing.Point(144, 178);
-            this.LogintBtn.Name = "LogintBtn";
-            this.LogintBtn.Size = new System.Drawing.Size(140, 43);
-            this.LogintBtn.TabIndex = 16;
-            this.LogintBtn.Text = "Save";
-            this.LogintBtn.UseVisualStyleBackColor = false;
-            this.LogintBtn.Click += new System.EventHandler(this.LogintBtn_Click);
             // 
             // newPassword
             // 
@@ -113,16 +98,33 @@
             this.crrUserPass.Tag = "";
             this.crrUserPass.Text = "  ";
             // 
+            // changePasswordBtn
+            // 
+            this.changePasswordBtn.BorderRadius = 6;
+            this.changePasswordBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.changePasswordBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.changePasswordBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.changePasswordBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.changePasswordBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(173)))), ((int)(((byte)(252)))));
+            this.changePasswordBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changePasswordBtn.ForeColor = System.Drawing.Color.Black;
+            this.changePasswordBtn.Location = new System.Drawing.Point(144, 178);
+            this.changePasswordBtn.Name = "changePasswordBtn";
+            this.changePasswordBtn.Size = new System.Drawing.Size(140, 43);
+            this.changePasswordBtn.TabIndex = 24;
+            this.changePasswordBtn.Text = "Save";
+            this.changePasswordBtn.Click += new System.EventHandler(this.LogintBtn_Click);
+            // 
             // ChangeUserPassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(19)))), ((int)(((byte)(79)))));
             this.ClientSize = new System.Drawing.Size(410, 327);
+            this.Controls.Add(this.changePasswordBtn);
             this.Controls.Add(this.crrUserPass);
             this.Controls.Add(this.labelOfCurrentUserPassword);
             this.Controls.Add(this.Autohrization);
-            this.Controls.Add(this.LogintBtn);
             this.Controls.Add(this.newPassword);
             this.Controls.Add(this.password_text_box);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -137,12 +139,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button LogintBtn;
         private System.Windows.Forms.Label newPassword;
         private System.Windows.Forms.TextBox password_text_box;
         private System.Windows.Forms.Label Autohrization;
         private System.Windows.Forms.Label labelOfCurrentUserPassword;
         private System.Windows.Forms.Label crrUserPass;
+        private Guna.UI2.WinForms.Guna2Button changePasswordBtn;
     }
 }

@@ -20,7 +20,7 @@ namespace Inventory_Manager {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("TestDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("InventoryReportDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class InventoryReportDataSet : global::System.Data.DataSet {
         
@@ -199,9 +199,9 @@ namespace Inventory_Manager {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "TestDataSet";
+            this.DataSetName = "InventoryReportDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/TestDataSet.xsd";
+            this.Namespace = "http://tempuri.org/InventoryReportDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableInventoryReport = new InventoryReportDataTable();
@@ -279,15 +279,15 @@ namespace Inventory_Manager {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class InventoryReportDataTable : global::System.Data.TypedTableBase<InventoryReportRow> {
             
-            private global::System.Data.DataColumn columnid;
+            private global::System.Data.DataColumn columnProduct_ID;
             
-            private global::System.Data.DataColumn columnbarcode;
+            private global::System.Data.DataColumn columnProduct_Barcode;
             
-            private global::System.Data.DataColumn columnname;
+            private global::System.Data.DataColumn columnProduct_Name;
             
-            private global::System.Data.DataColumn columnquantity;
+            private global::System.Data.DataColumn columnQuantity;
             
-            private global::System.Data.DataColumn columndate;
+            private global::System.Data.DataColumn columnDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -324,41 +324,41 @@ namespace Inventory_Manager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn idColumn {
+            public global::System.Data.DataColumn Product_IDColumn {
                 get {
-                    return this.columnid;
+                    return this.columnProduct_ID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn barcodeColumn {
+            public global::System.Data.DataColumn Product_BarcodeColumn {
                 get {
-                    return this.columnbarcode;
+                    return this.columnProduct_Barcode;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn nameColumn {
+            public global::System.Data.DataColumn Product_NameColumn {
                 get {
-                    return this.columnname;
+                    return this.columnProduct_Name;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn quantityColumn {
+            public global::System.Data.DataColumn QuantityColumn {
                 get {
-                    return this.columnquantity;
+                    return this.columnQuantity;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
+            public global::System.Data.DataColumn DateColumn {
                 get {
-                    return this.columndate;
+                    return this.columnDate;
                 }
             }
             
@@ -399,14 +399,14 @@ namespace Inventory_Manager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public InventoryReportRow AddInventoryReportRow(int id, int barcode, string name, int quantity, System.DateTime date) {
+            public InventoryReportRow AddInventoryReportRow(int Product_ID, int Product_Barcode, string Product_Name, int Quantity, System.DateTime Date) {
                 InventoryReportRow rowInventoryReportRow = ((InventoryReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        id,
-                        barcode,
-                        name,
-                        quantity,
-                        date};
+                        Product_ID,
+                        Product_Barcode,
+                        Product_Name,
+                        Quantity,
+                        Date};
                 rowInventoryReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowInventoryReportRow);
                 return rowInventoryReportRow;
@@ -429,32 +429,32 @@ namespace Inventory_Manager {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnid = base.Columns["id"];
-                this.columnbarcode = base.Columns["barcode"];
-                this.columnname = base.Columns["name"];
-                this.columnquantity = base.Columns["quantity"];
-                this.columndate = base.Columns["date"];
+                this.columnProduct_ID = base.Columns["Product ID"];
+                this.columnProduct_Barcode = base.Columns["Product Barcode"];
+                this.columnProduct_Name = base.Columns["Product Name"];
+                this.columnQuantity = base.Columns["Quantity"];
+                this.columnDate = base.Columns["Date"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnid = new global::System.Data.DataColumn("id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnid);
-                this.columnbarcode = new global::System.Data.DataColumn("barcode", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnbarcode);
-                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname);
-                this.columnquantity = new global::System.Data.DataColumn("quantity", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnquantity);
-                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate);
-                this.columnid.AllowDBNull = false;
-                this.columnbarcode.AllowDBNull = false;
-                this.columnname.AllowDBNull = false;
-                this.columnname.MaxLength = 50;
-                this.columnquantity.AllowDBNull = false;
-                this.columndate.AllowDBNull = false;
+                this.columnProduct_ID = new global::System.Data.DataColumn("Product ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduct_ID);
+                this.columnProduct_Barcode = new global::System.Data.DataColumn("Product Barcode", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduct_Barcode);
+                this.columnProduct_Name = new global::System.Data.DataColumn("Product Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduct_Name);
+                this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantity);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnProduct_ID.AllowDBNull = false;
+                this.columnProduct_Barcode.AllowDBNull = false;
+                this.columnProduct_Name.AllowDBNull = false;
+                this.columnProduct_Name.MaxLength = 50;
+                this.columnQuantity.AllowDBNull = false;
+                this.columnDate.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -597,56 +597,56 @@ namespace Inventory_Manager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int id {
+            public int Product_ID {
                 get {
-                    return ((int)(this[this.tableInventoryReport.idColumn]));
+                    return ((int)(this[this.tableInventoryReport.Product_IDColumn]));
                 }
                 set {
-                    this[this.tableInventoryReport.idColumn] = value;
+                    this[this.tableInventoryReport.Product_IDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int barcode {
+            public int Product_Barcode {
                 get {
-                    return ((int)(this[this.tableInventoryReport.barcodeColumn]));
+                    return ((int)(this[this.tableInventoryReport.Product_BarcodeColumn]));
                 }
                 set {
-                    this[this.tableInventoryReport.barcodeColumn] = value;
+                    this[this.tableInventoryReport.Product_BarcodeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string name {
+            public string Product_Name {
                 get {
-                    return ((string)(this[this.tableInventoryReport.nameColumn]));
+                    return ((string)(this[this.tableInventoryReport.Product_NameColumn]));
                 }
                 set {
-                    this[this.tableInventoryReport.nameColumn] = value;
+                    this[this.tableInventoryReport.Product_NameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int quantity {
+            public int Quantity {
                 get {
-                    return ((int)(this[this.tableInventoryReport.quantityColumn]));
+                    return ((int)(this[this.tableInventoryReport.QuantityColumn]));
                 }
                 set {
-                    this[this.tableInventoryReport.quantityColumn] = value;
+                    this[this.tableInventoryReport.QuantityColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public System.DateTime date {
+            public System.DateTime Date {
                 get {
-                    return ((global::System.DateTime)(this[this.tableInventoryReport.dateColumn]));
+                    return ((global::System.DateTime)(this[this.tableInventoryReport.DateColumn]));
                 }
                 set {
-                    this[this.tableInventoryReport.dateColumn] = value;
+                    this[this.tableInventoryReport.DateColumn] = value;
                 }
             }
         }
@@ -686,7 +686,7 @@ namespace Inventory_Manager {
         }
     }
 }
-namespace Inventory_Manager.TestDataSetTableAdapters {
+namespace Inventory_Manager.InventoryReportDataSetTableAdapters {
     
     
     /// <summary>
@@ -810,22 +810,23 @@ namespace Inventory_Manager.TestDataSetTableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "InventoryReport";
-            tableMapping.ColumnMappings.Add("id", "id");
-            tableMapping.ColumnMappings.Add("barcode", "barcode");
-            tableMapping.ColumnMappings.Add("name", "name");
-            tableMapping.ColumnMappings.Add("quantity", "quantity");
-            tableMapping.ColumnMappings.Add("date", "date");
+            tableMapping.ColumnMappings.Add("Product ID", "Product ID");
+            tableMapping.ColumnMappings.Add("Product Barcode", "Product Barcode");
+            tableMapping.ColumnMappings.Add("Product Name", "Product Name");
+            tableMapping.ColumnMappings.Add("Quantity", "Quantity");
+            tableMapping.ColumnMappings.Add("Date", "Date");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[InventoryReport] ([id], [barcode], [name], [quantity], [date])" +
-                " VALUES (@id, @barcode, @name, @quantity, @date)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[InventoryReport] ([Product ID], [Product Barcode], [Product Na" +
+                "me], [Quantity], [Date]) VALUES (@Product_ID, @Product_Barcode, @Product_Name, @" +
+                "Quantity, @Date)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@barcode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "barcode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_Barcode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Barcode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -841,7 +842,8 @@ namespace Inventory_Manager.TestDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, barcode, name, quantity, date FROM dbo.InventoryReport";
+            this._commandCollection[0].CommandText = "SELECT [Product ID], [Product Barcode], [Product Name], Quantity, Date FROM dbo.I" +
+                "nventoryReport";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -902,17 +904,17 @@ namespace Inventory_Manager.TestDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int id, int barcode, string name, int quantity, System.DateTime date) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(barcode));
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
+        public virtual int Insert(int Product_ID, int Product_Barcode, string Product_Name, int Quantity, System.DateTime Date) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Product_ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Product_Barcode));
+            if ((Product_Name == null)) {
+                throw new global::System.ArgumentNullException("Product_Name");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(name));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Product_Name));
             }
-            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(quantity));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(date));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Quantity));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(Date));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

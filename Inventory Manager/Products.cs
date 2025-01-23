@@ -5,141 +5,65 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Net;
-using Inventory_Manager.ProductDataSet1TableAdapters;
-using System.Configuration;
 namespace Inventory_Manager
 {
     public partial class Products : Form
     {
         #region essential_data
-        //establish connection to the server
-        SqlConnection conn = new SqlConnection();
-        SqlCommand cmd = new SqlCommand();
 
         //holding data that will affect on the database
-        private int id_value, quantity_value, barcode_value;
+        private int id_value, barcode_value;
         private string name_value;
         private double price_value;
         public static string imageExtension = "jpg";
-        public static string storeDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        public static string DirectoryName = "PayTek Inventory Management System";
 
         public Products()
         {
             InitializeComponent();
+            Shared.ConnectionInitializer();
+            this.productTableAdapter.Connection.ConnectionString = Shared.conn.ConnectionString;
+            this.note.Text = Shared.NoticeModifier("product");
             this.KeyDown += new KeyEventHandler(KeysShortcuts);
             this.KeyPreview = true;
+            dataGridView1.Columns[3].Visible = Shared.isVisibleForDeveloper;
             ImageSetterByBarcode();
         }
         //database table dataview 
-        private void Test_Load(object sender, EventArgs e)
+        private void Product_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'productDataSet1.Product' table. You can move, or remove it, as needed.
-            var productTableAdapter = new ProductTableAdapter();
-            string connectionString = ConfigurationManager.ConnectionStrings["Inventory_Manager.Properties.Settings.PublicConnectionString"].ConnectionString;
-            string machineName = Environment.MachineName;
-            connectionString = connectionString.Replace("{MachineName}", machineName);
-            productTableAdapter.Connection.ConnectionString = connectionString;
-            productTableAdapter.Fill(this.productDataSet1.Product);
-            conn.ConnectionString = connectionString;
-
-            if (conn.State != ConnectionState.Open)
-            {
-                ShowData();
-                Open_Connection_If_Was_Closed();
-            }
+            this.productTableAdapter.Fill(this.productDataSet.Product);
+            ShowData();
         }
 
         #endregion
 
         #region startup_functions
-        private void Open_Connection_If_Was_Closed()
-        {
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Close();
-                conn.Open();
-            }
-        }
 
         #region for shortcuts
         //Shortcuts for window
         private void KeysShortcuts(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.F) //make full screen
-            {
-                if (this.FormBorderStyle == FormBorderStyle.None)
-                {
-                    this.FormBorderStyle = FormBorderStyle.Sizable;
-                    this.WindowState = FormWindowState.Maximized;
-                }
-                else
-                {
-                    this.FormBorderStyle = FormBorderStyle.None;
-                    this.WindowState = FormWindowState.Normal;
-                    this.Location = new System.Drawing.Point(0, 0);
-                    this.Size = Screen.PrimaryScreen.Bounds.Size;
-                }
-                return;
-            }
-            if (e.Control && e.KeyCode == Keys.E) //exit
-            {
-                this.Close();
-                return;
-            }
-            if (e.Control && e.KeyCode == Keys.M) //minimize
-            {
-                this.WindowState = FormWindowState.Minimized;
-                return;
-            }
-
-            if (e.Control && e.KeyCode == Keys.I) // show information about the devleoper
-            {
-                ShowToast("The Developer: Muhammad Malek Alset");
-                return;
-            }
+            Shared.KeysShortcuts(sender, e, this);
         }
         #endregion
-
-        //showing a message as a toast
-        private void ShowToast(string message)
-        {
-            ToolTip toast = new ToolTip();
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width,
-            screenHeight = Screen.PrimaryScreen.Bounds.Height,
-            toastWidth = 300,
-            toastHeight = 50,
-            x = (screenWidth - toastWidth) / 2,
-            y = screenHeight - toastHeight - 75;
-            toast.Show(message, this, x, y, 1500);
-        }
 
         //Update the data of Product's table
         public void ShowData()
         {
-            Open_Connection_If_Was_Closed();
-            cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM Product ORDER BY id";
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
+            Shared.ShowAllData(dataGridView1, "Product", "ID");
         }
         public void ResetFields()
         {
             product_id_text_box.Text =
             product_barcode_text_box.Text =
-            product_name_text_box.Text =
-            product_quantity_text_box.Text =
-            product_price_text_box.Text = "";
+            product_name_text_box.Text = "";
         }
         #endregion
 
         #region Get Image Functions
         private void ImageSetterByBarcode(string barcode = "none")
         {
-            var path = $@"{storeDataDirectory}\{DirectoryName}\";
+            var path = $@"{Shared.DocumentsPath}\{Shared.DirectoryName}\";
             Image noSource = null;
 
             #region default icon
@@ -201,55 +125,6 @@ namespace Inventory_Manager
 
         }
 
-        private string BarcodeGetterById(string command, SqlCommand objCmd)
-        {
-            cmd = conn.CreateCommand();
-            cmd.CommandText = command;
-            cmd.Parameters.AddWithValue("@id", id_value);
-            if (cmd.ExecuteScalar() != null)
-                return cmd.ExecuteScalar().ToString();
-
-            return null;
-        }
-
-        private string BarcodeGetterByName(string command, SqlCommand objCmd)
-        {
-
-            cmd = conn.CreateCommand();
-            cmd.CommandText = command;
-            cmd.Parameters.AddWithValue("@name", name_value);
-            if (cmd.ExecuteScalar() != null)
-                return cmd.ExecuteScalar().ToString();
-
-            return null;
-        }
-        #endregion
-
-        #region Functions_For_Events
-        void SearchCommand(string command, SqlCommand objCmd)
-        {
-            cmd = conn.CreateCommand();
-            cmd.CommandText = command;
-            cmd.Parameters.AddWithValue("@id", id_value + "%");
-            cmd.Parameters.AddWithValue("@barcode", barcode_value + "%");
-            cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
-            cmd.Parameters.AddWithValue("@quantity", quantity_value + "%");
-            cmd.Parameters.AddWithValue("@price", price_value + "%");
-            Open_Connection_If_Was_Closed();
-            cmd.ExecuteNonQuery();
-            ShowDataSearching(objCmd);
-            cmd.Parameters.Clear();
-            cmd.Dispose();
-        }
-
-        void ShowDataSearching(SqlCommand objCmd)
-        {
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
-        }
-
         #endregion
 
         #region validation_functions
@@ -270,32 +145,15 @@ namespace Inventory_Manager
         //Check the validity of user input
         public bool Validation_of_input()
         {
-            Open_Connection_If_Was_Closed();
+            Shared.ConnectionInitializer();
             if (!Chech_If_Text_Boxes_Were_Empty())
             {
                 name_value = product_name_text_box.Text;
-                //if (!int.TryParse(product_id_text_box.Text, out id_value) || id_value < 0)
-                //{
-                //    MessageBox.Show("Please enter a valid value for the id field");
-                //    return false;
-                //}if (product_quantity_text_box.Text != "")
                 if (!int.TryParse(product_barcode_text_box.Text, out barcode_value) || barcode_value < 0)
                 {
                     MessageBox.Show("Please enter a valid value for the barcode field");
                     return false;
                 }
-                if (product_quantity_text_box.Text != "")
-                    if (!int.TryParse(product_quantity_text_box.Text, out quantity_value) || quantity_value < 0)
-                    {
-                        MessageBox.Show("Please enter a valid value for the quantity field");
-                        return false;
-                    }
-                if (product_price_text_box.Text != "")
-                    if (!double.TryParse(product_price_text_box.Text, out price_value) || price_value < 0)
-                    {
-                        MessageBox.Show("Please enter a valid value for the product price field");
-                        return false;
-                    }
                 return true;
             }
             return false;
@@ -332,7 +190,7 @@ namespace Inventory_Manager
         private bool Check_If_Product_Already_Exists()
         {
             string checkQuery = "SELECT COUNT(*) FROM Product WHERE name = @name OR  id = @id or barcode = @barcode ";
-            using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+            using (SqlCommand checkCmd = new SqlCommand(checkQuery, Shared.conn))
             {
                 checkCmd.Parameters.AddWithValue("@id", id_value);
                 checkCmd.Parameters.AddWithValue("@barcode", barcode_value);
@@ -355,7 +213,7 @@ namespace Inventory_Manager
         //save product
         private void button1_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
+            Shared.ConnectionInitializer();
             if (Validation_of_input())
                 if (!Check_If_Product_Already_Exists())
                 {
@@ -393,44 +251,31 @@ namespace Inventory_Manager
                         }
                         #endregion
 
-                        using (SqlCommand cmd = conn.CreateCommand())
+                        using (SqlCommand cmd = Shared.conn.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
                             cmd.Parameters.AddWithValue("@id_value", id_value);
                             cmd.Parameters.AddWithValue("@barcode_value", barcode_value);
                             cmd.Parameters.AddWithValue("@name_value", name_value);
-                            cmd.Parameters.AddWithValue("@quantity_value", quantity_value);
-                            cmd.Parameters.AddWithValue("@price_value", price_value);
                             cmd.Parameters.AddWithValue("@status_value", "Added new product");
+                            cmd.Parameters.AddWithValue("@specification_value", SpecificationRichBox.Text);
                             cmd.Parameters.AddWithValue("@date_value", DateTime.Now);
 
-                            cmd.CommandText = @"INSERT INTO Product (barcode , name, quantity, price) 
+                            cmd.CommandText = $@"INSERT INTO Product (barcode , name, quantity , specification , date) 
                                                 VALUES (
                                                         @barcode_value ,
                                                         @name_value,
-                                                        @quantity_value,
-                                                        @price_value
+                                                        0 , 
+                                                        @specification_value ,
+                                                        @date_value
                                                         )
                                                 ";
-                            cmd.ExecuteNonQuery();
-
-
-                            cmd.CommandText = $@"INSERT INTO ProductReport 
-                                                 VALUES (
-                                                         (SELECT id FROM Product WHERE name = @name_value),
-                                                         @barcode_value , 
-                                                         @name_value, 
-                                                         @status_value , 
-                                                         @quantity_value, 
-                                                         @date_value
-                                                        )
-                                                 ";
                             cmd.ExecuteNonQuery();
 
                         }
 
                         MessageBox.Show("Data inserted successfully!");
-                        cmd.Parameters.Clear();
+                        Shared.cmd.Parameters.Clear();
                         ShowData();
                     }
                     catch (Exception ex)
@@ -439,8 +284,8 @@ namespace Inventory_Manager
                     }
                     finally
                     {
-                        cmd.Dispose();
-                        conn.Close();
+                        Shared.cmd.Dispose();
+                        Shared.conn.Close();
                     }
                 }
                 else if (Check_If_Product_Already_Exists())
@@ -454,20 +299,19 @@ namespace Inventory_Manager
         //update existing product's id or name
         private void button2_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
+            Shared.ConnectionInitializer();
 
             if (At_Least_Input_Requriements())
                 if (Check_If_Product_Already_Exists())
                 {
-                    using (SqlCommand updateCmd = conn.CreateCommand())
+                    using (SqlCommand updateCmd = Shared.conn.CreateCommand())
                     {
                         updateCmd.CommandType = CommandType.Text;
                         updateCmd.Parameters.AddWithValue("@id", id_value);
                         updateCmd.Parameters.AddWithValue("@barcode", barcode_value);
                         updateCmd.Parameters.AddWithValue("@name", name_value);
                         updateCmd.Parameters.AddWithValue("@date", DateTime.Now);
-                        updateCmd.Parameters.AddWithValue("@status", "Product's quantity has been updated");
-
+                        updateCmd.Parameters.AddWithValue("@specification_value", SpecificationRichBox.Text);
 
 
                         #region Import image logic
@@ -494,8 +338,7 @@ namespace Inventory_Manager
 
                                     if (!string.IsNullOrEmpty(product_id_text_box.Text))
                                     {
-                                        var Command = @"SELECT barcode FROM Product WHERE id = @id";
-                                        newFilePath = Path.Combine(folderPath, $"{BarcodeGetterById(Command, cmd)}.{imageExtension}");
+                                        newFilePath = Path.Combine(folderPath, $"{Shared.ProductBarcodeGetter("ID", product_id_text_box)}.{imageExtension}");
                                     }
                                     else if (!string.IsNullOrEmpty(product_barcode_text_box.Text))
                                     {
@@ -503,8 +346,7 @@ namespace Inventory_Manager
                                     }
                                     else
                                     {
-                                        var Command = @"SELECT barcode FROM Product WHERE name = @name";
-                                        newFilePath = Path.Combine(folderPath, $"{BarcodeGetterByName(Command, cmd)}.{imageExtension}");
+                                        newFilePath = Path.Combine(folderPath, $"{Shared.ProductBarcodeGetter("Name", product_name_text_box)}.{imageExtension}");
 
                                     }
                                     File.Copy(selectedFilePath, newFilePath, true);
@@ -518,123 +360,6 @@ namespace Inventory_Manager
                                     MessageBox.Show("You did not choose an image!");
                                 }
 
-                            }
-                        }
-
-                        #endregion
-
-                        #region Update price or quantitiy logic
-
-                        DialogResult updateQuantityOrPrice = MessageBox.Show("Do you want to edit price or quantity of the product?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        if (updateQuantityOrPrice == DialogResult.Yes)
-                        {
-                            if (product_quantity_text_box.Text != ""
-                                || product_price_text_box.Text != "")
-                            {
-                                if (product_quantity_text_box.Text != "")
-                                {
-                                    if (!int.TryParse(product_quantity_text_box.Text, out quantity_value))
-                                    {
-                                        MessageBox.Show("Please enter a valid value for the quantity field");
-                                        return;
-                                    }
-                                    if (product_name_text_box.Text != "")
-                                    {
-                                        updateCmd.CommandText = @"INSERT INTO ProductReport 
-                                                                  VALUES (
-                                                                          (SELECT id from Product where name = @name) ,
-                                                                          (SELECT barcode from Product where name = @name) ,
-                                                                            @name ,
-                                                                            @status ,
-                                                                            @quantity ,
-                                                                            @date
-                                                                         )
-                                                                ";
-                                        updateCmd.Parameters.AddWithValue("@quantity", quantity_value);
-                                        updateCmd.ExecuteNonQuery();
-
-                                        updateCmd.CommandText = @"UPDATE Product 
-                                                              SET quantity = @quantity 
-                                                              WHERE name = @name";
-                                    }
-                                    else if (product_id_text_box.Text != "")
-                                    {
-                                        updateCmd.CommandText = @"INSERT INTO ProductReport
-                                                                 VALUES (
-                                                                            @id , 
-                                                                            (SELECT barcode from Product where id = @id) ,
-                                                                            (SELECT name from Product where id = @id) ,
-                                                                            @status,
-                                                                            @quantity ,
-                                                                            @date
-                                                                        )
-                                                                 ";
-                                        updateCmd.Parameters.AddWithValue("@quantity", quantity_value);
-                                        updateCmd.ExecuteNonQuery();
-                                        updateCmd.CommandText = @"UPDATE Product 
-                                                              SET quantity = @quantity 
-                                                              WHERE id = @id";
-                                    }
-                                    else if (product_barcode_text_box.Text != "")
-                                    {
-
-
-                                        updateCmd.CommandText = @"INSERT INTO ProductReport
-                                                                  VALUES (
-                                                                            (SELECT id from Product where barcode = @barcode) , 
-                                                                            @barcode ,
-                                                                            (SELECT name from Product where barcode = @barcode) ,
-                                                                            @status,
-                                                                            @quantity ,
-                                                                            @date
-                                                                          )
-                                                                 ";
-                                        updateCmd.Parameters.AddWithValue("@quantity", quantity_value);
-                                        updateCmd.ExecuteNonQuery();
-
-                                        updateCmd.CommandText = @"UPDATE Product 
-                                                              SET quantity = @quantity 
-                                                              WHERE barcode = @barcode";
-                                    }
-                                    updateCmd.ExecuteNonQuery();
-                                }
-
-
-                                if (product_price_text_box.Text != "")
-                                {
-
-                                    if (!double.TryParse(product_price_text_box.Text, out price_value))
-                                    {
-                                        MessageBox.Show("Please enter a valid value for the id field");
-                                        return;
-                                    }
-                                    updateCmd.CommandText = @"UPDATE Product
-                                                                  SET price = @price
-                                                                  WHERE 
-                                                                  name = @name OR
-                                                                  id = @id OR 
-                                                                  barcode = @barcode";
-                                    updateCmd.Parameters.AddWithValue("@price", price_value);
-                                    updateCmd.ExecuteNonQuery();
-                                }
-                            }
-
-                            else
-                            {
-                                MessageBox.Show("Type price or quantity to update the data");
-                                return;
-                            }
-
-                            int.TryParse(updateCmd.ExecuteNonQuery().ToString(), out int rowsAffected);
-
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("Product updated successfully.");
-                            }
-                            else
-                            {
-                                MessageBox.Show("No product was updated.");
                             }
                         }
 
@@ -709,6 +434,72 @@ namespace Inventory_Manager
 
                         #endregion
 
+                        #region Update specification logic
+
+                        if (withSpecification.Checked)
+                        {
+                            if (product_id_text_box.Text != ""
+                                || product_barcode_text_box.Text != ""
+                                || product_name_text_box.Text != "")
+                            {
+                                if (SpecificationRichBox.Text != "")
+                                {
+                                    if (product_id_text_box.Text != "")
+                                    {
+                                        if (!int.TryParse(product_id_text_box.Text, out id_value))
+                                        {
+                                            MessageBox.Show("Please enter a valid value for the id field");
+                                            return;
+                                        }
+                                        updateCmd.CommandText = @"UPDATE Product 
+                                                              SET specification = @specification_value 
+                                                              WHERE id = @id";
+                                    }
+                                    else if (product_barcode_text_box.Text != "")
+                                    {
+                                        if (!int.TryParse(product_barcode_text_box.Text, out barcode_value))
+                                        {
+                                            MessageBox.Show("Please enter a valid value for the barcode field");
+                                            return;
+                                        }
+                                        updateCmd.CommandText = @"UPDATE Product 
+                                                              SET specification = @specification_value  
+                                                              WHERE barcode = @barcode";
+                                    }
+                                    else
+                                    {
+                                        updateCmd.CommandText = @"UPDATE Product 
+                                                              SET specification = @specification_value  
+                                                              WHERE name = @name";
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Product specification can not be empty");
+                                    return;
+                                }
+                            }
+
+                            else
+                            {
+                                MessageBox.Show("Type id , barcode or name to update the specification");
+                                return;
+                            }
+
+                            int.TryParse(updateCmd.ExecuteNonQuery().ToString(), out int rowsAffected);
+
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Product's specification updated successfully.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("No product was updated.");
+                            }
+                        }
+
+                        #endregion
+
                     }
                 }
                 else
@@ -717,7 +508,7 @@ namespace Inventory_Manager
                 }
 
             ShowData();
-            conn.Close();
+            Shared.conn.Close();
             return;
         }
         #endregion
@@ -726,7 +517,7 @@ namespace Inventory_Manager
         //Delete a product
         private void button3_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
+            Shared.ConnectionInitializer();
             DialogResult delete;
             delete = MessageBox.Show("Are you sure ?", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (delete == DialogResult.Yes)
@@ -736,9 +527,12 @@ namespace Inventory_Manager
                     {
                         try
                         {
-                            using (SqlCommand cmd = conn.CreateCommand())
+                            using (SqlCommand cmd = Shared.conn.CreateCommand())
                             {
                                 cmd.CommandType = CommandType.Text;
+                                cmd.Parameters.AddWithValue("@id", id_value);
+                                cmd.Parameters.AddWithValue("@barcode", barcode_value);
+                                cmd.Parameters.AddWithValue("@name", name_value);
                                 cmd.Parameters.AddWithValue("@date", DateTime.Now);
                                 cmd.Parameters.AddWithValue("@status", "Deleted a product");
                                 ImageSetterByBarcode();
@@ -747,28 +541,11 @@ namespace Inventory_Manager
                                     #region Delete icon logic
                                     try
                                     {
-                                        var Command = $@"SELECT  barcode
-                                             FROM Product
-                                             WHERE
-                                             id = @id";
-
-                                        File.Delete($@"{storeDataDirectory}\{DirectoryName}\{BarcodeGetterById(Command, cmd)}.{imageExtension}");
+                                        File.Delete($@"{Shared.DocumentsPath}\{Shared.DirectoryName}\{Shared.ProductBarcodeGetter("ID", product_id_text_box)}.{imageExtension}");
                                     }
                                     catch (Exception m) { MessageBox.Show(m.Message); }
                                     #endregion
 
-                                    cmd.CommandText = @"INSERT INTO ProductReport 
-                                                        VALUES ( 
-                                                                @id , 
-                                                                (SELECT barcode from Product where id = @id) , 
-                                                                (SELECT name from Product where id = @id) , 
-                                                                @status, 
-                                                                (SELECT quantity from Product where id = @id) , 
-                                                                @date
-                                                                )
-                                                       ";
-                                    cmd.Parameters.AddWithValue("@id", id_value);
-                                    cmd.ExecuteNonQuery();
 
                                     cmd.CommandText = "DELETE FROM Product WHERE id = @id";
                                 }
@@ -782,23 +559,10 @@ namespace Inventory_Manager
                                              FROM Product
                                              WHERE
                                              barcode = @barcode";
-                                        File.Delete($@"{storeDataDirectory}\{DirectoryName}\{product_barcode_text_box.Text}.{imageExtension}");
+                                        File.Delete($@"{Shared.DocumentsPath}\{Shared.DirectoryName}\{product_barcode_text_box.Text}.{imageExtension}");
                                     }
                                     catch (Exception m) { MessageBox.Show(m.Message); }
                                     #endregion
-
-                                    cmd.CommandText = @"INSERT INTO ProductReport
-                                                        VALUES (
-                                                                (SELECT id FROM Product WHERE barcode = @barcode) ,
-                                                                @barcode ,
-                                                                (SELECT name FROM Product WHERE barcode = @barcode) ,
-                                                                @status ,
-                                                                (SELECT quantity FROM Product WHERE barcode = @barcode) ,
-                                                                @date
-                                                               )
-                                                        ";
-                                    cmd.Parameters.AddWithValue("@barcode", barcode_value);
-                                    cmd.ExecuteNonQuery();
 
                                     cmd.CommandText = "DELETE FROM Product WHERE barcode = @barcode";
                                 }
@@ -813,23 +577,10 @@ namespace Inventory_Manager
                                              WHERE
                                              name = @name";
 
-                                        File.Delete($@"{storeDataDirectory}\{DirectoryName}\{BarcodeGetterByName(Command, cmd)}.{imageExtension}");
+                                        File.Delete($@"{Shared.DocumentsPath}\{Shared.DirectoryName}\{Shared.ProductBarcodeGetter("Name", product_name_text_box)}.{imageExtension}");
                                     }
                                     catch (Exception m) { MessageBox.Show(m.Message); }
                                     #endregion
-
-                                    cmd.CommandText = @"INSERT INTO ProductReport 
-                                                        VALUES (
-                                                                (SELECT id from Product where name = @name) ,
-                                                                (SELECT barcode from Product where name = @name) ,
-                                                                @name , 
-                                                                @status , 
-                                                                (SELECT quantity from Product where name = @name) , 
-                                                                @date
-                                                                )
-                                                       ";
-                                    cmd.Parameters.AddWithValue("@name", name_value);
-                                    cmd.ExecuteNonQuery();
 
                                     cmd.CommandText = "DELETE FROM Product WHERE name = @name";
                                 }
@@ -852,7 +603,7 @@ namespace Inventory_Manager
                         }
                         finally
                         {
-                            conn.Close();
+                            Shared.conn.Close();
                         }
                         ShowData();
                         return;
@@ -882,115 +633,30 @@ namespace Inventory_Manager
 
         #endregion
 
-        #region Events_For_Searching
+        #region Events For Searching
 
         #region While Typing
-
         private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            var command = $@"SELECT  *
-                                        FROM Product
-                                        WHERE
-                                        name LIKE @name
-                                        ORDER BY barcode";
-            name_value = product_name_text_box.Text;
-
-            SearchCommand(command, cmd);
-
-            var Command = $@"SELECT  barcode
-                                             FROM Product
-                                             WHERE
-                                             name = @name";
-            ImageSetterByBarcode(BarcodeGetterByName(Command, cmd));
+            Shared.SearchCommandAssembler(dataGridView1, product_name_text_box, "Product", "Name", "ID");
+            ImageSetterByBarcode(Shared.ProductBarcodeGetter("Name", product_name_text_box));
         }
 
         private void product_barcode_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            if (int.TryParse("0" + product_barcode_text_box.Text, out barcode_value) && barcode_value >= 0)
-            {
-                var command = $@"SELECT  *
-                                             FROM Product
-                                             WHERE
-                                             barcode LIKE @barcode
-                                             ORDER BY barcode";
-                SearchCommand(command, cmd);
-
-                ImageSetterByBarcode(barcode_value.ToString());
-            }
-
-            else
-            {
-                MessageBox.Show("Enter a valid value for barcode");
-                product_barcode_text_box.Text = "0";
-                return;
-            }
+            Shared.SearchCommandAssembler(dataGridView1, product_barcode_text_box, "Product", "Barcode", "ID", false, "product barcode");
+            ImageSetterByBarcode(Shared.ProductBarcodeGetter("Barcode", product_barcode_text_box));
         }
 
         private void product_id_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            if (int.TryParse("0" + product_id_text_box.Text, out id_value) && id_value >= 0)
-            {
-                var command = $@"SELECT  *
-                                             FROM Product
-                                             WHERE
-                                             id LIKE @id
-                                             ORDER BY barcode";
-                SearchCommand(command, cmd);
-
-                var Command = $@"SELECT  barcode
-                                             FROM Product
-                                             WHERE
-                                             id = @id";
-                ImageSetterByBarcode(BarcodeGetterById(Command, cmd));
-            }
-            else
-            {
-                MessageBox.Show("Enter a valid value for id");
-                product_id_text_box.Text = "0";
-            }
-        }
-
-        private void product_quantity_text_box_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (int.TryParse("0" + product_quantity_text_box.Text, out quantity_value) && quantity_value >= 0)
-            {
-                var command = $@"SELECT  *
-                                             FROM Product
-                                             WHERE
-                                             quantity LIKE @quantity
-                                             ORDER BY barcode";
-                SearchCommand(command, cmd);
-            }
-            else
-            {
-                MessageBox.Show("Enter a valid value for quantity");
-                product_quantity_text_box.Text = "0";
-                return;
-            }
-        }
-
-        private void product_price_text_box_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (double.TryParse("0" + product_price_text_box.Text, out price_value) && price_value >= 0)
-            {
-                var command = $@"SELECT  *
-                                             FROM Product
-                                             WHERE
-                                             price LIKE @price
-                                             ORDER BY barcode";
-                SearchCommand(command, cmd);
-            }
-            else
-            {
-                MessageBox.Show("Enter a valid value for price");
-                product_price_text_box.Text = "0";
-                return;
-            }
+            Shared.SearchCommandAssembler(dataGridView1, product_id_text_box, "Product", "id", "ID", false, "product ID");
+            ImageSetterByBarcode(Shared.ProductBarcodeGetter("ID", product_id_text_box));
         }
 
         #endregion
 
-        
+
         #region Click on a cell
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1015,14 +681,6 @@ namespace Inventory_Manager
                     product_name_text_box.Text = text;
                     product_name_text_box_KeyUp(sender, c);
                     break;
-                case 3:
-                    product_quantity_text_box.Text = text;
-                    product_quantity_text_box_KeyUp(sender, c);
-                    break;
-                case 4:
-                    product_price_text_box.Text = text;
-                    product_price_text_box_KeyUp(sender, c);
-                    break;
             }
             ShowData();
             dataGridView1.CurrentCell = dataGridView1[columnIndex, rowIndex];
@@ -1031,13 +689,5 @@ namespace Inventory_Manager
 
         #endregion
 
-        #region entities
-
-        private void publicDataSetBindingSource_CurrentChanged(object sender, EventArgs e) { }
-        private void productBindingSource_CurrentChanged(object sender, EventArgs e) { }
-        private void productBindingSource1_CurrentChanged(object sender, EventArgs e) { }
-        private void productBindingSource2_CurrentChanged(object sender, EventArgs e) { }
-
-        #endregion
     }
-}
+}       

@@ -29,119 +29,121 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Authorization));
-            this.password_text_box = new System.Windows.Forms.TextBox();
-            this.Admin_radio = new System.Windows.Forms.RadioButton();
-            this.User_radio = new System.Windows.Forms.RadioButton();
             this.Autohrization = new System.Windows.Forms.Label();
-            this.user_type = new System.Windows.Forms.Label();
-            this.password = new System.Windows.Forms.Label();
-            this.LogintBtn = new System.Windows.Forms.Button();
+            this.LogintBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.password_text_box = new Guna.UI2.WinForms.Guna2TextBox();
+            this.viewPasswordButton = new Guna.UI2.WinForms.Guna2Button();
+            this.usernameTextBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.SuspendLayout();
-            // 
-            // password_text_box
-            // 
-            this.password_text_box.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.password_text_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password_text_box.Location = new System.Drawing.Point(177, 266);
-            this.password_text_box.Name = "password_text_box";
-            this.password_text_box.Size = new System.Drawing.Size(284, 31);
-            this.password_text_box.TabIndex = 0;
-            // 
-            // Admin_radio
-            // 
-            this.Admin_radio.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Admin_radio.AutoSize = true;
-            this.Admin_radio.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Bold);
-            this.Admin_radio.ForeColor = System.Drawing.Color.White;
-            this.Admin_radio.Location = new System.Drawing.Point(177, 141);
-            this.Admin_radio.Name = "Admin_radio";
-            this.Admin_radio.Size = new System.Drawing.Size(113, 38);
-            this.Admin_radio.TabIndex = 1;
-            this.Admin_radio.Text = "Admin";
-            this.Admin_radio.UseVisualStyleBackColor = true;
-            // 
-            // User_radio
-            // 
-            this.User_radio.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.User_radio.AutoSize = true;
-            this.User_radio.Checked = true;
-            this.User_radio.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Bold);
-            this.User_radio.ForeColor = System.Drawing.Color.White;
-            this.User_radio.Location = new System.Drawing.Point(177, 185);
-            this.User_radio.Name = "User_radio";
-            this.User_radio.Size = new System.Drawing.Size(97, 38);
-            this.User_radio.TabIndex = 2;
-            this.User_radio.TabStop = true;
-            this.User_radio.Text = "User";
-            this.User_radio.UseVisualStyleBackColor = true;
             // 
             // Autohrization
             // 
             this.Autohrization.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Autohrization.AutoSize = true;
             this.Autohrization.BackColor = System.Drawing.Color.Transparent;
-            this.Autohrization.Font = new System.Drawing.Font("Consolas", 32.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Autohrization.Font = new System.Drawing.Font("Segoe Script", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Autohrization.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Autohrization.Location = new System.Drawing.Point(47, 9);
+            this.Autohrization.Location = new System.Drawing.Point(43, 9);
             this.Autohrization.Name = "Autohrization";
-            this.Autohrization.Size = new System.Drawing.Size(387, 51);
+            this.Autohrization.Size = new System.Drawing.Size(358, 106);
             this.Autohrization.TabIndex = 10;
-            this.Autohrization.Text = "Login Window 🔑";
-            // 
-            // user_type
-            // 
-            this.user_type.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.user_type.AutoSize = true;
-            this.user_type.BackColor = System.Drawing.Color.Transparent;
-            this.user_type.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.user_type.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.user_type.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.user_type.Location = new System.Drawing.Point(5, 89);
-            this.user_type.Name = "user_type";
-            this.user_type.Size = new System.Drawing.Size(197, 37);
-            this.user_type.TabIndex = 11;
-            this.user_type.Text = "User type:";
-            // 
-            // password
-            // 
-            this.password.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.password.AutoSize = true;
-            this.password.BackColor = System.Drawing.Color.Transparent;
-            this.password.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.password.Location = new System.Drawing.Point(5, 226);
-            this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(179, 37);
-            this.password.TabIndex = 12;
-            this.password.Text = "Password:";
+            this.Autohrization.Text = "Welcome!";
             // 
             // LogintBtn
             // 
-            this.LogintBtn.BackColor = System.Drawing.Color.LightGray;
-            this.LogintBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.LogintBtn.Font = new System.Drawing.Font("Yu Gothic UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LogintBtn.ForeColor = System.Drawing.Color.Black;
-            this.LogintBtn.Location = new System.Drawing.Point(150, 324);
+            this.LogintBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.LogintBtn.AutoRoundedCorners = true;
+            this.LogintBtn.BorderRadius = 28;
+            this.LogintBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.LogintBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.LogintBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.LogintBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.LogintBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.LogintBtn.Font = new System.Drawing.Font("Lucida Sans Typewriter", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogintBtn.ForeColor = System.Drawing.Color.White;
+            this.LogintBtn.Location = new System.Drawing.Point(147, 303);
             this.LogintBtn.Name = "LogintBtn";
-            this.LogintBtn.Size = new System.Drawing.Size(140, 43);
-            this.LogintBtn.TabIndex = 3;
-            this.LogintBtn.Text = "Log in";
-            this.LogintBtn.UseVisualStyleBackColor = false;
+            this.LogintBtn.Size = new System.Drawing.Size(123, 58);
+            this.LogintBtn.TabIndex = 2;
+            this.LogintBtn.Text = "Login";
             this.LogintBtn.Click += new System.EventHandler(this.LogintBtn_Click);
+            // 
+            // password_text_box
+            // 
+            this.password_text_box.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.password_text_box.AutoRoundedCorners = true;
+            this.password_text_box.BorderRadius = 30;
+            this.password_text_box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.password_text_box.DefaultText = "";
+            this.password_text_box.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.password_text_box.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.password_text_box.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.password_text_box.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.password_text_box.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.password_text_box.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password_text_box.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.password_text_box.Location = new System.Drawing.Point(35, 232);
+            this.password_text_box.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.password_text_box.MaxLength = 30;
+            this.password_text_box.Name = "password_text_box";
+            this.password_text_box.PasswordChar = '•';
+            this.password_text_box.PlaceholderText = "Password";
+            this.password_text_box.SelectedText = "";
+            this.password_text_box.Size = new System.Drawing.Size(338, 62);
+            this.password_text_box.TabIndex = 1;
+            // 
+            // viewPasswordButton
+            // 
+            this.viewPasswordButton.BackColor = System.Drawing.SystemColors.Window;
+            this.viewPasswordButton.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.viewPasswordButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.viewPasswordButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.viewPasswordButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.viewPasswordButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.viewPasswordButton.FillColor = System.Drawing.Color.Transparent;
+            this.viewPasswordButton.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.viewPasswordButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.viewPasswordButton.Location = new System.Drawing.Point(345, 254);
+            this.viewPasswordButton.Name = "viewPasswordButton";
+            this.viewPasswordButton.Size = new System.Drawing.Size(25, 22);
+            this.viewPasswordButton.TabIndex = 12;
+            this.viewPasswordButton.Click += new System.EventHandler(this.ViewPasswordButton_Click);
+            // 
+            // usernameTextBox
+            // 
+            this.usernameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.usernameTextBox.AutoRoundedCorners = true;
+            this.usernameTextBox.BorderRadius = 30;
+            this.usernameTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.usernameTextBox.DefaultText = "";
+            this.usernameTextBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.usernameTextBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.usernameTextBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.usernameTextBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.usernameTextBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.usernameTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.usernameTextBox.Location = new System.Drawing.Point(35, 157);
+            this.usernameTextBox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.usernameTextBox.MaxLength = 30;
+            this.usernameTextBox.Name = "usernameTextBox";
+            this.usernameTextBox.PasswordChar = '\0';
+            this.usernameTextBox.PlaceholderText = "Username";
+            this.usernameTextBox.SelectedText = "";
+            this.usernameTextBox.Size = new System.Drawing.Size(338, 62);
+            this.usernameTextBox.TabIndex = 0;
             // 
             // Authorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(471, 379);
-            this.Controls.Add(this.LogintBtn);
-            this.Controls.Add(this.password);
-            this.Controls.Add(this.user_type);
-            this.Controls.Add(this.Autohrization);
-            this.Controls.Add(this.User_radio);
-            this.Controls.Add(this.Admin_radio);
+            this.ClientSize = new System.Drawing.Size(424, 413);
+            this.Controls.Add(this.usernameTextBox);
+            this.Controls.Add(this.viewPasswordButton);
             this.Controls.Add(this.password_text_box);
+            this.Controls.Add(this.LogintBtn);
+            this.Controls.Add(this.Autohrization);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -156,13 +158,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox password_text_box;
-        private System.Windows.Forms.RadioButton Admin_radio;
-        private System.Windows.Forms.RadioButton User_radio;
         private System.Windows.Forms.Label Autohrization;
-        private System.Windows.Forms.Label user_type;
-        private System.Windows.Forms.Label password;
-        private System.Windows.Forms.Button LogintBtn;
+        private Guna.UI2.WinForms.Guna2Button LogintBtn;
+        private Guna.UI2.WinForms.Guna2TextBox password_text_box;
+        private Guna.UI2.WinForms.Guna2Button viewPasswordButton;
+        private Guna.UI2.WinForms.Guna2TextBox usernameTextBox;
     }
 }

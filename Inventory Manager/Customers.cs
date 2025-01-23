@@ -1,6 +1,4 @@
-﻿using Inventory_Manager.PublicDataSet5TableAdapters;
-using System;
-using System.Configuration;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -10,129 +8,36 @@ namespace Inventory_Manager
     public partial class Customers : Form
     {
         #region essential_data
-        //establish connection to the server
-        SqlConnection conn = new SqlConnection();
-        SqlCommand cmd = new SqlCommand();
-
-        //holding data that will affect on the database
         private int id_value;
         private string name_value;
 
         public Customers()
         {
             InitializeComponent();
+            Shared.ConnectionInitializer();
+            this.customerTableAdapter.Connection.ConnectionString = Shared.conn.ConnectionString;
+            this.note.Text = Shared.NoticeModifier("customer");
             this.KeyDown += new KeyEventHandler(KeysShortcuts);
             this.KeyPreview = true;
         }
-        private void Product_Load(object sender, EventArgs e)
+        private void Customer_Load(object sender, EventArgs e)
         {
-            var customerTableAdapter = new CustomerTableAdapter();
-            string connectionString = ConfigurationManager.ConnectionStrings["Inventory_Manager.Properties.Settings.PublicConnectionString"].ConnectionString;
-            string machineName = Environment.MachineName;
-            connectionString = connectionString.Replace("{MachineName}", machineName);
-            customerTableAdapter.Connection.ConnectionString = connectionString;
-            customerTableAdapter.Fill(this.publicDataSet5.Customer);
-            conn.ConnectionString = connectionString;
-            if (conn.State != ConnectionState.Open)
-            {
-                ShowData();
-                Open_Connection_If_Was_Closed();
-            }
+            this.customerTableAdapter.Fill(this.customerDataSet.Customer);
+            ShowData();
         }
         #endregion
 
-        #region startup_functions
-        private void Open_Connection_If_Was_Closed()
-        {
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Close();
-                conn.Open();
-            }
-        }
+        #region Startup Functions
+
         //Update the data of customer's table
         public void ShowData()
         {
-            Open_Connection_If_Was_Closed();
-            cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT * FROM customer ORDER BY id";
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
+            Shared.ShowAllData(dataGridView1, "customer", "id");
         }
         //Shortcuts for window
         private void KeysShortcuts(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.F) //make full screen
-            {
-                if (this.FormBorderStyle == FormBorderStyle.None)
-                {
-                    this.FormBorderStyle = FormBorderStyle.Sizable;
-                    this.WindowState = FormWindowState.Maximized;
-                }
-                else
-                {
-                    this.FormBorderStyle = FormBorderStyle.None;
-                    this.WindowState = FormWindowState.Normal;
-                    this.Location = new System.Drawing.Point(0, 0);
-                    this.Size = Screen.PrimaryScreen.Bounds.Size;
-                }
-                return;
-            }
-            if (e.Control && e.KeyCode == Keys.E) //exit
-            {
-                this.Close();
-                return;
-            }
-            if (e.Control && e.KeyCode == Keys.M) //minimize
-            {
-                this.WindowState = FormWindowState.Minimized;
-                return;
-            }
-
-            if (e.Control && e.KeyCode == Keys.I) // show information about the devleoper
-            {
-                ShowToast("The Developer: Muhammad Malek Alset");
-                return;
-            }
-        }
-
-        //showing a message as a toast
-        private void ShowToast(string message)
-        {
-            ToolTip toast = new ToolTip();
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width,
-            screenHeight = Screen.PrimaryScreen.Bounds.Height,
-            toastWidth = 300,
-            toastHeight = 50,
-            x = (screenWidth - toastWidth) / 2,
-            y = screenHeight - toastHeight - 75;
-            toast.Show(message, this, x, y, 1500);
-        }
-        #endregion
-
-        #region Functions_For_Events
-        void SearchCommand(string command, SqlCommand objCmd)
-        {
-            Open_Connection_If_Was_Closed();
-            cmd = conn.CreateCommand();
-            cmd.CommandText = command;
-            cmd.Parameters.AddWithValue("@id", id_value + "%");
-            cmd.Parameters.AddWithValue("@name", "%" + name_value + "%");
-            cmd.ExecuteNonQuery();
-            ShowDataSearching(objCmd);
-            cmd.Parameters.Clear();
-            cmd.Dispose();
-        }
-
-        void ShowDataSearching(SqlCommand objCmd)
-        {
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
+            Shared.KeysShortcuts(sender, e, this);
         }
 
         #endregion
@@ -160,7 +65,7 @@ namespace Inventory_Manager
         //Check the validity of user input
         public bool Validation_of_input()
         {
-            Open_Connection_If_Was_Closed();
+            Shared.ConnectionInitializer();
             if (!Chech_If_Text_Boxes_Were_Empty())
             {
                 name_value = customer_name_text_box.Text;
@@ -205,7 +110,7 @@ namespace Inventory_Manager
         private bool Check_If_Customer_Already_Exists()
         {
             string checkQuery = "SELECT COUNT(*) FROM Customer WHERE name = @name OR  id = @id";
-            using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+            using (SqlCommand checkCmd = new SqlCommand(checkQuery, Shared.conn))
             {
                 checkCmd.Parameters.AddWithValue("@id", id_value);
                 checkCmd.Parameters.AddWithValue("@name", name_value);
@@ -224,7 +129,7 @@ namespace Inventory_Manager
         private bool Check_If_Customer_Name_Already_Exists()
         {
             string checkQuery = "SELECT COUNT(*) FROM Customer WHERE name = @name";
-            using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+            using (SqlCommand checkCmd = new SqlCommand(checkQuery, Shared.conn))
             {
                 checkCmd.Parameters.AddWithValue("@name", name_value);
 
@@ -241,7 +146,7 @@ namespace Inventory_Manager
         private bool Check_If_CustomerId_Already_Exists()
         {
             string checkQuery = "SELECT COUNT(*) FROM Customer WHERE id = @id";
-            using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+            using (SqlCommand checkCmd = new SqlCommand(checkQuery, Shared.conn))
             {
                 checkCmd.Parameters.AddWithValue("@id", id_value);
 
@@ -261,14 +166,14 @@ namespace Inventory_Manager
         #region save_button
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
+            Shared.ConnectionInitializer();
             if (At_Least_Input_Name())
                 if (!Check_If_Customer_Name_Already_Exists())
                 {
                     string name_value = customer_name_text_box.Text;
                     try
                     {
-                        using (SqlCommand cmd = conn.CreateCommand())
+                        using (SqlCommand cmd = Shared.conn.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = "INSERT INTO customer (name) VALUES (@name_value)";
@@ -289,7 +194,7 @@ namespace Inventory_Manager
                     }
                     finally
                     {
-                        conn.Close(); // Ensure the connection is closed
+                        Shared.conn.Close(); // Ensure the connection is closed
                     }
                     ShowData();
                     return;
@@ -304,13 +209,13 @@ namespace Inventory_Manager
         #region update_button
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
+            Shared.ConnectionInitializer();
             {
                 if (int.TryParse(customer_id_text_box.Text, out id_value))
                 {
                     if (Check_If_CustomerId_Already_Exists())
                     {
-                        using (SqlCommand updateCmd = conn.CreateCommand())
+                        using (SqlCommand updateCmd = Shared.conn.CreateCommand())
                         {
                             name_value = customer_name_text_box.Text;
                             updateCmd.CommandType = CommandType.Text;
@@ -351,7 +256,7 @@ namespace Inventory_Manager
                 }
             }
             ShowData();
-            conn.Close();
+            Shared.conn.Close();
             return;
         }
         #endregion
@@ -359,7 +264,7 @@ namespace Inventory_Manager
         #region delete_button
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            Open_Connection_If_Was_Closed();
+            Shared.ConnectionInitializer();
             DialogResult delete;
             delete = MessageBox.Show($"Are you sure ? ", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (delete == DialogResult.Yes)
@@ -369,7 +274,7 @@ namespace Inventory_Manager
                     {
                         try
                         {
-                            using (SqlCommand cmd = conn.CreateCommand())
+                            using (SqlCommand cmd = Shared.conn.CreateCommand())
                             {
                                 cmd.CommandType = CommandType.Text;
                                 if (!(customer_id_text_box.Text == ""))
@@ -402,7 +307,7 @@ namespace Inventory_Manager
                         }
                         finally
                         {
-                            conn.Close();
+                            Shared.conn.Close();
                         }
                         ShowData();
                         return;
@@ -432,37 +337,16 @@ namespace Inventory_Manager
 
         #endregion
 
-        #region Events_For_Searching
+        #region Events For Searching
 
         private void customer_id_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            if (int.TryParse("0" + customer_id_text_box.Text, out id_value) && id_value >= 0)
-            {
-                var command = $@"SELECT  *
-                                      FROM Customer
-                                      WHERE
-                                      id LIKE @id
-                                      ORDER BY id";
-                SearchCommand(command, cmd);
-            }
-            else
-            {
-                MessageBox.Show("Enter a valid value for id");
-                customer_id_text_box.Text = "0";
-                return;
-            }
+            Shared.SearchCommandAssembler(dataGridView1, customer_id_text_box, "Customer", "id", "ID" , false , "customer id");
         }
 
         private void customer_name_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            var command = $@"SELECT  *
-                                 FROM Customer
-                                 WHERE
-                                 name LIKE @name
-                                 ORDER BY id";
-            name_value = customer_name_text_box.Text;
-
-            SearchCommand(command, cmd);
+            Shared.SearchCommandAssembler(dataGridView1, customer_name_text_box, "Customer", "name", "ID");
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿namespace Inventory_Manager
 {
-    partial class terminal
+    partial class Terminal
     {
         /// <summary>
         /// Required designer variable.
