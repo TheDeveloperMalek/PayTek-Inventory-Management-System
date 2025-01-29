@@ -155,5 +155,10 @@ namespace Inventory_Manager
             this.Close();
         }
         #endregion
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

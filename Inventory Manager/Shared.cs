@@ -104,17 +104,17 @@ Delete and Edit a {target}";
             e.SuppressKeyPress = false;
         }
 
-        static void ShowToast(string message, object window)
+        public static void ShowToast(string message, object window)
         {
             var thisWindow = window as Form;
             ToolTip toast = new ToolTip();
             int screenWidth = Screen.PrimaryScreen.Bounds.Width,
             screenHeight = Screen.PrimaryScreen.Bounds.Height,
-            toastWidth = 300,
+            toastWidth = 110,
             toastHeight = 50,
             x = (screenWidth - toastWidth) / 2,
-            y = screenHeight - toastHeight - 75;
-            toast.Show(message, thisWindow, x, y, 1500);
+            y = screenHeight - toastHeight - 150;
+            toast.Show(message, thisWindow, x, y, 2500);
         }
 
         public static string ProductBarcodeGetter(string targetColumn, TextBox tb)

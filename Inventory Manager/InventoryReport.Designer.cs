@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryReport));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.productIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productBarcodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,8 +44,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.product_barcode_text_box = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.searchBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.exportbtn = new Guna.UI2.WinForms.Guna2Button();
             this.dateTimePickerEnd = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.dateTimePickerStart = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -53,6 +52,8 @@
             this.product_name_text_box = new System.Windows.Forms.TextBox();
             this.product_id_text_box = new System.Windows.Forms.TextBox();
             this.inventoryReportTableAdapter = new Inventory_Manager.InventoryReportDataSetTableAdapters.InventoryReportTableAdapter();
+            this.searchBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.exportbtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryReportDataSet)).BeginInit();
@@ -90,10 +91,10 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 95);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 118);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 50;
-            this.dataGridView1.Size = new System.Drawing.Size(1257, 385);
+            this.dataGridView1.Size = new System.Drawing.Size(1196, 401);
             this.dataGridView1.TabIndex = 29;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -179,42 +180,6 @@
             this.label5.TabIndex = 38;
             this.label5.Text = "Product\'s Barcode";
             // 
-            // searchBtn
-            // 
-            this.searchBtn.BorderRadius = 20;
-            this.searchBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.searchBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.searchBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.searchBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.searchBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.searchBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.searchBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchBtn.ForeColor = System.Drawing.Color.Black;
-            this.searchBtn.Location = new System.Drawing.Point(938, 9);
-            this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(211, 39);
-            this.searchBtn.TabIndex = 41;
-            this.searchBtn.Text = "Reset Filter";
-            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
-            // 
-            // exportbtn
-            // 
-            this.exportbtn.BorderRadius = 20;
-            this.exportbtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.exportbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.exportbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.exportbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.exportbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.exportbtn.FillColor = System.Drawing.Color.MediumSeaGreen;
-            this.exportbtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exportbtn.ForeColor = System.Drawing.Color.Black;
-            this.exportbtn.Location = new System.Drawing.Point(938, 49);
-            this.exportbtn.Name = "exportbtn";
-            this.exportbtn.Size = new System.Drawing.Size(211, 39);
-            this.exportbtn.TabIndex = 42;
-            this.exportbtn.Text = "Export as excel file";
-            this.exportbtn.Click += new System.EventHandler(this.exportbtn_Click);
-            // 
             // dateTimePickerEnd
             // 
             this.dateTimePickerEnd.BorderRadius = 10;
@@ -268,7 +233,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1257, 95);
+            this.groupBox1.Size = new System.Drawing.Size(1196, 118);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
@@ -321,15 +286,57 @@
             // 
             this.inventoryReportTableAdapter.ClearBeforeFill = true;
             // 
+            // searchBtn
+            // 
+            this.searchBtn.BorderRadius = 20;
+            this.searchBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.searchBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.searchBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.searchBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.searchBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.searchBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(167)))), ((int)(((byte)(38)))));
+            this.searchBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBtn.ForeColor = System.Drawing.Color.Black;
+            this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
+            this.searchBtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.searchBtn.ImageSize = new System.Drawing.Size(40, 40);
+            this.searchBtn.Location = new System.Drawing.Point(938, 9);
+            this.searchBtn.Name = "searchBtn";
+            this.searchBtn.Size = new System.Drawing.Size(233, 49);
+            this.searchBtn.TabIndex = 41;
+            this.searchBtn.Text = "Reset Filter";
+            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
+            // 
+            // exportbtn
+            // 
+            this.exportbtn.BorderRadius = 20;
+            this.exportbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exportbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.exportbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.exportbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.exportbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.exportbtn.FillColor = System.Drawing.Color.MediumSeaGreen;
+            this.exportbtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exportbtn.ForeColor = System.Drawing.Color.Black;
+            this.exportbtn.Image = ((System.Drawing.Image)(resources.GetObject("exportbtn.Image")));
+            this.exportbtn.ImageSize = new System.Drawing.Size(40, 40);
+            this.exportbtn.Location = new System.Drawing.Point(941, 63);
+            this.exportbtn.Name = "exportbtn";
+            this.exportbtn.Size = new System.Drawing.Size(233, 49);
+            this.exportbtn.TabIndex = 42;
+            this.exportbtn.Text = "Export as excel file";
+            this.exportbtn.Click += new System.EventHandler(this.exportbtn_Click);
+            // 
             // InventoryReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1257, 480);
+            this.ClientSize = new System.Drawing.Size(1180, 480);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
-            this.MinimumSize = new System.Drawing.Size(1171, 519);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MinimumSize = new System.Drawing.Size(1196, 519);
             this.Name = "InventoryReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory Report form";
@@ -350,8 +357,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox product_barcode_text_box;
         private System.Windows.Forms.Label label5;
-        private Guna.UI2.WinForms.Guna2Button searchBtn;
-        private Guna.UI2.WinForms.Guna2Button exportbtn;
         private Guna.UI2.WinForms.Guna2DateTimePicker dateTimePickerEnd;
         private Guna.UI2.WinForms.Guna2DateTimePicker dateTimePickerStart;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -367,5 +372,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private Guna.UI2.WinForms.Guna2Button exportbtn;
+        private Guna.UI2.WinForms.Guna2Button searchBtn;
     }
 }

@@ -5,6 +5,8 @@ namespace Inventory_Manager
 {
     public partial class Homepage : Form
     {
+        bool sidebarExpanded;
+        bool MaxmizeAble = false;
         #region essential_data
         public Homepage()
         {
@@ -28,6 +30,11 @@ namespace Inventory_Manager
                 a.FormClosed += Auth_FormClosed;
                 a.Show();
             }
+            if(e.Control && e.KeyCode == Keys.F)
+                if(MaxmizeAble){
+                testPanel.Controls[0].Width = testPanel.Width;
+                testPanel.Controls[0].Height = testPanel.Height;
+                }
             if (e.Control && e.KeyCode == Keys.B)
                 MessageBox.Show(Shared.CreateDBBackup("Public"), "PayTek Inventory Management System");
             if (e.Control && e.KeyCode == Keys.R)
@@ -39,52 +46,74 @@ namespace Inventory_Manager
             this.Close();
         }
 
+        private void FormViewer(Form obj)
+        {
+            MaxmizeAble = true;
+            testPanel.Visible = true;
+            pictureBox3.Visible = false;
+            testPanel.Controls.Clear();
+            obj.FormBorderStyle = FormBorderStyle.None;
+            testPanel.Controls.Add(obj);
+            obj.Show();
+        }
+
         #endregion
 
         #region buttons
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Customers p = new Customers();
-            p.Show();
-        }
 
+        private void menu_Click(object sender, EventArgs e)
+        {
+            sideBarTimer.Start();
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var c = new ChangeUserPassword();
+            c.Show();
+        }
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            testPanel.Controls.Clear();
+            testPanel.Visible = false;
+            pictureBox3.Visible = true;
+            MaxmizeAble = false;
+        }
         private void button6_Click(object sender, EventArgs e)
         {
-            Products s = new Products();
-            s.Show();
+            Products s = new Products { TopLevel = false, TopMost = true };
+            FormViewer(s);
         }
         private void button7_Click(object sender, EventArgs e)
         {
-            var s = new Suppliers();
-            s.Show();
+            var s = new Suppliers() { TopLevel = false, TopMost = true };
+            FormViewer(s); ;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Shared.ShowToast($"Welcome {Shared.UserName}", this);
         }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            Customers C = new Customers();
-            C.Show();
+            Customers C = new Customers() { TopLevel = false, TopMost = true };
+            FormViewer(C);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Sales p = new Sales();
-            p.Show();
+            Sales p = new Sales() { TopLevel = false, TopMost = true };
+            FormViewer(p);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            ProductsReport p = new ProductsReport();
-            p.Show();
+            ProductsReport p = new ProductsReport() { TopLevel = false, TopMost = true };
+            FormViewer(p);
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            InventoryReport ir = new InventoryReport();
-            ir.Show();
+            InventoryReport ir = new InventoryReport { TopLevel = false, TopMost = true };
+            FormViewer(ir);
         }
 
         private void changeUserPassword_Click(object sender, EventArgs e)
@@ -102,8 +131,8 @@ namespace Inventory_Manager
 
         private void button8_Click_1(object sender, EventArgs e)
         {
-            var p = new Purchases();
-            p.Show();
+            var p = new Purchases() { TopLevel = false, TopMost = true };
+            FormViewer(p); ;
         }
 
         private void roles_Click(object sender, EventArgs e)
@@ -111,6 +140,13 @@ namespace Inventory_Manager
             var r = new Roles();
             r.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var C = new InventoryReport() { TopLevel = false, TopMost = true };
+            FormViewer(C);
+        }
+
 
         #region shortcut guidance button
         private void shortcutBtn_Click(object sender, EventArgs e)
@@ -120,7 +156,7 @@ Ctrl + m => Minimize the form
 Ctrl + e => Close the form
 Ctrl + b => Create a backup of the database
 Ctrl + r => Restore data from a database's backup
-Alt + s => Switch to login form (just for homepage)
+Alt + s => Switch to login form
 Ctrl + p => To save the table as an excel file (just for reports)
                             ", "Shortcuts Table");
         }
@@ -128,5 +164,36 @@ Ctrl + p => To save the table as an excel file (just for reports)
         #endregion
 
         #endregion
+
+        private void sideBarTimer_Tick(object sender, EventArgs e)
+        {
+            if (sidebarExpanded)
+            {
+                sidebar.Width -= 10;
+                if (sidebar.Width == sidebar.MinimumSize.Width)
+                {
+                    sidebarExpanded = false;
+                    if(MaxmizeAble)
+                    {
+                        var d = testPanel.Controls[0];
+                        testPanel.Controls.Clear();
+                        testPanel.Controls.Add(d);
+                        testPanel.Controls[0].Width = testPanel.Width;
+                        testPanel.Controls[0].Height = testPanel.Height;
+                    }
+                    sideBarTimer.Stop();
+                }
+            }
+            else
+            {
+                sidebar.Width += 10;
+                if (sidebar.Width == sidebar.MaximumSize.Width)
+                {
+                    sidebarExpanded = true;
+                    sideBarTimer.Stop();
+                }
+            }
+        }
+
     }
 }

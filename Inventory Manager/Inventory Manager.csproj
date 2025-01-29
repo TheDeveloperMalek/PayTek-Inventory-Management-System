@@ -417,6 +417,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Products.resx">
       <DependentUpon>Products.cs</DependentUpon>
@@ -528,6 +529,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\7xm.xyz965442.jpg" />
+    <None Include="Resources\curverArrow.png" />
+    <None Include="Resources\menu.png" />
+    <None Include="Resources\house.png" />
     <EmbeddedResource Include="DBTemplate\TemplateScript.sql" />
     <EmbeddedResource Include="Icons\hide.png" />
     <EmbeddedResource Include="Icons\view.png" />

@@ -98,7 +98,7 @@ namespace Inventory_Manager
         {
             if (supplierNameTextBox.Text == "")
             {
-                MessageBox.Show("Please type a name at least to add new customer", "Inventory Management System");
+                MessageBox.Show("Please type a name at least to add new supplier", "Inventory Management System");
                 return false;
             }
             name_value = supplierNameTextBox.Text;
