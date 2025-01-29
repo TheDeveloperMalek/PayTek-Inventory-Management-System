@@ -159,7 +159,7 @@ namespace Inventory_Manager
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(110, 45);
             this.label9.TabIndex = 23;
-            this.label9.Text = "2024©";
+            this.label9.Text = "2025©";
             // 
             // shortcutBtn
             // 
@@ -616,7 +616,7 @@ namespace Inventory_Manager
             this.testPanel.Location = new System.Drawing.Point(73, 0);
             this.testPanel.Name = "testPanel";
             this.testPanel.Size = new System.Drawing.Size(1004, 693);
-            this.testPanel.TabIndex = 39;
+            this.testPanel.TabIndex = 40;
             this.testPanel.Visible = false;
             // 
             // Homepage
