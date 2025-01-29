@@ -44,7 +44,6 @@ namespace Inventory_Manager
         //Shortcuts for window
         private void KeysShortcuts(object sender, KeyEventArgs e)
         {
-            Shared.KeysShortcuts(sender, e, this);
             if (e.Control && e.KeyCode == Keys.P) //print
             {
                 exportbtn_Click(sender, e);

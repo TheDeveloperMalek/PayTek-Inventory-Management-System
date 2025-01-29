@@ -35,11 +35,6 @@ namespace Inventory_Manager
             Shared.ShowAllData(dataGridView1, "customer", "id");
         }
         //Shortcuts for window
-        private void KeysShortcuts(object sender, KeyEventArgs e)
-        {
-            Shared.KeysShortcuts(sender, e, this);
-        }
-
         #endregion
 
         #region validation_functions
