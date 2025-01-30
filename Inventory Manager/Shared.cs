@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Guna.UI2.WinForms;
 using System;
 using System.Configuration;
@@ -65,35 +66,34 @@ namespace Inventory_Manager
 Delete and Edit a {target}";
         }
 
-        public static void KeysShortcuts(object sender, KeyEventArgs e, object window, bool enableFullScreenShortcut = true)
+        public static void KeysShortcuts(object sender, KeyEventArgs e, Form window, bool enableFullScreenShortcut = true)
         {
-            var thisWindow = window as Form;
             e.SuppressKeyPress = true;
             if (enableFullScreenShortcut)
                 if (e.Control && e.KeyCode == Keys.F) //make full screen
                 {
-                    if (thisWindow.FormBorderStyle == FormBorderStyle.None)
+                    if (window.FormBorderStyle == FormBorderStyle.None)
                     {
-                        thisWindow.FormBorderStyle = FormBorderStyle.Sizable;
-                        thisWindow.WindowState = FormWindowState.Maximized;
+                        window.FormBorderStyle = FormBorderStyle.Sizable;
+                        window.WindowState = FormWindowState.Maximized;
                     }
                     else
                     {
-                        thisWindow.FormBorderStyle = FormBorderStyle.None;
-                        thisWindow.WindowState = FormWindowState.Normal;
-                        thisWindow.Location = new System.Drawing.Point(0, 0);
-                        thisWindow.Size = Screen.PrimaryScreen.Bounds.Size;
+                        window.FormBorderStyle = FormBorderStyle.None;
+                        window.WindowState = FormWindowState.Normal;
+                        window.Location = new System.Drawing.Point(0, 0);
+                        window.Size = Screen.PrimaryScreen.Bounds.Size;
                     }
                     return;
                 }
             if (e.Control && e.KeyCode == Keys.E) //exit
             {
-                thisWindow.Close();
+                window.Close();
                 return;
             }
             if (e.Control && e.KeyCode == Keys.M) //minimize
             {
-                thisWindow.WindowState = FormWindowState.Minimized;
+                window.WindowState = FormWindowState.Minimized;
                 return;
             }
             //if (e.Control && e.KeyCode == Keys.I) // show information about the devleoper
@@ -264,12 +264,20 @@ to: {endDate.Value.ToShortDateString()} ";
 
         public static string SearchCommandGenerator(TextBox tb, string targetTable, string targetColumn, bool skipCheckNumericDataValidation = true, string ItemNameForErrorMessage = "")
         {
-            if (skipCheckNumericDataValidation || int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
+            if (skipCheckNumericDataValidation)
             {
                 return $@"SELECT  *
-                                     FROM {targetTable}
-                                     WHERE {$"\"{targetColumn}\""}
-                                     LIKE '{tb.Text}%'
+                                     FROM ""{targetTable}""
+                                     WHERE ""{targetColumn}""
+                                     LIKE N'%{tb.Text}%'
+                                     ORDER BY id";
+            }
+            else if (int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
+            {
+                return $@"SELECT  *
+                                     FROM ""{targetTable}""
+                                     WHERE ""{targetColumn}""
+                                     LIKE N'{tb.Text}%'
                                      ORDER BY id";
             }
             else
@@ -312,12 +320,24 @@ to: {endDate.Value.ToShortDateString()} ";
 
         public static string SearchCommandGeneratorWithDateForProductReport(TextBox tb, string targetTable, string targetColumn, bool skipCheckNumericDataValidation = true, string ItemNameForErrorMessage = "")
         {
-            if (skipCheckNumericDataValidation || int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
+            if(skipCheckNumericDataValidation)
             {
                 return $@"SELECT  ""Product ID"" , ""Product Barcode"" , ""Product Name"" , Status , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
                                       FROM  ""{targetTable}""
                                       WHERE ""{targetColumn}""
-                                      LIKE '{tb.Text}%'
+                                      LIKE N'%{tb.Text}%'
+                                      AND  date 
+                                      BETWEEN @StartDate
+                                      AND @EndDate
+                                      GROUP BY  ""Product ID"" , ""Product Barcode"" , ""Product Name"" , Status
+                                      ORDER BY ""Product ID""";
+            }
+            else if (int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
+            {
+                return $@"SELECT  ""Product ID"" , ""Product Barcode"" , ""Product Name"" , Status , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                      FROM  ""{targetTable}""
+                                      WHERE ""{targetColumn}""
+                                      LIKE N'{tb.Text}%'
                                       AND  date 
                                       BETWEEN @StartDate
                                       AND @EndDate
@@ -334,12 +354,24 @@ to: {endDate.Value.ToShortDateString()} ";
 
         public static string SearchCommandGeneratorWithDateForInventoryReport(TextBox tb, string targetTable, string targetColumn, bool skipCheckNumericDataValidation = true, string ItemNameForErrorMessage = "")
         {
-            if (skipCheckNumericDataValidation || int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
+            if(skipCheckNumericDataValidation)
             {
                 return $@"SELECT  ""Product ID"" , ""Product Barcode"" , ""Product Name"" , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
                                       FROM ""{targetTable}""
                                       WHERE ""{targetColumn}""
-                                      LIKE '{tb.Text}%'
+                                      LIKE N'%{tb.Text}%'
+                                      AND  date 
+                                      BETWEEN @StartDate
+                                      AND @EndDate
+                                      GROUP BY  ""Product ID"" , ""Product Barcode"" , ""Product Name""
+                                      ORDER BY ""Product ID""";
+            }
+            else if ( int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
+            {
+                return $@"SELECT  ""Product ID"" , ""Product Barcode"" , ""Product Name"" , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
+                                      FROM ""{targetTable}""
+                                      WHERE ""{targetColumn}""
+                                      LIKE N'{tb.Text}%'
                                       AND  date 
                                       BETWEEN @StartDate
                                       AND @EndDate

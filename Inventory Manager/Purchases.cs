@@ -24,8 +24,6 @@ namespace Inventory_Manager
             this.cost_text_box.Visible =
             this.dataGridView1.Columns[7].Visible = Shared.isJustVisibleForNonUserType;
             this.note.Text = Shared.NoticeModifier("purchase");
-            this.KeyDown += new KeyEventHandler(KeysShortcuts);
-            this.KeyPreview = true;
         }
 
         private void Purchases_Load(object sender, EventArgs e)
@@ -47,11 +45,6 @@ namespace Inventory_Manager
             Shared.ShowAllData(dataGridView1, "Purchase", "ID");
         }
 
-        //Shortcuts for window
-        private void KeysShortcuts(object sender, KeyEventArgs e)
-        {
-            Shared.KeysShortcuts(sender, e, this);
-        }
         #endregion
 
         #region validation_functions

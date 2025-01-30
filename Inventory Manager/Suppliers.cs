@@ -18,8 +18,6 @@ namespace Inventory_Manager
             InitializeComponent();
             Shared.ConnectionInitializer();
             this.supplierTableAdapter.Connection.ConnectionString = Shared.conn.ConnectionString;
-            this.KeyDown += new KeyEventHandler(KeysShortcuts);
-            this.KeyPreview = true;
         }
         private void Supplier_Load(object sender, EventArgs e)
         {
@@ -33,11 +31,6 @@ namespace Inventory_Manager
         public void ShowData()
         {
             Shared.ShowAllData(dataGridView1, "supplier", "id");
-        }
-        //Shortcuts for window
-        private void KeysShortcuts(object sender, KeyEventArgs e)
-        {
-            Shared.KeysShortcuts(sender, e, this);
         }
         #endregion
 

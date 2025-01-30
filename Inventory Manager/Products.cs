@@ -23,8 +23,6 @@ namespace Inventory_Manager
             Shared.ConnectionInitializer();
             this.productTableAdapter.Connection.ConnectionString = Shared.conn.ConnectionString;
             this.note.Text = Shared.NoticeModifier("product");
-            this.KeyDown += new KeyEventHandler(KeysShortcuts);
-            this.KeyPreview = true;
             dataGridView1.Columns[3].Visible = Shared.isVisibleForDeveloper;
             ImageSetterByBarcode();
         }
@@ -41,10 +39,6 @@ namespace Inventory_Manager
 
         #region for shortcuts
         //Shortcuts for window
-        private void KeysShortcuts(object sender, KeyEventArgs e)
-        {
-            Shared.KeysShortcuts(sender, e, this);
-        }
         #endregion
 
         //Update the data of Product's table

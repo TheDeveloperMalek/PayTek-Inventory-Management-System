@@ -11,6 +11,8 @@ namespace Inventory_Manager
             InitializeComponent();
             Shared.ConnectionInitializer();
             this.productReportTableAdapter.Connection.ConnectionString = Shared.conn.ConnectionString;
+            dateTimePickerEnd.Value = DateTime.Now;
+            dateTimePickerStart.Value = DateTime.Now.AddDays(-30);
 
             #region For DatePicker
             dateTimePickerStart.MaxDate = DateTime.Now.AddDays(-1);

@@ -12,16 +12,14 @@ namespace Inventory_Manager
             InitializeComponent();
             Shared.ConnectionInitializer();
             this.inventoryReportTableAdapter.Connection.ConnectionString = Shared.conn.ConnectionString;
+            dateTimePickerEnd.Value = DateTime.Now;
+            dateTimePickerStart.Value = DateTime.Now.AddDays(-30);
 
             #region for DatePicker
             dateTimePickerStart.MaxDate = DateTime.Now.AddDays(-1);
             dateTimePickerEnd.MaxDate = DateTime.Now;
             #endregion
 
-            #region For Shrotcuts
-            this.KeyDown += new KeyEventHandler(KeysShortcuts);
-            this.KeyPreview = true;
-            #endregion
         }
 
         private void InventoryReport_Load(object sender, EventArgs e)
@@ -42,17 +40,6 @@ namespace Inventory_Manager
         public void ShowData()
         {
             Shared.ShowAllData(dataGridView1, "InventoryReport", "Product ID");
-        }
-
-        //Shortcuts for window
-        private void KeysShortcuts(object sender, KeyEventArgs e)
-        {
-            Shared.KeysShortcuts(sender, e, this);
-            if (e.Control && e.KeyCode == Keys.P) //print
-            {
-                exportbtn_Click(sender, e);
-                return;
-            }
         }
 
         #endregion

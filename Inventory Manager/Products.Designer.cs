@@ -154,7 +154,7 @@
             this.guna2Button4.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button4.Image")));
             this.guna2Button4.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.guna2Button4.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button4.Location = new System.Drawing.Point(907, 37);
+            this.guna2Button4.Location = new System.Drawing.Point(847, 45);
             this.guna2Button4.Name = "guna2Button4";
             this.guna2Button4.Size = new System.Drawing.Size(145, 50);
             this.guna2Button4.TabIndex = 37;
@@ -178,7 +178,7 @@
             this.guna2Button5.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button5.Image")));
             this.guna2Button5.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.guna2Button5.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button5.Location = new System.Drawing.Point(907, 89);
+            this.guna2Button5.Location = new System.Drawing.Point(847, 97);
             this.guna2Button5.Name = "guna2Button5";
             this.guna2Button5.Size = new System.Drawing.Size(145, 50);
             this.guna2Button5.TabIndex = 36;
@@ -201,7 +201,7 @@
             this.guna2Button6.ForeColor = System.Drawing.Color.Black;
             this.guna2Button6.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button6.Image")));
             this.guna2Button6.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button6.Location = new System.Drawing.Point(756, 89);
+            this.guna2Button6.Location = new System.Drawing.Point(696, 97);
             this.guna2Button6.Name = "guna2Button6";
             this.guna2Button6.Size = new System.Drawing.Size(145, 50);
             this.guna2Button6.TabIndex = 35;
@@ -224,7 +224,7 @@
             this.guna2Button7.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button7.Image")));
             this.guna2Button7.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.guna2Button7.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button7.Location = new System.Drawing.Point(756, 37);
+            this.guna2Button7.Location = new System.Drawing.Point(696, 45);
             this.guna2Button7.Name = "guna2Button7";
             this.guna2Button7.Size = new System.Drawing.Size(145, 50);
             this.guna2Button7.TabIndex = 34;
@@ -249,7 +249,7 @@
             this.SpecificationRichBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SpecificationRichBox.Location = new System.Drawing.Point(464, 45);
             this.SpecificationRichBox.Name = "SpecificationRichBox";
-            this.SpecificationRichBox.Size = new System.Drawing.Size(286, 94);
+            this.SpecificationRichBox.Size = new System.Drawing.Size(220, 94);
             this.SpecificationRichBox.TabIndex = 32;
             this.SpecificationRichBox.Text = "";
             // 
@@ -290,7 +290,7 @@
             // 
             // productIcon
             // 
-            this.productIcon.Location = new System.Drawing.Point(1089, 12);
+            this.productIcon.Location = new System.Drawing.Point(998, 18);
             this.productIcon.Name = "productIcon";
             this.productIcon.Size = new System.Drawing.Size(157, 157);
             this.productIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

@@ -32,7 +32,10 @@ namespace Inventory_Manager
             }
             if(e.Control && e.KeyCode == Keys.F)
                 if(MaxmizeAble){
-                testPanel.Controls[0].Width = testPanel.Width;
+                        var d = testPanel.Controls[0];
+                        testPanel.Controls.Clear();
+                        testPanel.Controls.Add(d);
+                    testPanel.Controls[0].Width = testPanel.Width;
                 testPanel.Controls[0].Height = testPanel.Height;
                 }
             if (e.Control && e.KeyCode == Keys.B)
