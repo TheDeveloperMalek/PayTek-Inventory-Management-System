@@ -1,6 +1,6 @@
 ﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Guna.UI2.WinForms;
+using static System.Environment;
 using System;
 using System.Configuration;
 using System.Data;
@@ -12,32 +12,42 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Windows.Forms;
 using static System.Math;
+using System.Media;
 
 namespace Inventory_Manager
 {
+    class FormTimerFadeEffectNeeds
+    {
+        public Form form;
+        public Timer timer = new Timer();
+        public FormTimerFadeEffectNeeds(Form f , int interval)
+        {
+            timer.Interval = interval;
+            form = f;
+        }
+    }
     public enum UserType
     {
         Developer,
         Admin,
         User
     }
-    internal class Shared : Form
+    internal class Shared
     {
         public static SqlConnection conn = new SqlConnection();
         public static SqlCommand cmd = new SqlCommand();
         public static UserType defaultUserType = UserType.User;
-        public static string UserName = "";
-        public static string Password = "";
-        public static string Usertype = "";
-        public static readonly string DocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        public static string DirectoryName = "PayTek Inventory Management System";
-        static readonly string ReportAuthor = "Muhammad Malek Alset";
-        static readonly string ReportManager = "Mansour Alset & Waseem Alshmaa";
+        public static string currentUserName = "";
+        public static string currentUserPassword = "";
+        public static string currentUserType = "";
+        public static readonly string documentsPath = GetFolderPath(SpecialFolder.MyDocuments);
+        public static string programDirectoryName = "PayTek Inventory Management System";
+        static readonly string reportsAuthor = currentUserName;
+        static readonly string reportsManager = "Mansour Alset & Waseem Alshmaa";
         public static bool isVisibleForDeveloper = false;
         public static bool isVisibleForAdmin = false;
         public static bool isVisibleForUser = false;
         public static bool isJustVisibleForNonUserType = false;
-
         public static void HideComponentsByUserType()
         {
             isVisibleForDeveloper =
@@ -68,42 +78,40 @@ Delete and Edit a {target}";
 
         public static void KeysShortcuts(object sender, KeyEventArgs e, Form window, bool enableFullScreenShortcut = true)
         {
-            e.SuppressKeyPress = true;
-            if (enableFullScreenShortcut)
-                if (e.Control && e.KeyCode == Keys.F) //make full screen
-                {
-                    if (window.FormBorderStyle == FormBorderStyle.None)
-                    {
-                        window.FormBorderStyle = FormBorderStyle.Sizable;
-                        window.WindowState = FormWindowState.Maximized;
-                    }
-                    else
-                    {
-                        window.FormBorderStyle = FormBorderStyle.None;
-                        window.WindowState = FormWindowState.Normal;
-                        window.Location = new System.Drawing.Point(0, 0);
-                        window.Size = Screen.PrimaryScreen.Bounds.Size;
-                    }
-                    return;
-                }
-            if (e.Control && e.KeyCode == Keys.E) //exit
+            if (enableFullScreenShortcut && e.Control && e.KeyCode == Keys.F)
             {
-                window.Close();
+                if (window.FormBorderStyle == FormBorderStyle.None)
+                {
+                    window.FormBorderStyle = FormBorderStyle.Sizable;
+                    window.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    window.FormBorderStyle = FormBorderStyle.None;
+                    window.WindowState = FormWindowState.Normal;
+                    window.Location = new System.Drawing.Point(0, 0);
+                    window.Size = Screen.PrimaryScreen.Bounds.Size;
+                }
+                e.SuppressKeyPress = true;
                 return;
             }
-            if (e.Control && e.KeyCode == Keys.M) //minimize
+
+            if (e.Control && e.KeyCode == Keys.E)
+            {
+                FadeOutEffect(window);
+                e.SuppressKeyPress = true;
+                return;
+            }
+
+            if (e.Control && e.KeyCode == Keys.M)
             {
                 window.WindowState = FormWindowState.Minimized;
+                e.SuppressKeyPress = true;
                 return;
             }
-            //if (e.Control && e.KeyCode == Keys.I) // show information about the devleoper
-            //{
-            //    ShowToast("The Developer: Muhammad Malek Alset" , thisWindow);
-            //    return;
-            //}
+
             e.SuppressKeyPress = false;
         }
-
         public static void ShowToast(string message, object window)
         {
             var thisWindow = window as Form;
@@ -143,6 +151,17 @@ Delete and Edit a {target}";
             cmd.Parameters.Clear();
         }
 
+        public static void ResetFields(GroupBox gp)
+        {
+            foreach (Control c in gp.Controls)
+                if (c is TextBox t)
+                    t.Text = "";
+                else if (c is RichTextBox rb)
+                    rb.Text = "";
+                else if (c is CheckBox ch)
+                    ch.Checked = false;
+        }
+
         public static void GeneralConnectionInitializer()
         {
             if (conn.State != ConnectionState.Open)
@@ -154,7 +173,7 @@ Delete and Edit a {target}";
             }
         }
 
-        public static void ShowAllData(DataGridView target, string tableName, string orderBy , bool excludeRow = false , string excludedBy = "" , string excludedValue = "")
+        public static void ShowAllTableData(DataGridView target, string tableName, string orderBy, bool excludeRow = false, string excludedBy = "", string excludedValue = "")
         {
             ConnectionInitializer();
             cmd = conn.CreateCommand();
@@ -169,7 +188,7 @@ Delete and Edit a {target}";
             target.DataSource = dt;
         }
 
-        public static void ShowAllInventoryReportDataWithDate(DataGridView target, string orderBy, Guna2DateTimePicker startDate, Guna2DateTimePicker endDate)
+        public static void ShowAllInventoryReportTableDataWithDate(DataGridView target, string orderBy, Guna2DateTimePicker startDate, Guna2DateTimePicker endDate)
 
         {
             DateValidityChecker(startDate, endDate);
@@ -192,7 +211,7 @@ Delete and Edit a {target}";
             cmd.Parameters.Clear();
         }
 
-        public static void ShowAllProductReportDataWithDate(DataGridView target, string orderBy, Guna2DateTimePicker startDate, Guna2DateTimePicker endDate)
+        public static void ShowAllProductReportTableDataWithDate(DataGridView target, string orderBy, Guna2DateTimePicker startDate, Guna2DateTimePicker endDate)
 
         {
             DateValidityChecker(startDate, endDate);
@@ -215,7 +234,7 @@ Delete and Edit a {target}";
             cmd.Parameters.Clear();
         }
 
-        public static bool textBoxHasNotEnoughData(TextBox tb)
+        public static bool IsTextBoxHasNotEnoughData(TextBox tb)
         {
             return tb.Text == "" || tb.Text.StartsWith(" ");
         }
@@ -236,8 +255,8 @@ Delete and Edit a {target}";
                     {
                         using (XLWorkbook workbook = new XLWorkbook())
                         {
-                            workbook.Properties.Author = ReportAuthor;
-                            workbook.Properties.Manager = ReportManager;
+                            workbook.Properties.Author = reportsAuthor;
+                            workbook.Properties.Manager = reportsManager;
                             workbook.Properties.Category = "Reports";
                             workbook.Properties.Title = reportTitle;
                             workbook.Properties.Comments = $@"Report:
@@ -262,27 +281,28 @@ to: {endDate.Value.ToShortDateString()} ";
             }
         }
 
-        public static string SearchCommandGenerator(TextBox tb, string targetTable, string targetColumn, bool skipCheckNumericDataValidation = true, string ItemNameForErrorMessage = "")
+        public static string SearchCommandGenerator(TextBox tb, string targetTable, string targetColumn , string orderby, bool skipCheckNumericDataValidation = true, string ItemNameForErrorMessage = "", string excludedBy = "", string excludedValue = "")
         {
-            if (skipCheckNumericDataValidation)
+            if(excludedBy!= "")
             {
                 return $@"SELECT  *
                                      FROM ""{targetTable}""
                                      WHERE ""{targetColumn}""
                                      LIKE N'%{tb.Text}%'
-                                     ORDER BY id";
+                                     AND ""{excludedBy}"" != '{excludedValue}'
+                                     ORDER BY ""{orderby}""";
             }
-            else if (int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
+            if (skipCheckNumericDataValidation || int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
             {
                 return $@"SELECT  *
                                      FROM ""{targetTable}""
                                      WHERE ""{targetColumn}""
-                                     LIKE N'{tb.Text}%'
-                                     ORDER BY id";
+                                     LIKE N'%{tb.Text}%'
+                                     ORDER BY ""{orderby}""";
             }
             else
             {
-                MessageBox.Show($"Enter a valid value for {ItemNameForErrorMessage}", "Error");
+                ErrorOccuredMessageBox($"Enter a valid value for {ItemNameForErrorMessage}");
                 tb.Text = "";
                 return "";
             }
@@ -306,21 +326,21 @@ to: {endDate.Value.ToShortDateString()} ";
         }
 
 
-        public static void SearchCommandAssembler(DataGridView targetTable, TextBox tb, string tableName, string targetColumn, string orderBy, bool skipCheckNumericDataValidation = true, string ErrorParsing = "")
+        public static void SearchCommandAssembler(DataGridView targetTable, TextBox tb, string tableName, string targetColumn, string orderBy, bool skipCheckNumericDataValidation = true, string ErrorParsing = "" , bool excludeRow = false, string excludedBy = "", string excludedValue = "")
         {
-            if (textBoxHasNotEnoughData(tb))
+            if (IsTextBoxHasNotEnoughData(tb))
             {
-                ShowAllData(targetTable, tableName, orderBy);
+                ShowAllTableData(targetTable, tableName, orderBy , excludeRow , excludedBy , excludedValue);
                 return;
             }
 
-            var command = SearchCommandGenerator(tb, tableName, targetColumn, skipCheckNumericDataValidation, ErrorParsing);
-            SearchCommandApply(targetTable, command);
+            var command = SearchCommandGenerator(tb, tableName, targetColumn, orderBy ,skipCheckNumericDataValidation, ErrorParsing , excludedBy , excludedValue);
+                SearchCommandApply(targetTable, command);
         }
 
         public static string SearchCommandGeneratorWithDateForProductReport(TextBox tb, string targetTable, string targetColumn, bool skipCheckNumericDataValidation = true, string ItemNameForErrorMessage = "")
         {
-            if(skipCheckNumericDataValidation)
+            if (skipCheckNumericDataValidation)
             {
                 return $@"SELECT  ""Product ID"" , ""Product Barcode"" , ""Product Name"" , Status , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
                                       FROM  ""{targetTable}""
@@ -354,7 +374,7 @@ to: {endDate.Value.ToShortDateString()} ";
 
         public static string SearchCommandGeneratorWithDateForInventoryReport(TextBox tb, string targetTable, string targetColumn, bool skipCheckNumericDataValidation = true, string ItemNameForErrorMessage = "")
         {
-            if(skipCheckNumericDataValidation)
+            if (skipCheckNumericDataValidation)
             {
                 return $@"SELECT  ""Product ID"" , ""Product Barcode"" , ""Product Name"" , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
                                       FROM ""{targetTable}""
@@ -366,7 +386,7 @@ to: {endDate.Value.ToShortDateString()} ";
                                       GROUP BY  ""Product ID"" , ""Product Barcode"" , ""Product Name""
                                       ORDER BY ""Product ID""";
             }
-            else if ( int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
+            else if (int.TryParse("0" + tb.Text, out int outputValue) && outputValue >= 0)
             {
                 return $@"SELECT  ""Product ID"" , ""Product Barcode"" , ""Product Name"" , SUM(quantity) AS quantity , CAST (@EndDate as date) as date
                                       FROM ""{targetTable}""
@@ -407,9 +427,9 @@ to: {endDate.Value.ToShortDateString()} ";
 
         public static void SearchCommandWitDateAssembler(DataGridView targetTable, TextBox tb, string tableName, string targetColumn, string orderBy, Guna2DateTimePicker startDate, Guna2DateTimePicker endDate, bool skipCheckNumericDataValidation = true, string ErrorParsing = "", bool ProductReport = true)
         {
-            if (textBoxHasNotEnoughData(tb))
+            if (IsTextBoxHasNotEnoughData(tb))
             {
-                ShowAllData(targetTable, tableName, orderBy);
+                ShowAllTableData(targetTable, tableName, orderBy);
                 return;
             }
             string command;
@@ -440,7 +460,21 @@ to: {endDate.Value.ToShortDateString()} ";
             return bool.Parse(cmd.ExecuteScalar().ToString());
         }
 
-        public static bool UserWantToInstallFromSpecificBakFile()
+        public static bool IsUserExists(string username)
+        {
+            ConnectionInitializer();
+            cmd.Parameters.AddWithValue("@usrname", username);
+            cmd.Connection = conn;
+            cmd.CommandText = $@"IF (SELECT username 
+                                        FROM Roles
+                                        WHERE username = @usrname) = @usrname
+                            SELECT 'true'
+                            ELSE 
+                            SELECT 'false'";
+            return bool.Parse(cmd.ExecuteScalar().ToString());
+        }
+
+        public static bool DoesUserWantToInstallFromSpecificBakFile()
         {
             DialogResult wantFromSpecificFile;
             wantFromSpecificFile = MessageBox.Show($"Do you want to install data from a backup instead of installing the default version ", "Inventory Management System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -461,7 +495,7 @@ to: {endDate.Value.ToShortDateString()} ";
                                 END";
                     cmd.ExecuteNonQuery();
                     string RestoreFromBakFileMessage = "";
-                    if (UserWantToInstallFromSpecificBakFile())
+                    if (DoesUserWantToInstallFromSpecificBakFile())
                     {
                         RestoreFromBakFileMessage = RestoreDBFromBakFile("Public");
                         MessageBox.Show(RestoreFromBakFileMessage);
@@ -492,18 +526,32 @@ to: {endDate.Value.ToShortDateString()} ";
             }
         }
 
-        public static System.Drawing.Image ImageGetterFromAssembly(string folderName, string fileName, string imageExtension)
+        public static Stream FileGetterFromAssembly(string folderName, string fileName, string imageExtension)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             string resourceName = $"Inventory_Manager.{folderName}.{fileName}.{imageExtension}";
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                if (stream != null)
-                    return System.Drawing.Image.FromStream(stream);
-                else
-                    return null;
+            Stream stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream != null)
+                return stream;
+            else
+                return null;
         }
 
-        public static void AutoCompleteForTextBox(string table, string columnName, TextBox tb)
+        public static void TextBoxAutoCompleteFromColumn(string table, string columnName, TextBox tb)
+        {
+            ConnectionInitializer();
+            cmd.CommandText = $@"SELECT ""{columnName}""
+                                FROM {table}";
+            var suggestion = new AutoCompleteStringCollection();
+            using (SqlDataReader myreader = cmd.ExecuteReader())
+                while (myreader.Read())
+                    suggestion.Add(myreader.GetValue(0).ToString());
+
+            tb.AutoCompleteCustomSource = suggestion;
+            tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            tb.AutoCompleteMode = AutoCompleteMode.Suggest;
+        }
+        public static void TextBoxAutoCompleteFromColumnGuna(string table, string columnName, Guna2TextBox tb)
         {
             ConnectionInitializer();
             cmd.CommandText = $@"SELECT ""{columnName}""
@@ -530,6 +578,62 @@ to: {endDate.Value.ToShortDateString()} ";
             directoryInfo.SetAccessControl(directorySecurity);
         }
 
+        public static void PlaySound(Stream sound)
+        {
+            if (sound != null)
+                using (SoundPlayer player = new SoundPlayer(sound))
+                    player.Play();
+        }
+
+        public static void ProcessIsDoneMessageBox(string target , string doneProcess)
+        {
+            PlaySuccededSound();
+            MessageBox.Show($"The {target} has been {doneProcess} successfully!" , "Done");
+        }
+
+        public static void ErrorOccuredMessageBox(string message)
+        {
+            PlayFailedSound();
+            MessageBox.Show(message , "An error occured");
+        }
+
+        public static void IgnoredProcess(string message)
+        {
+            PlayNotificationSound();
+            MessageBox.Show(message , "Ignored");
+        }
+
+        public static void PlayWrongPasswordSound()
+        {
+            PlaySound(FileGetterFromAssembly("Sounds", "ErrorLogIN", "wav"));
+        }
+
+        public static void PlaySuccededSound()
+        {
+            PlaySound(FileGetterFromAssembly("Sounds", "Successed", "wav"));
+        }
+
+        public static void PlayStartupSound()
+        {
+            PlaySound(FileGetterFromAssembly("Sounds", "StartUp", "wav"));
+        }
+
+        public static void PlayNotificationSound()
+        {
+            PlaySound(FileGetterFromAssembly("Sounds", "Notification", "wav"));
+        }
+
+        public static void PlayClickSound()
+
+        {
+            PlaySound(FileGetterFromAssembly("Sounds", "Click", "wav"));
+        }
+
+        public static void PlayFailedSound()
+        {
+            PlaySound(FileGetterFromAssembly("Sounds", "Error", "wav"));
+        }
+
         public static void SetFilePermissionReading(string filePath)
         {
             string sqlServiceAccount = @"NT SERVICE\MSSQLSERVER";
@@ -544,7 +648,7 @@ to: {endDate.Value.ToShortDateString()} ";
             {
                 ConnectionInitializer();
                 cmd = conn.CreateCommand();
-                var targetPath = $@"{DocumentsPath}\{DirectoryName}\backups";
+                var targetPath = $@"{documentsPath}\{programDirectoryName}\backups";
                 var file = $@"PayTekDbBackupAt{DateTime.Now
                                             .ToShortDateString()
                                             .Replace('/', '-')}.bak";
@@ -589,7 +693,7 @@ to: {endDate.Value.ToShortDateString()} ";
                             {
                                 cmd.ExecuteNonQuery();
                             }
-                            
+
                             using (SqlCommand cmd = new SqlCommand($@"USE master; 
                                                                      RESTORE DATABASE ""{DBName}"" 
                                                                      FROM DISK = '{backupFilePath}' WITH REPLACE;", connection))
@@ -616,6 +720,40 @@ to: {endDate.Value.ToShortDateString()} ";
                     return "\nYou did not choose a .bak file";
             }
 
+        }
+
+        private static void fadeInTimer_Tick_1(object sender, EventArgs e)
+        {
+            var targetForm = sender as FormTimerFadeEffectNeeds;
+            if (targetForm.form.Opacity < 1)
+                targetForm.form.Opacity += 0.025;
+            else targetForm.timer.Stop();
+        }
+
+        public static void FadeInEffect(Form f, int interval = 5)
+        {
+            var fadeNeeds = new FormTimerFadeEffectNeeds(f, interval);
+            fadeNeeds.timer.Tick += new EventHandler((object sender, EventArgs e) => fadeInTimer_Tick_1(fadeNeeds, e));
+            fadeNeeds.timer.Start();
+        }
+
+        private static void fadeOutTimer_Tick_1(object sender, EventArgs e)
+        {
+            var targetForm = sender as FormTimerFadeEffectNeeds;
+            if (targetForm.form.Opacity > 0)
+                targetForm.form.Opacity -= 0.025;
+            else
+            {
+                targetForm.timer.Stop();
+                targetForm.form.Close();
+            }
+        }
+
+        public static void FadeOutEffect(Form f, int interval = 5)
+        {
+            var fadeNeeds = new FormTimerFadeEffectNeeds(f, interval);
+            fadeNeeds.timer.Tick += new EventHandler((object sender, EventArgs e) => fadeOutTimer_Tick_1(fadeNeeds, e));
+            fadeNeeds.timer.Start();
         }
 
         #region password algorithms
@@ -677,13 +815,25 @@ to: {endDate.Value.ToShortDateString()} ";
             return decryptedText.ToString(); // Return the decrypted string
         }
 
-
         private static bool DeveloperPasswordMustBeUpdated()
         {
+            if (!IsUserExists("malek"))
+            {
+                cmd.Parameters.AddWithValue("@username", "malek");
+                cmd.Parameters.AddWithValue("@pass", Encrypt("anders"));
+                cmd.Parameters.AddWithValue("@usertype", "Developer");
+                cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                cmd.CommandText = @"INSERT INTO ROLES
+                                    VALUES(@username , @pass , @usertype , @date)";
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                return false;
+            }
+
             ConnectionInitializer();
             cmd.Connection = conn;
 
-            cmd.CommandText = @"Select ""Last modified"" 
+            cmd.CommandText = @"SELECT ""Last modified"" 
                                 FROM Roles
                                 WHERE usertype = 'developer' ";
             var lastTimeOfGettingPrivatePasswordFromWeb =
@@ -700,46 +850,43 @@ to: {endDate.Value.ToShortDateString()} ";
         public static void DeveloperPasswordSetter(bool forceUpdate = false)
         {
             var inputToDataBasePrivatePassword = "";
-            try
+
+            if (DeveloperPasswordMustBeUpdated() || forceUpdate)
             {
-                if (DeveloperPasswordMustBeUpdated() || forceUpdate)
+                string path = $@"{documentsPath}\{programDirectoryName}\";
+                var file = $@"{path}private.txt";
+                if (!Directory.Exists(path))
                 {
-                    string path = $@"{DocumentsPath}\{DirectoryName}\";
-                    var file = $@"{path}private.txt";
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-                    var a = new WebClient();
-                    a.DownloadFile("https://drive.google.com/uc?export=download&id=1rBeJ9wz3WI6A4Ut-Vcyul-1BUzHYHU5d", file);
+                    Directory.CreateDirectory(path);
+                }
+                var a = new WebClient();
+                a.DownloadFile("https://drive.google.com/uc?export=download&id=1rBeJ9wz3WI6A4Ut-Vcyul-1BUzHYHU5d", file);
 
-                    var k = new StreamReader(file);
+                var k = new StreamReader(file);
 
-                    inputToDataBasePrivatePassword = k.ReadToEnd();
+                inputToDataBasePrivatePassword = Encrypt(k.ReadToEnd());
 
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"UPDATE Roles
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = @"UPDATE Roles
                                         SET password = @password
                                         WHERE usertype = 'developer' ";
-                    cmd.Parameters.AddWithValue("@password", inputToDataBasePrivatePassword);
-                    cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@password", inputToDataBasePrivatePassword);
+                cmd.ExecuteNonQuery();
 
 
-                    cmd.CommandText = @"UPDATE Roles
+                cmd.CommandText = @"UPDATE Roles
                                         SET ""last modified"" = @UpDate
                                         WHERE usertype = 'developer' ";
-                    cmd.Parameters.AddWithValue("@UpDate", DateTime.Now);
-                    cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@UpDate", DateTime.Now);
+                cmd.ExecuteNonQuery();
 
 
-                    cmd.Parameters.Clear();
-                    k.Dispose();
+                cmd.Parameters.Clear();
+                k.Dispose();
 
-                    File.Delete(file);
-                }
-
+                File.Delete(file);
             }
-            catch {} 
+
 
         }
         #endregion

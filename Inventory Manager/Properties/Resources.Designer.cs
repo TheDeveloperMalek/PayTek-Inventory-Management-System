@@ -63,16 +63,6 @@ namespace Inventory_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _7xm_xyz965442 {
-            get {
-                object obj = ResourceManager.GetObject("7xm.xyz965442", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap curverArrow {
             get {
                 object obj = ResourceManager.GetObject("curverArrow", resourceCulture);
@@ -86,6 +76,16 @@ namespace Inventory_Manager.Properties {
         internal static System.Drawing.Bitmap house {
             get {
                 object obj = ResourceManager.GetObject("house", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LandingImg {
+            get {
+                object obj = ResourceManager.GetObject("LandingImg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

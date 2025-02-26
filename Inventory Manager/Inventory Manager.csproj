@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>PayTek_Inventory_Management_System_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\PayTekInventoryManagementSystemLogo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
@@ -250,227 +250,314 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authorization.cs">
+    <Compile Include="MainForms\ShortcutsTable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Authorization.Designer.cs">
+    <Compile Include="MainForms\ShortcutsTable.Designer.cs">
+      <DependentUpon>ShortcutsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Customers\AddNewCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Customers\AddNewCustomer.Designer.cs">
+      <DependentUpon>AddNewCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Customers\DeleteCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Customers\DeleteCustomer.Designer.cs">
+      <DependentUpon>DeleteCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Customers\EditCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Customers\EditCustomer.Designer.cs">
+      <DependentUpon>EditCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Roles\EditUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Roles\EditUser.Designer.cs">
+      <DependentUpon>EditUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Roles\DeleteUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Roles\DeleteUser.Designer.cs">
+      <DependentUpon>DeleteUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Roles\AddNewUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Roles\AddNewUser.Designer.cs">
+      <DependentUpon>AddNewUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForms\Authorization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForms\Authorization.Designer.cs">
       <DependentUpon>Authorization.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangeUserPassword.cs">
+    <Compile Include="MainForms\ChangeUserPassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeUserPassword.Designer.cs">
+    <Compile Include="MainForms\ChangeUserPassword.Designer.cs">
       <DependentUpon>ChangeUserPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomerDataSet.Designer.cs">
+    <Compile Include="DBTemplate\CustomerDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CustomerDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="EncryptorDecryptor.cs">
+    <Compile Include="MainForms\EncryptorDecryptor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EncryptorDecryptor.Designer.cs">
+    <Compile Include="MainForms\EncryptorDecryptor.Designer.cs">
       <DependentUpon>EncryptorDecryptor.cs</DependentUpon>
     </Compile>
-    <Compile Include="InventoryReportDataSet.cs">
+    <Compile Include="DBTemplate\InventoryReportDataSet.cs">
       <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="InventoryReportDataSet.Designer.cs">
+    <Compile Include="DBTemplate\InventoryReportDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ProductDataSet.Designer.cs">
+    <Compile Include="DBTemplate\ProductDataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ProductReportDataSet1.Designer.cs">
+    <Compile Include="DBTemplate\ProductReportDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProductReportDataSet1.xsd</DependentUpon>
+      <DependentUpon>ProductReportDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="PurchaseDataSet.Designer.cs">
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DBTemplate\PurchaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Purchases.cs">
+    <Compile Include="MainForms\Purchases.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchases.Designer.cs">
+    <Compile Include="MainForms\Purchases.Designer.cs">
       <DependentUpon>Purchases.cs</DependentUpon>
     </Compile>
-    <Compile Include="Roles.cs">
+    <Compile Include="MainForms\Roles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Roles.Designer.cs">
+    <Compile Include="MainForms\Roles.Designer.cs">
       <DependentUpon>Roles.cs</DependentUpon>
     </Compile>
-    <Compile Include="RolesDataSet.Designer.cs">
+    <Compile Include="DBTemplate\RolesDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RolesDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SaleDataSet.Designer.cs">
+    <Compile Include="DBTemplate\SaleDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SaleDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Shared.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SupplierDataSet.Designer.cs">
+    <Compile Include="Shared.cs" />
+    <Compile Include="DBTemplate\SupplierDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SupplierDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Suppliers.cs">
+    <Compile Include="MainForms\Suppliers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Suppliers.Designer.cs">
+    <Compile Include="MainForms\Suppliers.Designer.cs">
       <DependentUpon>Suppliers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Terminal.cs">
+    <Compile Include="MainForms\Terminal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Terminal.Designer.cs">
+    <Compile Include="MainForms\Terminal.Designer.cs">
       <DependentUpon>Terminal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Homepage.cs">
+    <Compile Include="MainForms\Homepage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Homepage.Designer.cs">
+    <Compile Include="MainForms\Homepage.Designer.cs">
       <DependentUpon>Homepage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Customers.cs">
+    <Compile Include="MainForms\Customers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Customers.Designer.cs">
+    <Compile Include="MainForms\Customers.Designer.cs">
       <DependentUpon>Customers.cs</DependentUpon>
     </Compile>
-    <Compile Include="InventoryReport.cs">
+    <Compile Include="MainForms\InventoryReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InventoryReport.Designer.cs">
+    <Compile Include="MainForms\InventoryReport.Designer.cs">
       <DependentUpon>InventoryReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductsReport.cs">
+    <Compile Include="MainForms\ProductsReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProductsReport.Designer.cs">
+    <Compile Include="MainForms\ProductsReport.Designer.cs">
       <DependentUpon>ProductsReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Products.cs">
+    <Compile Include="MainForms\Products.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Products.Designer.cs">
+    <Compile Include="MainForms\Products.Designer.cs">
       <DependentUpon>Products.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales.cs">
+    <Compile Include="MainForms\Sales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sales.Designer.cs">
+    <Compile Include="MainForms\Sales.Designer.cs">
       <DependentUpon>Sales.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Authorization.resx">
+    <Compile Include="SubForms\Suppliers\AddNewSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Suppliers\AddNewSupplier.Designer.cs">
+      <DependentUpon>AddNewSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Suppliers\DeleteSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Suppliers\DeleteSupplier.Designer.cs">
+      <DependentUpon>DeleteSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Suppliers\EditSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Suppliers\EditSupplier.Designer.cs">
+      <DependentUpon>EditSupplier.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainForms\ShortcutsTable.resx">
+      <DependentUpon>ShortcutsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Customers\AddNewCustomer.resx">
+      <DependentUpon>AddNewCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Customers\DeleteCustomer.resx">
+      <DependentUpon>DeleteCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Customers\EditCustomer.resx">
+      <DependentUpon>EditCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Roles\EditUser.resx">
+      <DependentUpon>EditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Roles\DeleteUser.resx">
+      <DependentUpon>DeleteUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Roles\AddNewUser.resx">
+      <DependentUpon>AddNewUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForms\Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangeUserPassword.resx">
+    <EmbeddedResource Include="MainForms\ChangeUserPassword.resx">
       <DependentUpon>ChangeUserPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncryptorDecryptor.resx">
+    <EmbeddedResource Include="MainForms\EncryptorDecryptor.resx">
       <DependentUpon>EncryptorDecryptor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchases.resx">
+    <EmbeddedResource Include="MainForms\Purchases.resx">
       <DependentUpon>Purchases.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Roles.resx">
+    <EmbeddedResource Include="MainForms\Roles.resx">
       <DependentUpon>Roles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Suppliers.resx">
+    <EmbeddedResource Include="MainForms\Suppliers.resx">
       <DependentUpon>Suppliers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Terminal.resx">
+    <EmbeddedResource Include="MainForms\Terminal.resx">
       <DependentUpon>Terminal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Homepage.resx">
+    <EmbeddedResource Include="MainForms\Homepage.resx">
       <DependentUpon>Homepage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Customers.resx">
+    <EmbeddedResource Include="MainForms\Customers.resx">
       <DependentUpon>Customers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InventoryReport.resx">
+    <EmbeddedResource Include="MainForms\InventoryReport.resx">
       <DependentUpon>InventoryReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProductsReport.resx">
+    <EmbeddedResource Include="MainForms\ProductsReport.resx">
       <DependentUpon>ProductsReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Products.resx">
+    <EmbeddedResource Include="MainForms\Products.resx">
       <DependentUpon>Products.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales.resx">
+    <EmbeddedResource Include="MainForms\Sales.resx">
       <DependentUpon>Sales.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="CustomerDataSet.xsc">
+    <EmbeddedResource Include="SubForms\Suppliers\AddNewSupplier.resx">
+      <DependentUpon>AddNewSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Suppliers\DeleteSupplier.resx">
+      <DependentUpon>DeleteSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Suppliers\EditSupplier.resx">
+      <DependentUpon>EditSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DBTemplate\CustomerDataSet.xsc">
       <DependentUpon>CustomerDataSet.xsd</DependentUpon>
     </None>
-    <None Include="CustomerDataSet.xsd">
+    <None Include="DBTemplate\CustomerDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>CustomerDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="CustomerDataSet.xss">
+    <None Include="DBTemplate\CustomerDataSet.xss">
       <DependentUpon>CustomerDataSet.xsd</DependentUpon>
     </None>
-    <None Include="InventoryReportDataSet.xsc">
+    <None Include="DBTemplate\InventoryReportDataSet.xsc">
       <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
     </None>
-    <None Include="InventoryReportDataSet.xsd">
+    <None Include="DBTemplate\InventoryReportDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>InventoryReportDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="InventoryReportDataSet.xss">
+    <None Include="DBTemplate\InventoryReportDataSet.xss">
       <DependentUpon>InventoryReportDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="ProductDataSet.xsc">
+    <None Include="DBTemplate\ProductDataSet.xsc">
       <DependentUpon>ProductDataSet.xsd</DependentUpon>
     </None>
-    <None Include="ProductDataSet.xsd">
+    <None Include="DBTemplate\ProductDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ProductDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProductDataSet2.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ProductDataSet.xss">
+    <None Include="DBTemplate\ProductDataSet.xss">
       <DependentUpon>ProductDataSet.xsd</DependentUpon>
     </None>
-    <None Include="ProductReportDataSet1.xsc">
-      <DependentUpon>ProductReportDataSet1.xsd</DependentUpon>
+    <None Include="DBTemplate\ProductReportDataSet.xsc">
+      <DependentUpon>ProductReportDataSet.xsd</DependentUpon>
     </None>
-    <None Include="ProductReportDataSet1.xsd">
+    <None Include="DBTemplate\ProductReportDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ProductReportDataSet1.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProductReportDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ProductReportDataSet1.xss">
-      <DependentUpon>ProductReportDataSet1.xsd</DependentUpon>
+    <None Include="DBTemplate\ProductReportDataSet.xss">
+      <DependentUpon>ProductReportDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Properties\DataSources\Product.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -480,48 +567,48 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="PurchaseDataSet.xsc">
+    <None Include="DBTemplate\PurchaseDataSet.xsc">
       <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
     </None>
-    <None Include="PurchaseDataSet.xsd">
+    <None Include="DBTemplate\PurchaseDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>PurchaseDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="PurchaseDataSet.xss">
+    <None Include="DBTemplate\PurchaseDataSet.xss">
       <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
     </None>
-    <None Include="RolesDataSet.xsc">
+    <None Include="DBTemplate\RolesDataSet.xsc">
       <DependentUpon>RolesDataSet.xsd</DependentUpon>
     </None>
-    <None Include="RolesDataSet.xsd">
+    <None Include="DBTemplate\RolesDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>RolesDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="RolesDataSet.xss">
+    <None Include="DBTemplate\RolesDataSet.xss">
       <DependentUpon>RolesDataSet.xsd</DependentUpon>
     </None>
-    <None Include="SaleDataSet.xsc">
+    <None Include="DBTemplate\SaleDataSet.xsc">
       <DependentUpon>SaleDataSet.xsd</DependentUpon>
     </None>
-    <None Include="SaleDataSet.xsd">
+    <None Include="DBTemplate\SaleDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SaleDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="SaleDataSet.xss">
+    <None Include="DBTemplate\SaleDataSet.xss">
       <DependentUpon>SaleDataSet.xsd</DependentUpon>
     </None>
-    <None Include="SupplierDataSet.xsc">
+    <None Include="DBTemplate\SupplierDataSet.xsc">
       <DependentUpon>SupplierDataSet.xsd</DependentUpon>
     </None>
-    <None Include="SupplierDataSet.xsd">
+    <None Include="DBTemplate\SupplierDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SupplierDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="SupplierDataSet.xss">
+    <None Include="DBTemplate\SupplierDataSet.xss">
       <DependentUpon>SupplierDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
@@ -529,14 +616,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\7xm.xyz965442.jpg" />
+    <EmbeddedResource Include="Sounds\Click.wav" />
+    <EmbeddedResource Include="Sounds\Notification.wav" />
+    <EmbeddedResource Include="Sounds\StartUp.wav" />
+    <EmbeddedResource Include="Sounds\Error.wav" />
+    <EmbeddedResource Include="Sounds\Successed.wav" />
+    <EmbeddedResource Include="Sounds\ErrorLogIN.wav" />
+    <None Include="Resources\LandingImg.jpg" />
     <None Include="Resources\curverArrow.png" />
     <None Include="Resources\menu.png" />
     <None Include="Resources\house.png" />
     <EmbeddedResource Include="DBTemplate\TemplateScript.sql" />
     <EmbeddedResource Include="Icons\hide.png" />
     <EmbeddedResource Include="Icons\view.png" />
-    <Content Include="PayTek_Inventory_Management_System_Icon.ico" />
+    <Content Include="Resources\PayTekInventoryManagementSystemLogo.ico" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

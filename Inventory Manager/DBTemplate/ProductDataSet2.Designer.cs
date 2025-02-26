@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Inventory_Manager {
+namespace Inventory_Manager.DBTemplate {
     
     
     /// <summary>
@@ -201,7 +201,7 @@ namespace Inventory_Manager {
         private void InitClass() {
             this.DataSetName = "ProductDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/ProductDataSet.xsd";
+            this.Namespace = "http://tempuri.org/ProductDataSet1.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableProduct = new ProductDataTable();
@@ -749,7 +749,7 @@ namespace Inventory_Manager {
         }
     }
 }
-namespace Inventory_Manager.ProductDataSetTableAdapters {
+namespace Inventory_Manager.DBTemplate.ProductDataSetTableAdapters {
     
     
     /// <summary>

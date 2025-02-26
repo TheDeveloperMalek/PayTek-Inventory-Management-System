@@ -1,6 +1,6 @@
 USE [Public]
 GO
-/****** Object:  Table [dbo].[Customer]    Script Date: 23/01/2025 11:12:16 ص ******/
+/****** Object:  Table [dbo].[Customer]    Script Date: 25/02/2025 06:45:58 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,7 +10,7 @@ CREATE TABLE [dbo].[Customer](
 	[name] [nvarchar](50) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InventoryReport]    Script Date: 23/01/2025 11:12:16 ص ******/
+/****** Object:  Table [dbo].[InventoryReport]    Script Date: 25/02/2025 06:45:58 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,7 +23,7 @@ CREATE TABLE [dbo].[InventoryReport](
 	[date] [date] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Product]    Script Date: 23/01/2025 11:12:16 ص ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 25/02/2025 06:45:58 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -33,11 +33,11 @@ CREATE TABLE [dbo].[Product](
 	[Barcode] [int] NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
 	[Quantity] [int] NULL,
-	[Specification] [nvarchar](50) NULL,
+	[Specification] [nvarchar](max) NULL,
 	[Date] [date] NOT NULL
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProductReport]    Script Date: 23/01/2025 11:12:16 ص ******/
+/****** Object:  Table [dbo].[ProductReport]    Script Date: 25/02/2025 06:45:58 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -51,7 +51,7 @@ CREATE TABLE [dbo].[ProductReport](
 	[Date] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Purchase]    Script Date: 23/01/2025 11:12:16 ص ******/
+/****** Object:  Table [dbo].[Purchase]    Script Date: 25/02/2025 06:45:58 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -68,19 +68,19 @@ CREATE TABLE [dbo].[Purchase](
 	[Date] [date] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 23/01/2025 11:12:16 ص ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 25/02/2025 06:45:58 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Roles](
 	[Username] [nvarchar](50) NOT NULL,
-	[Password] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](max) NOT NULL,
 	[Usertype] [nvarchar](50) NOT NULL,
 	[Last modified] [date] NOT NULL
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Sale]    Script Date: 23/01/2025 11:12:16 ص ******/
+/****** Object:  Table [dbo].[Sale]    Script Date: 25/02/2025 06:45:58 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -97,7 +97,7 @@ CREATE TABLE [dbo].[Sale](
 	[Date] [date] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Supplier]    Script Date: 23/01/2025 11:12:16 ص ******/
+/****** Object:  Table [dbo].[Supplier]    Script Date: 25/02/2025 06:45:58 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +107,7 @@ CREATE TABLE [dbo].[Supplier](
 	[name] [nvarchar](50) NOT NULL
 ) ON [PRIMARY]
 GO
-INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'malek', N'100 113 103 104 117 118', N'developer', CAST(N'2025-01-23' AS Date))
+INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'malek', N'100 113 103 104 117 118', N'developer', CAST(N'2025-02-23' AS Date))
 GO
 INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'admin', N'100 103 112 108 113', N'admin', CAST(N'2025-07-01' AS Date))
 GO
