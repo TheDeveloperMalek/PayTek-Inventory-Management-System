@@ -16,6 +16,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +29,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -79,13 +79,76 @@
     <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net48\Guna.UI2.dll</HintPath>
     </Reference>
+    <Reference Include="itext.barcodes, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.bouncy-castle-connector, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.bouncy-castle-connector.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.commons, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.commons.9.1.0\lib\net461\itext.commons.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfua, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.pdfua.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.9.1.0\lib\net461\itext.svg.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.HashCode, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.HashCode.6.0.0\lib\net462\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=9.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.9.0.3\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=9.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.9.0.3\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.9.0.3\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RBush, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RBush.4.0.0\lib\net47\RBush.dll</HintPath>
@@ -99,8 +162,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -111,8 +174,8 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.9.0.3\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
@@ -164,8 +227,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Management" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.2\lib\net462\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
@@ -178,8 +241,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
     </Reference>
     <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
@@ -190,8 +253,8 @@
       <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.1\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
@@ -233,6 +296,9 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.2\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -250,58 +316,106 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForms\ShortcutsTable.cs">
+    <Compile Include="Forms\MainForms\Preferences.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\ShortcutsTable.Designer.cs">
+    <Compile Include="Forms\MainForms\Preferences.Designer.cs">
+      <DependentUpon>Preferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForms\SalesLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForms\SalesLog.Designer.cs">
+      <DependentUpon>SalesLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForms\ShortcutsTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForms\ShortcutsTable.Designer.cs">
       <DependentUpon>ShortcutsTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Customers\AddNewCustomer.cs">
+    <Compile Include="Forms\SubForms\Customers\AddNewCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Customers\AddNewCustomer.Designer.cs">
+    <Compile Include="Forms\SubForms\Customers\AddNewCustomer.Designer.cs">
       <DependentUpon>AddNewCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Customers\DeleteCustomer.cs">
+    <Compile Include="Forms\SubForms\Customers\DeleteCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Customers\DeleteCustomer.Designer.cs">
+    <Compile Include="Forms\SubForms\Customers\DeleteCustomer.Designer.cs">
       <DependentUpon>DeleteCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Customers\EditCustomer.cs">
+    <Compile Include="Forms\SubForms\Customers\EditCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Customers\EditCustomer.Designer.cs">
+    <Compile Include="Forms\SubForms\Customers\EditCustomer.Designer.cs">
       <DependentUpon>EditCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Roles\EditUser.cs">
+    <Compile Include="Forms\SubForms\Products\AddNewProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Roles\EditUser.Designer.cs">
+    <Compile Include="Forms\SubForms\Products\AddNewProduct.Designer.cs">
+      <DependentUpon>AddNewProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Products\DeleteProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Products\DeleteProduct.Designer.cs">
+      <DependentUpon>DeleteProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Products\EditProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Products\EditProduct.Designer.cs">
+      <DependentUpon>EditProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Purchases\AddNewPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Purchases\AddNewPurchase.Designer.cs">
+      <DependentUpon>AddNewPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Purchases\DeletePurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Purchases\DeletePurchase.Designer.cs">
+      <DependentUpon>DeletePurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Purchases\EditPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Purchases\EditPurchase.Designer.cs">
+      <DependentUpon>EditPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Roles\EditUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Roles\EditUser.Designer.cs">
       <DependentUpon>EditUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Roles\DeleteUser.cs">
+    <Compile Include="Forms\SubForms\Roles\DeleteUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Roles\DeleteUser.Designer.cs">
+    <Compile Include="Forms\SubForms\Roles\DeleteUser.Designer.cs">
       <DependentUpon>DeleteUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Roles\AddNewUser.cs">
+    <Compile Include="Forms\SubForms\Roles\AddNewUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Roles\AddNewUser.Designer.cs">
+    <Compile Include="Forms\SubForms\Roles\AddNewUser.Designer.cs">
       <DependentUpon>AddNewUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\Authorization.cs">
+    <Compile Include="Forms\MainForms\Authorization.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Authorization.Designer.cs">
+    <Compile Include="Forms\MainForms\Authorization.Designer.cs">
       <DependentUpon>Authorization.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\ChangeUserPassword.cs">
+    <Compile Include="Forms\MainForms\ChangeUserPassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\ChangeUserPassword.Designer.cs">
+    <Compile Include="Forms\MainForms\ChangeUserPassword.Designer.cs">
       <DependentUpon>ChangeUserPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="DBTemplate\CustomerDataSet.Designer.cs">
@@ -309,10 +423,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CustomerDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\EncryptorDecryptor.cs">
+    <Compile Include="Forms\MainForms\EncryptorDecryptor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\EncryptorDecryptor.Designer.cs">
+    <Compile Include="Forms\MainForms\EncryptorDecryptor.Designer.cs">
       <DependentUpon>EncryptorDecryptor.cs</DependentUpon>
     </Compile>
     <Compile Include="DBTemplate\InventoryReportDataSet.cs">
@@ -333,6 +447,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductReportDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SubForms\SalesLog\AddNewSaleLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\SalesLog\AddNewSaleLog.Designer.cs">
+      <DependentUpon>AddNewSaleLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\SalesLog\DeleteSaleLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\SalesLog\DeleteSaleLog.Designer.cs">
+      <DependentUpon>DeleteSaleLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\SalesLog\EditSaleLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\SalesLog\EditSaleLog.Designer.cs">
+      <DependentUpon>EditSaleLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -343,16 +475,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\Purchases.cs">
+    <Compile Include="Forms\MainForms\Purchases.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Purchases.Designer.cs">
+    <Compile Include="Forms\MainForms\Purchases.Designer.cs">
       <DependentUpon>Purchases.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\Roles.cs">
+    <Compile Include="Forms\MainForms\Roles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Roles.Designer.cs">
+    <Compile Include="Forms\MainForms\Roles.Designer.cs">
       <DependentUpon>Roles.cs</DependentUpon>
     </Compile>
     <Compile Include="DBTemplate\RolesDataSet.Designer.cs">
@@ -365,152 +497,217 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SaleDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DBTemplate\SaleLogDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaleLogDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Shared.cs" />
     <Compile Include="DBTemplate\SupplierDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SupplierDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\Suppliers.cs">
+    <Compile Include="Forms\MainForms\Suppliers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Suppliers.Designer.cs">
+    <Compile Include="Forms\MainForms\Suppliers.Designer.cs">
       <DependentUpon>Suppliers.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\Terminal.cs">
+    <Compile Include="Forms\MainForms\Terminal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Terminal.Designer.cs">
+    <Compile Include="Forms\MainForms\Terminal.Designer.cs">
       <DependentUpon>Terminal.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\Homepage.cs">
+    <Compile Include="Forms\MainForms\Homepage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Homepage.Designer.cs">
+    <Compile Include="Forms\MainForms\Homepage.Designer.cs">
       <DependentUpon>Homepage.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\Customers.cs">
+    <Compile Include="Forms\MainForms\Customers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Customers.Designer.cs">
+    <Compile Include="Forms\MainForms\Customers.Designer.cs">
       <DependentUpon>Customers.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\InventoryReport.cs">
+    <Compile Include="Forms\MainForms\InventoryReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\InventoryReport.Designer.cs">
+    <Compile Include="Forms\MainForms\InventoryReport.Designer.cs">
       <DependentUpon>InventoryReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\ProductsReport.cs">
+    <Compile Include="Forms\MainForms\ProductsReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\ProductsReport.Designer.cs">
+    <Compile Include="Forms\MainForms\ProductsReport.Designer.cs">
       <DependentUpon>ProductsReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainForms\Products.cs">
+    <Compile Include="Forms\MainForms\Products.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Products.Designer.cs">
+    <Compile Include="Forms\MainForms\Products.Designer.cs">
       <DependentUpon>Products.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForms\Sales.cs">
+    <Compile Include="Forms\MainForms\Sales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForms\Sales.Designer.cs">
+    <Compile Include="Forms\MainForms\Sales.Designer.cs">
       <DependentUpon>Sales.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Suppliers\AddNewSupplier.cs">
+    <Compile Include="Forms\SubForms\Sales\AddNewSale.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Suppliers\AddNewSupplier.Designer.cs">
+    <Compile Include="Forms\SubForms\Sales\AddNewSale.Designer.cs">
+      <DependentUpon>AddNewSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Sales\DeleteSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Sales\DeleteSale.Designer.cs">
+      <DependentUpon>DeleteSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Sales\EditSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Sales\EditSale.Designer.cs">
+      <DependentUpon>EditSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubForms\Suppliers\AddNewSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubForms\Suppliers\AddNewSupplier.Designer.cs">
       <DependentUpon>AddNewSupplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Suppliers\DeleteSupplier.cs">
+    <Compile Include="Forms\SubForms\Suppliers\DeleteSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Suppliers\DeleteSupplier.Designer.cs">
+    <Compile Include="Forms\SubForms\Suppliers\DeleteSupplier.Designer.cs">
       <DependentUpon>DeleteSupplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForms\Suppliers\EditSupplier.cs">
+    <Compile Include="Forms\SubForms\Suppliers\EditSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForms\Suppliers\EditSupplier.Designer.cs">
+    <Compile Include="Forms\SubForms\Suppliers\EditSupplier.Designer.cs">
       <DependentUpon>EditSupplier.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainForms\ShortcutsTable.resx">
+    <EmbeddedResource Include="Forms\MainForms\Preferences.resx">
+      <DependentUpon>Preferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForms\SalesLog.resx">
+      <DependentUpon>SalesLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForms\ShortcutsTable.resx">
       <DependentUpon>ShortcutsTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Customers\AddNewCustomer.resx">
+    <EmbeddedResource Include="Forms\SubForms\Customers\AddNewCustomer.resx">
       <DependentUpon>AddNewCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Customers\DeleteCustomer.resx">
+    <EmbeddedResource Include="Forms\SubForms\Customers\DeleteCustomer.resx">
       <DependentUpon>DeleteCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Customers\EditCustomer.resx">
+    <EmbeddedResource Include="Forms\SubForms\Customers\EditCustomer.resx">
       <DependentUpon>EditCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Roles\EditUser.resx">
+    <EmbeddedResource Include="Forms\SubForms\Products\AddNewProduct.resx">
+      <DependentUpon>AddNewProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Products\DeleteProduct.resx">
+      <DependentUpon>DeleteProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Products\EditProduct.resx">
+      <DependentUpon>EditProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Purchases\AddNewPurchase.resx">
+      <DependentUpon>AddNewPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Purchases\DeletePurchase.resx">
+      <DependentUpon>DeletePurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Purchases\EditPurchase.resx">
+      <DependentUpon>EditPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Roles\EditUser.resx">
       <DependentUpon>EditUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Roles\DeleteUser.resx">
+    <EmbeddedResource Include="Forms\SubForms\Roles\DeleteUser.resx">
       <DependentUpon>DeleteUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Roles\AddNewUser.resx">
+    <EmbeddedResource Include="Forms\SubForms\Roles\AddNewUser.resx">
       <DependentUpon>AddNewUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Authorization.resx">
+    <EmbeddedResource Include="Forms\MainForms\Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\ChangeUserPassword.resx">
+    <EmbeddedResource Include="Forms\MainForms\ChangeUserPassword.resx">
       <DependentUpon>ChangeUserPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\EncryptorDecryptor.resx">
+    <EmbeddedResource Include="Forms\MainForms\EncryptorDecryptor.resx">
       <DependentUpon>EncryptorDecryptor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Purchases.resx">
+    <EmbeddedResource Include="Forms\MainForms\Purchases.resx">
       <DependentUpon>Purchases.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Roles.resx">
+    <EmbeddedResource Include="Forms\MainForms\Roles.resx">
       <DependentUpon>Roles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Suppliers.resx">
+    <EmbeddedResource Include="Forms\MainForms\Suppliers.resx">
       <DependentUpon>Suppliers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Terminal.resx">
+    <EmbeddedResource Include="Forms\MainForms\Terminal.resx">
       <DependentUpon>Terminal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Homepage.resx">
+    <EmbeddedResource Include="Forms\MainForms\Homepage.resx">
       <DependentUpon>Homepage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Customers.resx">
+    <EmbeddedResource Include="Forms\MainForms\Customers.resx">
       <DependentUpon>Customers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\InventoryReport.resx">
+    <EmbeddedResource Include="Forms\MainForms\InventoryReport.resx">
       <DependentUpon>InventoryReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\ProductsReport.resx">
+    <EmbeddedResource Include="Forms\MainForms\ProductsReport.resx">
       <DependentUpon>ProductsReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\SalesLog\AddNewSaleLog.resx">
+      <DependentUpon>AddNewSaleLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\SalesLog\DeleteSaleLog.resx">
+      <DependentUpon>DeleteSaleLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\SalesLog\EditSaleLog.resx">
+      <DependentUpon>EditSaleLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Products.resx">
+    <EmbeddedResource Include="Forms\MainForms\Products.resx">
       <DependentUpon>Products.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForms\Sales.resx">
+    <EmbeddedResource Include="Forms\MainForms\Sales.resx">
       <DependentUpon>Sales.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Suppliers\AddNewSupplier.resx">
+    <EmbeddedResource Include="Forms\SubForms\Sales\AddNewSale.resx">
+      <DependentUpon>AddNewSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Sales\DeleteSale.resx">
+      <DependentUpon>DeleteSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Sales\EditSale.resx">
+      <DependentUpon>EditSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubForms\Suppliers\AddNewSupplier.resx">
       <DependentUpon>AddNewSupplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Suppliers\DeleteSupplier.resx">
+    <EmbeddedResource Include="Forms\SubForms\Suppliers\DeleteSupplier.resx">
       <DependentUpon>DeleteSupplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Suppliers\EditSupplier.resx">
+    <EmbeddedResource Include="Forms\SubForms\Suppliers\EditSupplier.resx">
       <DependentUpon>EditSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DBTemplate\CustomerDataSet.xsc">
@@ -578,6 +775,17 @@
     <None Include="DBTemplate\PurchaseDataSet.xss">
       <DependentUpon>PurchaseDataSet.xsd</DependentUpon>
     </None>
+    <None Include="DBTemplate\SupplierDataSet.xsc">
+      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DBTemplate\SupplierDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SupplierDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DBTemplate\SupplierDataSet.xss">
+      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    </None>
     <None Include="DBTemplate\RolesDataSet.xsc">
       <DependentUpon>RolesDataSet.xsd</DependentUpon>
     </None>
@@ -600,35 +808,37 @@
     <None Include="DBTemplate\SaleDataSet.xss">
       <DependentUpon>SaleDataSet.xsd</DependentUpon>
     </None>
-    <None Include="DBTemplate\SupplierDataSet.xsc">
-      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    <None Include="DBTemplate\SaleLogDataSet.xsc">
+      <DependentUpon>SaleLogDataSet.xsd</DependentUpon>
     </None>
-    <None Include="DBTemplate\SupplierDataSet.xsd">
+    <None Include="DBTemplate\SaleLogDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SupplierDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>SaleLogDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="DBTemplate\SupplierDataSet.xss">
-      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    <None Include="DBTemplate\SaleLogDataSet.xss">
+      <DependentUpon>SaleLogDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Sounds\Click.wav" />
-    <EmbeddedResource Include="Sounds\Notification.wav" />
-    <EmbeddedResource Include="Sounds\StartUp.wav" />
-    <EmbeddedResource Include="Sounds\Error.wav" />
-    <EmbeddedResource Include="Sounds\Successed.wav" />
-    <EmbeddedResource Include="Sounds\ErrorLogIN.wav" />
+    <EmbeddedResource Include="Resources\Sounds\Click.wav" />
+    <EmbeddedResource Include="Resources\Sounds\Notification.wav" />
+    <EmbeddedResource Include="Resources\Sounds\StartUp.wav" />
+    <EmbeddedResource Include="Resources\Sounds\Error.wav" />
+    <EmbeddedResource Include="Resources\Sounds\Successed.wav" />
+    <EmbeddedResource Include="Resources\Sounds\ErrorLogIN.wav" />
+    <EmbeddedResource Include="Resources\Fonts\times.ttf" />
     <None Include="Resources\LandingImg.jpg" />
     <None Include="Resources\curverArrow.png" />
     <None Include="Resources\menu.png" />
     <None Include="Resources\house.png" />
     <EmbeddedResource Include="DBTemplate\TemplateScript.sql" />
-    <EmbeddedResource Include="Icons\hide.png" />
-    <EmbeddedResource Include="Icons\view.png" />
+    <EmbeddedResource Include="Resources\Icons\hide.png" />
+    <EmbeddedResource Include="Resources\Icons\view.png" />
+    <EmbeddedResource Include="Resources\Icons\levant_logo.jpg" />
     <Content Include="Resources\PayTekInventoryManagementSystemLogo.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -656,7 +866,9 @@
     <Error Condition="!Exists('..\packages\Fody.6.9.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.9.1\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
   </Target>
   <Import Project="..\packages\Fody.6.9.1\build\Fody.targets" Condition="Exists('..\packages\Fody.6.9.1\build\Fody.targets')" />
   <Import Project="..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />
+  <Import Project="..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
 </Project>

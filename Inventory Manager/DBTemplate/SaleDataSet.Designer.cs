@@ -295,6 +295,8 @@ namespace Inventory_Manager.DBTemplate {
             
             private global::System.Data.DataColumn columnPrice;
             
+            private global::System.Data.DataColumn columnTotal_Price;
+            
             private global::System.Data.DataColumn columnDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -396,6 +398,14 @@ namespace Inventory_Manager.DBTemplate {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Total_PriceColumn {
+                get {
+                    return this.columnTotal_Price;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn DateColumn {
                 get {
                     return this.columnDate;
@@ -439,7 +449,7 @@ namespace Inventory_Manager.DBTemplate {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public SaleRow AddSaleRow(int Customer_ID, string Customer_Name, int Product_ID, int Product_Barcode, string Product_Name, int Quantity, int Price, System.DateTime Date) {
+            public SaleRow AddSaleRow(int Customer_ID, string Customer_Name, int Product_ID, int Product_Barcode, string Product_Name, int Quantity, int Price, int Total_Price, System.DateTime Date) {
                 SaleRow rowSaleRow = ((SaleRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -450,6 +460,7 @@ namespace Inventory_Manager.DBTemplate {
                         Product_Name,
                         Quantity,
                         Price,
+                        Total_Price,
                         Date};
                 rowSaleRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSaleRow);
@@ -481,6 +492,7 @@ namespace Inventory_Manager.DBTemplate {
                 this.columnProduct_Name = base.Columns["Product Name"];
                 this.columnQuantity = base.Columns["Quantity"];
                 this.columnPrice = base.Columns["Price"];
+                this.columnTotal_Price = base.Columns["Total Price"];
                 this.columnDate = base.Columns["Date"];
             }
             
@@ -503,6 +515,8 @@ namespace Inventory_Manager.DBTemplate {
                 base.Columns.Add(this.columnQuantity);
                 this.columnPrice = new global::System.Data.DataColumn("Price", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPrice);
+                this.columnTotal_Price = new global::System.Data.DataColumn("Total Price", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal_Price);
                 this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDate);
                 this.columnID.AutoIncrement = true;
@@ -757,6 +771,22 @@ namespace Inventory_Manager.DBTemplate {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int Total_Price {
+                get {
+                    try {
+                        return ((int)(this[this.tableSale.Total_PriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total Price\' in table \'Sale\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSale.Total_PriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.DateTime Date {
                 get {
                     try {
@@ -793,6 +823,18 @@ namespace Inventory_Manager.DBTemplate {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetPriceNull() {
                 this[this.tableSale.PriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTotal_PriceNull() {
+                return this.IsNull(this.tableSale.Total_PriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTotal_PriceNull() {
+                this[this.tableSale.Total_PriceColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -975,22 +1017,21 @@ namespace Inventory_Manager.DBTemplate.SaleDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("Product Name", "Product Name");
             tableMapping.ColumnMappings.Add("Quantity", "Quantity");
             tableMapping.ColumnMappings.Add("Price", "Price");
+            tableMapping.ColumnMappings.Add("Total Price", "Total Price");
             tableMapping.ColumnMappings.Add("Date", "Date");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Sale] ([Customer ID], [Customer Name], [Product ID], [Product " +
-                "Barcode], [Product Name], [Quantity], [Price], [Date]) VALUES (@Customer_ID, @Cu" +
-                "stomer_Name, @Product_ID, @Product_Barcode, @Product_Name, @Quantity, @Price, @D" +
-                "ate)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Sale] ([Customer ID], [Customer Name], [Product ID], [Product Barcode], [Product Name], [Quantity], [Price], [Total Price], [Date]) VALUES (@Customer_ID, @Customer_Name, @Product_ID, @Product_Barcode, @Product_Name, @Quantity, @Price, @Total_Price, @Date)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Customer_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Customer ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Customer_Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Customer Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Customer_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Customer Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_Barcode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Barcode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Product Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Total_Price", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Total Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -1008,7 +1049,7 @@ namespace Inventory_Manager.DBTemplate.SaleDataSetTableAdapters {
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, [Customer ID], [Customer Name], [Product ID], [Product Barcode], [Prod" +
-                "uct Name], Quantity, Price, Date FROM dbo.Sale";
+                "uct Name], Quantity, Price, [Total Price], Date FROM dbo.Sale";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1069,7 +1110,7 @@ namespace Inventory_Manager.DBTemplate.SaleDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int Customer_ID, string Customer_Name, int Product_ID, int Product_Barcode, string Product_Name, global::System.Nullable<int> Quantity, global::System.Nullable<int> Price, global::System.Nullable<global::System.DateTime> Date) {
+        public virtual int Insert(int Customer_ID, string Customer_Name, int Product_ID, int Product_Barcode, string Product_Name, global::System.Nullable<int> Quantity, global::System.Nullable<int> Price, global::System.Nullable<int> Total_Price, global::System.Nullable<global::System.DateTime> Date) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Customer_ID));
             if ((Customer_Name == null)) {
                 throw new global::System.ArgumentNullException("Customer_Name");
@@ -1097,11 +1138,17 @@ namespace Inventory_Manager.DBTemplate.SaleDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((Date.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(Date.Value));
+            if ((Total_Price.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(Total_Price.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Date.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((System.DateTime)(Date.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 

@@ -438,7 +438,7 @@ namespace Inventory_Manager.DBTemplate {
                 this.columnUsername.AllowDBNull = false;
                 this.columnUsername.MaxLength = 50;
                 this.columnPassword.AllowDBNull = false;
-                this.columnPassword.MaxLength = 50;
+                this.columnPassword.MaxLength = 2147483647;
                 this.columnUsertype.AllowDBNull = false;
                 this.columnUsertype.MaxLength = 50;
                 this.columnLast_modified.AllowDBNull = false;
