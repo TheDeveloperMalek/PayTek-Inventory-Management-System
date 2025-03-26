@@ -33,7 +33,7 @@
             this.pdfcompanyheader = new System.Windows.Forms.Label();
             this.pdfpaymentinfo = new System.Windows.Forms.Label();
             this.PaymentMethodRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.PdfDate = new System.Windows.Forms.Label();
+            this.WordDate = new System.Windows.Forms.Label();
             this.PDFDateTimePicker = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.EditPrefBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
@@ -80,16 +80,16 @@
             this.PaymentMethodRichTextBox.TabIndex = 5;
             this.PaymentMethodRichTextBox.Text = "";
             // 
-            // PdfDate
+            // WordDate
             // 
-            this.PdfDate.AutoSize = true;
-            this.PdfDate.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PdfDate.ForeColor = System.Drawing.Color.White;
-            this.PdfDate.Location = new System.Drawing.Point(410, 9);
-            this.PdfDate.Name = "PdfDate";
-            this.PdfDate.Size = new System.Drawing.Size(106, 24);
-            this.PdfDate.TabIndex = 8;
-            this.PdfDate.Text = "PDF Date";
+            this.WordDate.AutoSize = true;
+            this.WordDate.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WordDate.ForeColor = System.Drawing.Color.White;
+            this.WordDate.Location = new System.Drawing.Point(410, 9);
+            this.WordDate.Name = "WordDate";
+            this.WordDate.Size = new System.Drawing.Size(118, 24);
+            this.WordDate.TabIndex = 8;
+            this.WordDate.Text = "Word Date";
             // 
             // PDFDateTimePicker
             // 
@@ -141,7 +141,7 @@
             this.ClientSize = new System.Drawing.Size(923, 516);
             this.Controls.Add(this.EditPrefBtn);
             this.Controls.Add(this.PDFDateTimePicker);
-            this.Controls.Add(this.PdfDate);
+            this.Controls.Add(this.WordDate);
             this.Controls.Add(this.pdfpaymentinfo);
             this.Controls.Add(this.PaymentMethodRichTextBox);
             this.Controls.Add(this.pdfcompanyheader);
@@ -162,7 +162,7 @@
         private System.Windows.Forms.Label pdfcompanyheader;
         private System.Windows.Forms.Label pdfpaymentinfo;
         private System.Windows.Forms.RichTextBox PaymentMethodRichTextBox;
-        private System.Windows.Forms.Label PdfDate;
+        private System.Windows.Forms.Label WordDate;
         private Guna.UI2.WinForms.Guna2DateTimePicker PDFDateTimePicker;
         private Guna.UI2.WinForms.Guna2Button EditPrefBtn;
     }

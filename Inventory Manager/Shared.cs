@@ -13,10 +13,9 @@ using System.Text;
 using System.Windows.Forms;
 using static System.Math;
 using System.Media;
-using iTextSharp.text.pdf;
 using System.Collections.Generic;
-using iTextSharp.text;
 using Inventory_Manager.Forms.MainForms;
+using Microsoft.Office.Interop.Word;
 
 namespace Inventory_Manager
 {
@@ -30,7 +29,7 @@ namespace Inventory_Manager
             form = f;
         }
     }
-    public enum UserType
+    enum UserType
     {
         Developer,
         Admin,
@@ -38,7 +37,6 @@ namespace Inventory_Manager
     }
     internal class Shared
     {
-
         public static SqlConnection conn = new SqlConnection();
         private static SqlCommand cmd = new SqlCommand();
         #region Usertype And Password
@@ -65,17 +63,16 @@ namespace Inventory_Manager
         public static bool isJustVisibleForNonUserType = false;
         #endregion
 
-        #region Sale PDF Variables
-        static string pdfHeaderTitle = "";
-        static readonly BaseFont TimesNewRomanFont = Shared.LoadFontFromAssembly("times.ttf");
+        #region Sale Word Variables
+        static string customerName = "";
+        static string headertitle = "";
         static double totalBill = 0;
         static decimal discountPercentage = 0;
-        static string customerName = "";
         static readonly List<string> customersNames = new List<string>() { };
 
         #endregion
 
-        #region Sale PDF Functions
+        #region Sale Word Functions
 
         static decimal OfferDialog(string text, string caption)
         {
@@ -99,7 +96,7 @@ namespace Inventory_Manager
             return prompt.ShowDialog() == DialogResult.OK ? numericUpDown.Value : 0;
         }
 
-        static bool IsDatagridValidForPrintingPdf(DataGridView dataGridView1)
+        static bool IsDatagridValidForPrintingWord(DataGridView dataGridView1)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
                 foreach (DataGridViewCell cell in row.Cells)
@@ -119,164 +116,254 @@ namespace Inventory_Manager
 
             return true;
         }
-        public static void printSale(DataGridView dt, string headerTitle)
+        public static void PrintSale(DataGridView dt, string headerTitle)
         {
-            pdfHeaderTitle = headerTitle;
-            if (!IsDatagridValidForPrintingPdf(dt)) return;
-            customerName = customersNames[0];
-            DialogResult offerMake = MessageBox.Show("Do you want to make an offer?", "Make Offer", MessageBoxButtons.YesNo);
+            if (!IsDatagridValidForPrintingWord(dt)) return;
+             customerName = customersNames[0];
+            DialogResult offerMake = MessageBox.Show("Do you want to make a discount?", "Make discount", MessageBoxButtons.YesNo);
             if (offerMake == DialogResult.Yes)
-                discountPercentage = OfferDialog("Enter the value:", "Make Offer");
-            var svf = new SaveFileDialog();
-            svf.Filter = "PDF (*.pdf)|*pdf";
-            svf.FileName = $"فاتورة {customerName}.pdf";
+                discountPercentage = OfferDialog("Enter the value:", "Make Discount");
+            var svf = new SaveFileDialog { Filter = "Word (*.docx)|*docx", FileName = $"{headerTitle} {customerName}.docx" };
             if (svf.ShowDialog() == DialogResult.OK)
                 try
                 {
-                    if (Path.GetExtension(svf.FileName) != ".pdf")
-                        svf.FileName += ".pdf";
-                    CreatePdf(svf.FileName, dt);
+                    if (Path.GetExtension(svf.FileName) != ".docx")
+                        svf.FileName += ".docx";
+                    var word = new Microsoft.Office.Interop.Word.Application();
+                    Document doc = word.Documents.Add();
+                    headertitle = headerTitle;
+                    CreateWord(word , doc , dt);
+                    doc.SaveAs2(svf.FileName);
+
+                    string targetCopyFolderPath = $"{folderPath}";
+                    string CurrentSNO = "";
+                    if(headertitle == "عرض")
+                    {
+                         CurrentSNO = Preferences.GetPrefValue("CurrentOfferNO");
+                         targetCopyFolderPath+= @"\العروض";
+                        if (!Directory.Exists(targetCopyFolderPath))
+                            Directory.CreateDirectory(targetCopyFolderPath);
+                  Preferences.SetPrefValue("CurrentOfferNO", (int.Parse(CurrentSNO) + 1).ToString("D4"));
+                    }
+                    else
+                    {
+                        CurrentSNO = Preferences.GetPrefValue("CurrentSaleNO");
+                        targetCopyFolderPath += @"\الفواتير";
+                        if (!Directory.Exists(targetCopyFolderPath))
+                            Directory.CreateDirectory(targetCopyFolderPath);
+                        Preferences.SetPrefValue("CurrentSaleNO", (int.Parse(CurrentSNO) + 1).ToString("D4"));
+                    }
+                    var wordCopyFilePath = $@"{targetCopyFolderPath}\{headertitle} {customerName} NO{CurrentSNO}.docx";
+                    doc.SaveAs2(wordCopyFilePath);
                     discountPercentage = 0;
                     totalBill = 0;
                     customerName = "";
+                    headertitle = "";
                     customersNames.Clear();
+                    doc.Close();
                     ProcessIsDoneMessageBox("bill", "printed");
+                    Preferences.SetPrefValue("WordDate", DateTime.Now.ToShortDateString());
                 }
                 catch (Exception exc)
                 {
-                    Shared.ErrorOccuredMessageBox(exc.Message);
+                    ErrorOccuredMessageBox(exc.Message);
                 }
         }
 
-        static void CreatePdf(string filePath, DataGridView dataGridView)
+        static void CreateWord(Microsoft.Office.Interop.Word.Application word, Document doc , DataGridView datatable)
         {
-            ;
-            using (var document = new Document())
-            using (var writer = PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create)))
-            {
-                document.Open();
-                AddHeader(document);
-                AddBody(document, writer, dataGridView);
-                AddFooter(document);
-                document.Close();
-            }
-        }
-        static void AddHeader(Document document)
-        {
-            PdfPTable headerTable = new PdfPTable(2) { WidthPercentage = 100 };
-            #region Image
-            Image img = Image.GetInstance(Shared.StreamMakerFromAssemblyFile("Resources.Icons", "levant_logo", "jpg"));
-            img.ScaleToFit(156f, 56f);
-            PdfPCell imageCell = new PdfPCell(img) { Border = Rectangle.NO_BORDER };
-            headerTable.AddCell(imageCell);
-            #endregion
+            double price = 0;
 
-            #region Text
-            PdfPCell companyCell = new PdfPCell(new Phrase($"{Preferences.GetPrefValue("CompanyHeader")}", new Font(TimesNewRomanFont, 14, 0, BaseColor.BLACK)))
+            #region Header
+            Range headerRange = doc.Sections[1].Headers[WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+            Table headerTable = headerRange.Tables.Add(headerRange, 1, 2);
+            headerTable.Borders.Enable = 0;
+            using (Stream stream = Shared.StreamMakerFromAssemblyFile("Resources.Icons", "levant_logo", "jpg"))
             {
-                Border = Rectangle.BOTTOM_BORDER,
-                HorizontalAlignment = Element.ALIGN_JUSTIFIED,
-                RunDirection = PdfWriter.RUN_DIRECTION_RTL,
-                VerticalAlignment = Element.ALIGN_MIDDLE,
-            };
-            headerTable.AddCell(companyCell);
-            #endregion
-            document.Add(headerTable);
-        }
-        static void AddBody(Document document, PdfWriter writer, DataGridView dataGridView)
-        {
-            #region Title
-            var title = new PdfPTable(1) { WidthPercentage = 100 };
-            title.AddCell(new PdfPCell(new Phrase($"{pdfHeaderTitle}", new Font(TimesNewRomanFont, 20, 0, BaseColor.BLACK)))
-            {
-                PaddingTop = 20,
-                PaddingBottom = 20,
-                Border = Rectangle.NO_BORDER,
-                HorizontalAlignment = Element.ALIGN_CENTER,
-                RunDirection = PdfWriter.RUN_DIRECTION_RTL,
-            });
-            document.Add(title);
-            #endregion
+                string tempFilePath = Path.Combine(Path.GetTempPath(), "tempImage.png");
+                if (!File.Exists(tempFilePath))
+                    using (FileStream fileStream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write))
+                        stream.CopyTo(fileStream);
 
-            #region Date and Customer
-            PdfPTable bodyTable = new PdfPTable(2) { WidthPercentage = 100 };
-            bodyTable.AddCell(new PdfPCell(new Phrase("دمشق في : " + Preferences.GetPrefValue("PDFDate"), new Font(TimesNewRomanFont))) { Border = Rectangle.NO_BORDER, RunDirection = PdfWriter.RUN_DIRECTION_RTL, HorizontalAlignment = Element.ALIGN_RIGHT });
-            bodyTable.AddCell(new PdfPCell(new Phrase($"المطلوب من السيد: {customerName} المحترم", new Font(TimesNewRomanFont))) { Border = Rectangle.NO_BORDER, RunDirection = PdfWriter.RUN_DIRECTION_RTL });
-            document.Add(bodyTable);
-            #endregion
+                headerTable.Cell(1, 1).Range.InlineShapes.AddPicture(tempFilePath, LinkToFile: false, SaveWithDocument: true);
+                headerTable.Cell(1, 1).Width = 20;
+                headerTable.Cell(1, 1).Height = 60;
+                headerTable.Cell(1, 1).RightPadding = 215;
+                headerTable.Cell(1, 1).VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
 
-            #region Table
-            var columnsWidths = new float[] { 4, 1, 1, 1 };
-            PdfPTable dataTable = new PdfPTable(columnsWidths) { WidthPercentage = 100, SpacingBefore = 35 };
-            foreach (DataGridViewColumn column in dataGridView.Columns)
-            {
-                if (column == dataGridView.Columns["quantityColumn"] ||
-                    column == dataGridView.Columns["productNameColumn"] ||
-                    column == dataGridView.Columns["priceColumn"] ||
-                    column == dataGridView.Columns["totalPriceColumn"])
-                    dataTable.AddCell(new PdfPCell(new Phrase(column.HeaderText, FontFactory.GetFont(FontFactory.HELVETICA_BOLD))) { BackgroundColor = BaseColor.LIGHT_GRAY, HorizontalAlignment = Element.ALIGN_CENTER, Padding = 5 });
             }
 
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            var textCell = headerTable.Cell(1, 2);
+            textCell.Range.Text = Preferences.GetPrefValue("CompanyHeader");
+            textCell.Range.Font.SizeBi = 15;
+            textCell.Range.Font.BoldBi = 1;
+            textCell.Column.AutoFit();
+            textCell.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphRight;
+            textCell.VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+            #endregion
+
+            #region Title Date NO  Customer's Name
+            Range titleRange = doc.Content;
+            titleRange.Collapse(WdCollapseDirection.wdCollapseEnd);
+            titleRange.Text = headertitle ;
+            titleRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+            titleRange.Font.BoldBi = 1;
+            titleRange.Font.SizeBi = 19;
+            titleRange.InsertParagraphAfter();
+
+            Range dateRange = doc.Content;
+            dateRange.Collapse(WdCollapseDirection.wdCollapseEnd);
+            dateRange.InsertParagraphAfter();
+            dateRange.Text = "دمشق في : " + Preferences.GetPrefValue("WordDate");
+            dateRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
+            dateRange.Font.SizeBi = 14;
+            dateRange.InsertParagraphAfter();
+
+            Range SerialNumberRange = doc.Content;
+            SerialNumberRange.Collapse(WdCollapseDirection.wdCollapseEnd);
+            SerialNumberRange.InsertParagraphAfter();
+            SerialNumberRange.Text = (headertitle is "عرض") ? "NO :  " + Preferences.GetPrefValue("CurrentOfferNO") : "NO :  " + Preferences.GetPrefValue("CurrentSaleNO");
+            SerialNumberRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
+            SerialNumberRange.Font.SizeBi = 14;
+            SerialNumberRange.InsertParagraphAfter();
+
+            Range billRange = doc.Content;
+            billRange.Collapse(WdCollapseDirection.wdCollapseEnd);
+            billRange.InsertParagraphAfter();
+            billRange.Text = $"المطلوب من : {customerName} المحترم";
+            billRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphRight;
+            billRange.Font.SizeBi = 14;
+            billRange.InsertParagraphAfter();
+            #endregion
+
+            #region Description Table
+            var dt = datatable.DataSource as System.Data.DataTable;
+            int numberOfColumns = 4;
+            var tableRange = doc.Content;
+            tableRange.Collapse(WdCollapseDirection.wdCollapseEnd);
+            tableRange.InsertParagraphAfter();
+            var descTable = word.Application.ActiveDocument.Tables.Add(tableRange, datatable.Rows.Count + 1, numberOfColumns, Type.Missing);
+            foreach (Cell cell in descTable.Range.Cells)
             {
-                foreach (DataGridViewCell cell in row.Cells)
+                cell.Borders.Enable = 1;
+                cell.Borders.OutsideLineStyle = WdLineStyle.wdLineStyleSingle;
+                cell.Range.Font.SizeBi = 14;
+                cell.Range.Font.Size = 14;
+                cell.TopPadding = 11;
+                cell.BottomPadding = 3;
+            }
+            for (int i = 0; i < numberOfColumns; i++)
+            {
+                var headerCell = descTable.Cell(1, i + 1);
+                headerCell.Range.Text = datatable.Columns[i + 5].HeaderText;
+                headerCell.Range.Font.Bold = 1;
+                headerCell.Range.Font.Size = 14;
+                headerCell.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                headerCell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+            }
+            for (int i = 0; i < datatable.Rows.Count; i++)
+                for (int j = 0; j < numberOfColumns; j++)
                 {
-                    if (cell.ColumnIndex > 4 && cell.ColumnIndex < 9)
-                    {
-                        dataTable.AddCell(new PdfPCell(new Phrase(cell.Value.ToString() ?? string.Empty, new Font(TimesNewRomanFont)))
-                        {
-                            HorizontalAlignment = Element.ALIGN_CENTER,
-                            VerticalAlignment = Element.ALIGN_CENTER,
-                            RunDirection = PdfWriter.RUN_DIRECTION_RTL,
-                            Padding = 15
-                        });
-                        if (cell.ColumnIndex == 8)
-                            totalBill += double.Parse(cell.Value.ToString());
-                    }
+                    descTable.Cell(i + 2, j + 1).Range.Text = dt.Rows[i][j + 5].ToString();
+                    descTable.Cell(i + 2, j + 1).Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                    if (j == numberOfColumns - 1)
+                        price += double.Parse(dt.Rows[i][j + 5].ToString());
                 }
-            }
-            document.Add(dataTable);
+            descTable.AutoFitBehavior(WdAutoFitBehavior.wdAutoFitWindow);
+            descTable.Columns.AutoFit();
             #endregion
 
-            #region Total Bill
-            double discountPrice = (double)discountPercentage / 100 * totalBill;
-            PdfPTable Bill;
-            var FinalBillColumnsWidths = new float[] { 6, 1 };
-            if (discountPrice > 0)
+            if(discountPercentage == 0)
             {
-                var BillcolumnsWidths = new float[] { 2, 2, 3 };
-                Bill = new PdfPTable(BillcolumnsWidths) { WidthPercentage = 100 };
-                Bill.AddCell(new PdfPCell(new Phrase($"مبلغ الحسم : {discountPrice}", new Font(TimesNewRomanFont, 16))) { RunDirection = PdfWriter.RUN_DIRECTION_RTL, Padding = 15, HorizontalAlignment = Element.ALIGN_CENTER });
-                Bill.AddCell(new PdfPCell(new Phrase($"الحسم : {discountPercentage}%", new Font(TimesNewRomanFont, 16))) { RunDirection = PdfWriter.RUN_DIRECTION_RTL, Padding = 15, HorizontalAlignment = Element.ALIGN_CENTER });
-                Bill.AddCell(new PdfPCell(new Phrase($"المجموع: {totalBill}", new Font(TimesNewRomanFont, 16))) { RunDirection = PdfWriter.RUN_DIRECTION_RTL, Padding = 15, HorizontalAlignment = Element.ALIGN_CENTER });
-                var BillWithNoOffer = new PdfPTable(2) { WidthPercentage = 100, SpacingAfter = 20 };
-                BillWithNoOffer.AddCell(new PdfPCell(new Phrase($"كتابةً  : ", new Font(TimesNewRomanFont, 16, 1))) { RunDirection = PdfWriter.RUN_DIRECTION_RTL, Padding = 15, HorizontalAlignment = Element.ALIGN_CENTER });
-                BillWithNoOffer.AddCell(new PdfPCell(new Phrase($"المجموع الكلي رقماً :  {totalBill - discountPrice}", new Font(TimesNewRomanFont, 16, 1))) { RunDirection = PdfWriter.RUN_DIRECTION_RTL, Padding = 15, HorizontalAlignment = Element.ALIGN_CENTER });
-                document.Add(Bill);
-                document.Add(BillWithNoOffer);
+            #region Pay Table With No Discount
+            Range newTableRange = doc.Content;
+            newTableRange.Collapse(WdCollapseDirection.wdCollapseEnd);
+            Table newTable = doc.Tables.Add(newTableRange, 1, 2);
+            newTable.AutoFitBehavior(WdAutoFitBehavior.wdAutoFitWindow);
+            newTable.Borders.Enable = 1;
+            var numCell = newTable.Cell(descTable.Rows.Count, 2);
+            var txtCell = newTable.Cell(descTable.Rows.Count, 1);
+            numCell.Range.Text = $"{price}";
+            txtCell.Range.Text = " : المجموع";
+            numCell.TopPadding = txtCell.TopPadding = 11;
+            numCell.BottomPadding = txtCell.BottomPadding = 3;
+            numCell.Range.Font.Size = txtCell.Range.Font.Size = 14;
+            numCell.Range.Font.SizeBi = txtCell.Range.Font.SizeBi = 14;
+            numCell.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+            numCell.Width =  descTable.Cell(1 , 4).Width;
+            txtCell.Width = descTable.Cell(1, 1).Width + descTable.Cell(1, 2).Width + descTable.Cell(1, 3).Width;
+            numCell.Range.Bold = 1;
+            txtCell.Range.BoldBi = 1;
+            #endregion
             }
+
             else
             {
-                Bill = new PdfPTable(FinalBillColumnsWidths) { WidthPercentage = 100, SpacingAfter = 20 };
-                Bill.AddCell(new PdfPCell(new Phrase("المجموع :", new Font(TimesNewRomanFont, 16, 1)))
-                { RunDirection = PdfWriter.RUN_DIRECTION_RTL, Padding = 15 });
-                Bill.AddCell(new PdfPCell(new Phrase($"{totalBill}", new Font(TimesNewRomanFont, 16, 1))) { RunDirection = PdfWriter.RUN_DIRECTION_RTL, Padding = 15, HorizontalAlignment = Element.ALIGN_CENTER });
-                document.Add(Bill);
+                #region PayTable With Discount
+                Range discountRange = doc.Content;
+                discountRange.Collapse(WdCollapseDirection.wdCollapseEnd);
+                Table discountTable = doc.Tables.Add(discountRange, 1, 2);
+                discountTable.AutoFitBehavior(WdAutoFitBehavior.wdAutoFitWindow);
+                discountTable.Borders.Enable = 1;
+                var discountNumCell = discountTable.Cell(descTable.Rows.Count, 2);
+                var discountTxtCell = discountTable.Cell(descTable.Rows.Count, 1);
+                var negativeValueOfDiscount = - price * (double)discountPercentage / 100;
+                discountNumCell.Range.Text = $"{negativeValueOfDiscount}";
+                discountTxtCell.Range.Text = $"{discountPercentage}% : الحسم";
+                discountNumCell.TopPadding = discountTxtCell.TopPadding = 11;
+                discountNumCell.BottomPadding = discountTxtCell.BottomPadding = 3;
+                discountNumCell.Range.Font.Size = discountTxtCell.Range.Font.Size = 14;
+                discountNumCell.Range.Font.SizeBi = discountTxtCell.Range.Font.SizeBi = 14;
+                discountNumCell.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                discountNumCell.Width = descTable.Cell(1, 4).Width;
+                discountTxtCell.Width = descTable.Cell(1, 1).Width + descTable.Cell(1, 2).Width + descTable.Cell(1, 3).Width;
+                discountNumCell.Range.Bold = 1;
+                discountTxtCell.Range.Bold = 1;
+                discountTxtCell.Range.BoldBi = 1;
+
+                Range priceTableRange = doc.Content;
+            priceTableRange.Collapse(WdCollapseDirection.wdCollapseEnd);
+            Table priceTable = doc.Tables.Add(priceTableRange, 1, 2);
+            priceTable.AutoFitBehavior(WdAutoFitBehavior.wdAutoFitWindow);
+            priceTable.Borders.Enable = 1;
+            var numCell = priceTable.Cell(descTable.Rows.Count, 2);
+            var txtCell = priceTable.Cell(descTable.Rows.Count, 1);
+            numCell.Range.Text = $"{price + negativeValueOfDiscount}";
+            txtCell.Range.Text = " : المجموع";
+            numCell.TopPadding = txtCell.TopPadding = 11;
+            numCell.BottomPadding = txtCell.BottomPadding = 3;
+            numCell.Range.Font.Size = txtCell.Range.Font.Size = 14;
+            numCell.Range.Font.SizeBi = txtCell.Range.Font.SizeBi = 14;
+            numCell.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+            numCell.Width = descTable.Cell(1, 4).Width;
+            txtCell.Width = descTable.Cell(1, 1).Width + descTable.Cell(1, 2).Width + descTable.Cell(1, 3).Width;
+            numCell.Range.Bold = 1;
+            txtCell.Range.BoldBi = 1;
+            #endregion
             }
+
+            #region PayInfo
+            Range PayInfo = doc.Content;
+            PayInfo.Collapse(WdCollapseDirection.wdCollapseEnd);
+            PayInfo.Text = "\n" + Preferences.GetPrefValue("CompanyPaymentInfo");
+            PayInfo.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphRight;
+            PayInfo.Font.SizeBi = 14;
+            PayInfo.InsertParagraphAfter();
             #endregion
 
-            #region Pay Info
-            PdfPTable PayInfo = new PdfPTable(1) { WidthPercentage = 100, SpacingBefore = 10, SpacingAfter = 70 };
-            PayInfo.AddCell(new PdfPCell(new Phrase(Preferences.GetPrefValue("CompanyPaymentInfo"), new Font(TimesNewRomanFont, 14))) { Border = Rectangle.NO_BORDER, RunDirection = PdfWriter.RUN_DIRECTION_RTL });
-            document.Add(PayInfo);
+            #region Footer
+            Range footerRange = doc.Sections[1].Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+            Table footerTable = doc.Tables.Add(footerRange, 1, 2);
+            footerTable.Cell(1, 1).Range.Text = "EMAIL: a.alrehawe@levant-tek.com";
+            footerTable.Cell(1, 2).Range.Text = "دمشق  هاتف : 0968585950 - 22228989";
+            footerTable.Cell(1, 1).Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
+            footerTable.Cell(1, 2).Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphRight;
+            footerTable.Borders.Enable = 0;
+            footerTable.Borders[WdBorderType.wdBorderTop].LineStyle = WdLineStyle.wdLineStyleSingle;
+            footerTable.Borders[WdBorderType.wdBorderTop].LineWidth = WdLineWidth.wdLineWidth300pt;
+            footerTable.Borders[WdBorderType.wdBorderTop].Color = WdColor.wdColorDarkRed;
             #endregion
-        }
-        static void AddFooter(Document document)
-        {
-            PdfPTable footerTable = new PdfPTable(2) { WidthPercentage = 100, PaddingTop = 20 };
-            footerTable.AddCell(new PdfPCell(new Phrase("EMAIL: a.alrehawe@levant-tek.com", new Font(TimesNewRomanFont, 12, 0, BaseColor.GRAY))) { Border = Rectangle.TOP_BORDER, RunDirection = PdfWriter.RUN_DIRECTION_RTL, HorizontalAlignment = Element.ALIGN_RIGHT });
-            footerTable.AddCell(new PdfPCell(new Phrase($"دمشق  هاتف : 0968585950 - 22228989", new Font(TimesNewRomanFont, 12, 0, BaseColor.GRAY))) { Border = Rectangle.TOP_BORDER, RunDirection = PdfWriter.RUN_DIRECTION_RTL });
-            document.Add(footerTable);
         }
         #endregion
 
@@ -396,7 +483,7 @@ namespace Inventory_Manager
                     t.Text = "";
                 else if (c is RichTextBox rb)
                     rb.Text = "";
-                else if (c is CheckBox ch)
+                else if (c is System.Windows.Forms.CheckBox ch)
                     ch.Checked = false;
         }
 
@@ -436,7 +523,7 @@ namespace Inventory_Manager
             cmd.CommandText += $@" ORDER BY ""{orderBy}""";
             cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             da.Fill(dt);
             target.DataSource = dt;
         }
@@ -458,7 +545,7 @@ namespace Inventory_Manager
                                       ORDER BY ""{orderBy}""";
             cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             da.Fill(dt);
             target.DataSource = dt;
             cmd.Parameters.Clear();
@@ -481,7 +568,7 @@ namespace Inventory_Manager
                                       ORDER BY ""{orderBy}""";
             cmd.ExecuteNonQuery();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             da.Fill(dt);
             target.DataSource = dt;
             cmd.Parameters.Clear();
@@ -494,7 +581,7 @@ namespace Inventory_Manager
 
         public static void SaveDataGridViewASExcelFile(string reportTitle, DataGridView target, Guna2DateTimePicker startDate, Guna2DateTimePicker endDate)
         {
-            if (target.DataSource is DataTable dataTable)
+            if (target.DataSource is System.Data.DataTable dataTable)
             {
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
@@ -586,7 +673,7 @@ to: {endDate.Value.ToShortDateString()} ";
                 }
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
+                System.Data.DataTable dt = new System.Data.DataTable();
                 da.Fill(dt);
                 targetTable.DataSource = dt;
             }
@@ -685,7 +772,7 @@ to: {endDate.Value.ToShortDateString()} ";
             {
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
+                System.Data.DataTable dt = new System.Data.DataTable();
                 da.Fill(dt);
                 targetTable.DataSource = dt;
             }
@@ -813,21 +900,6 @@ to: {endDate.Value.ToShortDateString()} ";
                 return stream;
             else
                 return null;
-        }
-
-        public static BaseFont LoadFontFromAssembly(string fontFileName)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            using (Stream fontStream = assembly.GetManifestResourceStream($"Inventory_Manager.Resources.Fonts.{fontFileName}"))
-            {
-                string tempFontPath = Path.Combine(Path.GetTempPath(), $"font.ttf");
-                if (!File.Exists(tempFontPath))
-                    using (var fileStream = new FileStream(tempFontPath, FileMode.Create, FileAccess.Write))
-                    {
-                        fontStream.CopyTo(fileStream);
-                    }
-                return BaseFont.CreateFont(tempFontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            }
         }
 
         public static void TextBoxAutoCompleteFromColumn(string table, string columnName, TextBox tb)

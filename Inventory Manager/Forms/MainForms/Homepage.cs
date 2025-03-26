@@ -10,6 +10,7 @@ namespace Inventory_Manager
     {
         #region Essential Data
         bool sidebarExpanded;
+        object callerOfExpand;
         bool MaxmizeAble = false;
 
         public Homepage()
@@ -105,6 +106,15 @@ namespace Inventory_Manager
             a.ForeColor = Color.White;
         }
 
+        private void FormsButtonClickProcedure(object SenderButton , Form form)
+        {
+            Shared.PlayClickSound();
+            ChangeButtonsBackgroundColor(SenderButton);
+            ShowFormByPanel(form); 
+            callerOfExpand = SenderButton;
+            sideBarTimer.Start();
+        }
+
         #endregion
 
         #region Events
@@ -114,30 +124,26 @@ namespace Inventory_Manager
         private void Menu_Click(object sender, EventArgs e)
         {
             Shared.PlayClickSound();
+            callerOfExpand = sender;
             sideBarTimer.Start();
         }
         private void HomepageBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            ViewFormPanel.Controls.Clear();
+            var f = new Homepage() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
             MaxmizeAble =
             ViewFormPanel.Visible = false;
             AsideCubesPicture.Visible = true;
         }
         private void ProductsBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            Products s = new Products { TopLevel = false, TopMost = true };
-            ShowFormByPanel(s);
+            var f = new Products() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender , f);
         }
         private void SuppliersBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            var s = new Suppliers() { TopLevel = false, TopMost = true };
-            ShowFormByPanel(s); ;
+            var f = new Suppliers() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -146,34 +152,26 @@ namespace Inventory_Manager
 
         private void CustomersBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            Customers C = new Customers() { TopLevel = false, TopMost = true };
-            ShowFormByPanel(C);
+            var f = new Customers() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
 
         private void SalesBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            Sales p = new Sales() { TopLevel = false, TopMost = true };
-            ShowFormByPanel(p);
+            var f = new Sales() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
 
         private void ProductsReportBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            ProductsReport p = new ProductsReport() { TopLevel = false, TopMost = true };
-            ShowFormByPanel(p);
+            var f = new ProductsReport() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
 
         private void InventoryReportBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            InventoryReport ir = new InventoryReport { TopLevel = false, TopMost = true };
-            ShowFormByPanel(ir);
+            var f = new InventoryReport() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
 
         private void ChangeUserPasswordBtn_Click(object sender, EventArgs e)
@@ -181,44 +179,36 @@ namespace Inventory_Manager
             Shared.PlayClickSound();
             var c = new ChangeUserPassword();
             c.Show();
+            callerOfExpand = sender;
+            sideBarTimer.Start();
         }
 
         private void PurchasesBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            var p = new Purchases() { TopLevel = false, TopMost = true };
-            ShowFormByPanel(p);
+            var f = new Purchases() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
         private void RolesBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            var r = new Customer { TopLevel = false, TopMost = true };
-            ShowFormByPanel(r);
+            var f = new Customer() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
 
         private void TerminalBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            var t = new Terminal { TopLevel = false, TopMost = true };
-            ShowFormByPanel(t);
+            var f = new Terminal() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
         private void OffersBtn_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            var s = new SalesLog { TopLevel = false, TopMost = true };
-            ShowFormByPanel(s);
+            var f = new SalesLog() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
         }
         private void PrefButton_Click(object sender, EventArgs e)
         {
-            Shared.PlayClickSound();
-            ChangeButtonsBackgroundColor(sender);
-            var C = new Preferences() { TopLevel = false, TopMost = true };
-            ShowFormByPanel(C);
-        }
+            var f = new Preferences() { TopLevel = false, TopMost = true };
+            FormsButtonClickProcedure(sender, f);
+    }
 
 
         #region shortcut guidance button
@@ -322,6 +312,7 @@ namespace Inventory_Manager
             }
             else
             {
+                if(callerOfExpand == ShowBtnsNamesBtn)
                 sidebar.Width += 10;
                 if (sidebar.Width == sidebar.MaximumSize.Width)
                 {

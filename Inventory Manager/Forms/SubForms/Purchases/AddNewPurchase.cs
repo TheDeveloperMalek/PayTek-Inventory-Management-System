@@ -237,31 +237,31 @@ namespace Inventory_Manager
 
         private void ProductIdTextBox_TextChanged(object sender, EventArgs e)
         {
-            ProductBarcodeTextBox.Enabled = ProductNameTextBox.Enabled = ProductIdTextBox.TextLength > 0;
+            ProductBarcodeTextBox.Enabled = ProductNameTextBox.Enabled = ProductIdTextBox.TextLength is 0;
             AddBtn.Enabled = ProductIdTextBox.TextLength > 0 && (SupplierIdTextBox.TextLength > 0 || SupplierNameTextBox.TextLength > 0) && QuantityTextBox.TextLength > 0;
         }
 
         private void ProductBarcodeTextBox_TextChanged(object sender, EventArgs e)
         {
-            ProductIdTextBox.Enabled = ProductNameTextBox.Enabled = ProductBarcodeTextBox.TextLength > 0;
+            ProductIdTextBox.Enabled = ProductNameTextBox.Enabled = ProductBarcodeTextBox.TextLength is 0;
             AddBtn.Enabled = ProductBarcodeTextBox.TextLength > 0 && (SupplierIdTextBox.TextLength > 0 || SupplierNameTextBox.TextLength > 0) && QuantityTextBox.TextLength > 0;
         }
 
         private void ProductNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            ProductBarcodeTextBox.Enabled = ProductIdTextBox.Enabled = ProductNameTextBox.TextLength > 0;
+            ProductBarcodeTextBox.Enabled = ProductIdTextBox.Enabled = ProductNameTextBox.TextLength is 0;
             AddBtn.Enabled = ProductNameTextBox.TextLength > 0 && (SupplierIdTextBox.TextLength > 0 || SupplierNameTextBox.TextLength > 0) && QuantityTextBox.TextLength > 0;
         }
 
         private void SupplierIdTextBox_TextChanged(object sender, EventArgs e)
         {
-            SupplierNameTextBox.Enabled = SupplierIdTextBox.TextLength > 0;
+            SupplierNameTextBox.Enabled = SupplierIdTextBox.TextLength is 0;
             AddBtn.Enabled = SupplierIdTextBox.TextLength > 0 && (ProductIdTextBox.TextLength > 0 || ProductBarcodeTextBox.TextLength > 0 || ProductNameTextBox.TextLength > 0) && QuantityTextBox.TextLength > 0;
         }
 
         private void SupplierNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            SupplierIdTextBox.Enabled = SupplierNameTextBox.TextLength > 0;
+            SupplierIdTextBox.Enabled = SupplierNameTextBox.TextLength is 0;
             AddBtn.Enabled = SupplierNameTextBox.TextLength > 0 && (ProductIdTextBox.TextLength > 0 || ProductBarcodeTextBox.TextLength > 0 || ProductNameTextBox.TextLength > 0) && QuantityTextBox.TextLength > 0;
         }
 

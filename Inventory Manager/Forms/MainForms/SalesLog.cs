@@ -12,7 +12,7 @@ namespace Inventory_Manager
             InitializeComponent();
             Shared.ConnectionInitializer();
             this.saleLogTableAdapter.Connection.ConnectionString = Shared.conn.ConnectionString;
-            this.dataGridView1.Columns[7].Visible = printBillBtn.Visible = Shared.isJustVisibleForNonUserType;
+            this.datatable.Columns[7].Visible = printBillBtn.Visible = Shared.isJustVisibleForNonUserType;
             dateTimePickerEnd.Value = DateTime.Now;
             dateTimePickerStart.Value = DateTime.Now.AddMonths(-5);
 
@@ -38,7 +38,7 @@ namespace Inventory_Manager
         #region Startup Functions
         public void ShowData()
         {
-            Shared.ShowAllTableData(dataGridView1, "SaleLog", "ID", startDate: dateTimePickerStart, endDate: dateTimePickerEnd);
+            Shared.ShowAllTableData(datatable, "SaleLog", "ID", startDate: dateTimePickerStart, endDate: dateTimePickerEnd);
         }
 
         #endregion
@@ -86,9 +86,8 @@ namespace Inventory_Manager
         private void pdfButton_Click(object sender, EventArgs e)
         {
             Shared.PlayClickSound();
-            Shared.printSale(dataGridView1 , "عرض");
+            Shared.PrintSale(datatable , "عرض");
         }
-
         #endregion
 
         #endregion
@@ -97,37 +96,37 @@ namespace Inventory_Manager
 
         private void Sale_id_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            Shared.SearchCommandAssembler(dataGridView1, SaleIDTextBox, "SaleLog", "ID", "ID", false, "sale id", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
+            Shared.SearchCommandAssembler(datatable, SaleIDTextBox, "SaleLog", "ID", "ID", false, "sale id", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
         }
 
         private void product_name_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            Shared.SearchCommandAssembler(dataGridView1, ProductNameTextBox, "SaleLog", "Product Name", "ID", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
+            Shared.SearchCommandAssembler(datatable, ProductNameTextBox, "SaleLog", "Product Name", "ID", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
         }
 
         private void product_barcode_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            Shared.SearchCommandAssembler(dataGridView1, ProductBarcodeTextBox, "SaleLog", "Product Barcode", "ID", false, "product barcode", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
+            Shared.SearchCommandAssembler(datatable, ProductBarcodeTextBox, "SaleLog", "Product Barcode", "ID", false, "product barcode", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
         }
 
         private void product_id_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            Shared.SearchCommandAssembler(dataGridView1, ProductIDTextBox, "SaleLog", "Product ID", "ID", false, "product id", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
+            Shared.SearchCommandAssembler(datatable, ProductIDTextBox, "SaleLog", "Product ID", "ID", false, "product id", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
         }
 
         private void product_quantity_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            Shared.SearchCommandAssembler(dataGridView1, ProductQuantityTextBox, "SaleLog", "Quantity", "ID", false, "quantity", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
+            Shared.SearchCommandAssembler(datatable, ProductQuantityTextBox, "SaleLog", "Quantity", "ID", false, "quantity", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
         }
 
         private void customer_name_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            Shared.SearchCommandAssembler(dataGridView1, CustomerNameTextBox, "SaleLog", "Customer Name", "ID", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
+            Shared.SearchCommandAssembler(datatable, CustomerNameTextBox, "SaleLog", "Customer Name", "ID", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
         }
 
         private void customer_id_text_box_KeyUp(object sender, KeyEventArgs e)
         {
-            Shared.SearchCommandAssembler(dataGridView1, CustomerIDTextBox, "SaleLog", "Customer ID", "ID", false, "customer id", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
+            Shared.SearchCommandAssembler(datatable, CustomerIDTextBox, "SaleLog", "Customer ID", "ID", false, "customer id", startDate: dateTimePickerStart.Value, endDate: dateTimePickerEnd.Value);
         }
 
         #endregion
@@ -137,8 +136,8 @@ namespace Inventory_Manager
         {
             Shared.PlayClickSound();
             Shared.ResetFields(groupBox1);
-            var text = dataGridView1.CurrentCell.Value.ToString();
-            var columnIndex = dataGridView1.CurrentCellAddress.X;
+            var text = datatable.CurrentCell.Value.ToString();
+            var columnIndex = datatable.CurrentCellAddress.X;
             var c = new KeyEventArgs(Keys.NoName);
 
             switch (columnIndex)
@@ -179,12 +178,12 @@ namespace Inventory_Manager
         #region ChangeDate
         private void dateTimePickerStart_ValueChanged(object sender, EventArgs e)
         {
-            Shared.ShowAllTableData(dataGridView1, "SaleLog", "ID", startDate: dateTimePickerStart, endDate: dateTimePickerEnd);
+            Shared.ShowAllTableData(datatable, "SaleLog", "ID", startDate: dateTimePickerStart, endDate: dateTimePickerEnd);
         }
 
         private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
         {
-            Shared.ShowAllTableData(dataGridView1, "SaleLog", "ID", startDate: dateTimePickerStart, endDate: dateTimePickerEnd);
+            Shared.ShowAllTableData(datatable, "SaleLog", "ID", startDate: dateTimePickerStart, endDate: dateTimePickerEnd);
         }
         #endregion
         #endregion

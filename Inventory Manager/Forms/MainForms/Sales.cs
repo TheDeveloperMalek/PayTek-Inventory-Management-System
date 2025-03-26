@@ -88,7 +88,7 @@ namespace Inventory_Manager
         private void pdfButton_Click(object sender, EventArgs e)
         {
             Shared.PlayClickSound();
-            Shared.printSale(dataGridView1 , "فاتورة");
+            Shared.PrintSale(dataGridView1 , "فاتورة");
         }
 
         #endregion

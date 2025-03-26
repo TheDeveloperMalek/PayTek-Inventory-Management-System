@@ -40,8 +40,7 @@ namespace Inventory_Manager.Forms.MainForms
             {
                 CompanyHeaderRichTextBox.Text = GetPrefValue("CompanyHeader");
                 PaymentMethodRichTextBox.Text = GetPrefValue("CompanyPaymentInfo");
-                SetPrefValue("PDFDate", DateTime.Now.ToShortDateString());
-                PDFDateTimePicker.Value = DateTime.Parse(GetPrefValue("PDFDate"));
+                PDFDateTimePicker.Value = DateTime.Parse(GetPrefValue("WordDate"));
             }
             catch (Exception ex)
             {
@@ -59,8 +58,8 @@ namespace Inventory_Manager.Forms.MainForms
             {
                 SetPrefValue("CompanyHeader", CompanyHeaderRichTextBox.Text);
                 SetPrefValue("CompanyPaymentInfo", PaymentMethodRichTextBox.Text);
-                SetPrefValue("PDFDate", PDFDateTimePicker.Value.ToShortDateString());
-                Shared.ProcessIsDoneMessageBox("new preferences", "save");
+                SetPrefValue("WordDate", PDFDateTimePicker.Value.ToShortDateString());
+                Shared.ProcessIsDoneMessageBox("new preferences", "saved");
             }
             catch (Exception ex)
             {

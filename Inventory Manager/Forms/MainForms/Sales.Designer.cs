@@ -177,7 +177,7 @@
             this.printBillBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.printBillBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.printBillBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.printBillBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.printBillBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(165)))), ((int)(((byte)(238)))));
             this.printBillBtn.Font = new System.Drawing.Font("Lucida Sans Typewriter", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.printBillBtn.ForeColor = System.Drawing.Color.Black;
             this.printBillBtn.Image = ((System.Drawing.Image)(resources.GetObject("printBillBtn.Image")));

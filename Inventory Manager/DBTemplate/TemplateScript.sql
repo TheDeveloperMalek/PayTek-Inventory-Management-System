@@ -1,6 +1,6 @@
 USE [Public]
 GO
-/****** Object:  Table [dbo].[Customer]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[Customer]    Script Date: 26/03/2025 03:59:12 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,7 +10,7 @@ CREATE TABLE [dbo].[Customer](
 	[name] [nvarchar](50) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InventoryReport]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[InventoryReport]    Script Date: 26/03/2025 03:59:12 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,7 +23,7 @@ CREATE TABLE [dbo].[InventoryReport](
 	[date] [date] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Preference]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[Preference]    Script Date: 26/03/2025 03:59:12 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -33,7 +33,7 @@ CREATE TABLE [dbo].[Preference](
 	[value] [nvarchar](500) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Product]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 26/03/2025 03:59:12 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -47,7 +47,7 @@ CREATE TABLE [dbo].[Product](
 	[Date] [date] NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProductReport]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[ProductReport]    Script Date: 26/03/2025 03:59:12 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -61,7 +61,7 @@ CREATE TABLE [dbo].[ProductReport](
 	[Date] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Purchase]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[Purchase]    Script Date: 26/03/2025 03:59:12 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -74,11 +74,11 @@ CREATE TABLE [dbo].[Purchase](
 	[Product Barcode] [int] NOT NULL,
 	[Product Name] [nvarchar](50) NOT NULL,
 	[Quantity] [int] NOT NULL,
-	[Price] [int] NULL,
+	[Price] [float] NULL,
 	[Date] [date] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 26/03/2025 03:59:12 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -90,7 +90,7 @@ CREATE TABLE [dbo].[Roles](
 	[Last modified] [date] NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Sale]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[Sale]    Script Date: 26/03/2025 03:59:12 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -103,12 +103,12 @@ CREATE TABLE [dbo].[Sale](
 	[Product Barcode] [int] NOT NULL,
 	[Product Name] [nvarchar](50) NOT NULL,
 	[Quantity] [int] NULL,
-	[Price] [int] NULL,
-	[Total Price] [int] NULL,
+	[Price] [float] NULL,
+	[Total Price] [float] NULL,
 	[Date] [date] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SaleLog]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[SaleLog]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -121,12 +121,12 @@ CREATE TABLE [dbo].[SaleLog](
 	[Product Barcode] [int] NOT NULL,
 	[Product Name] [nvarchar](50) NOT NULL,
 	[Quantity] [int] NULL,
-	[Price] [int] NULL,
-	[Total Price] [int] NULL,
+	[Price] [float] NULL,
+	[Total Price] [float] NULL,
 	[Date] [date] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Supplier]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  Table [dbo].[Supplier]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -138,22 +138,25 @@ CREATE TABLE [dbo].[Supplier](
 GO
 INSERT [dbo].[Preference] ([name], [value]) VALUES (N'CompanyHeader', N'شركة فلان الفلاني')
 GO
-INSERT [dbo].[Preference] ([name], [value]) VALUES (N'CompanyPaymentInfo', N'يرجى التسديد نقداً أو على حساب الشركة التالي:')
+INSERT [dbo].[Preference] ([name], [value]) VALUES (N'CompanyPaymentInfo', N'يرجى التسديد على الحساب التالي')
 GO
-INSERT [dbo].[Preference] ([name], [value]) VALUES (N'PDFDate', N'21/03/2025')
+INSERT [dbo].[Preference] ([name], [value]) VALUES (N'WordDate', N'26/03/2025')
 GO
-INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'malek', N'100 113 103 104 117 118', N'Developer', CAST(N'2025-03-21' AS Date))
+INSERT [dbo].[Preference] ([name], [value]) VALUES (N'CurrentOfferNO', N'0001')
 GO
-INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'user', N'120 118 104 117', N'user', CAST(N'2025-03-21' AS Date))
+INSERT [dbo].[Preference] ([name], [value]) VALUES (N'CurrentSaleNO', N'0001')
 GO
-INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'admin', N'100 103 112 108 113', N'admin', CAST(N'2025-03-21' AS Date))
+INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'malek', N'100 113 103 104 117 118', N'developer', CAST(N'2025-03-13' AS Date))
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewCustomer]    Script Date: 21/03/2025 03:33:09 م ******/
+INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'admin', N'100 103 112 108 113', N'admin', CAST(N'2025-07-01' AS Date))
+GO
+INSERT [dbo].[Roles] ([Username], [Password], [Usertype], [Last modified]) VALUES (N'user', N'120 118 104 117', N'user', CAST(N'2025-07-01' AS Date))
+GO
+/****** Object:  StoredProcedure [dbo].[AddNewCustomer]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewCustomer] 
     @name NVARCHAR(50)
@@ -163,12 +166,11 @@ BEGIN
     VALUES (@name);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewProduct]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewProduct]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewProduct] 
     @barcode INT, 
@@ -187,12 +189,11 @@ BEGIN
     );
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierIdAndProductBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierIdAndProductBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierIdAndProductBarcode]
     @product_barcode INT,
@@ -200,7 +201,7 @@ CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierIdAndProductBarcode]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -301,12 +302,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierIdAndProductId]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierIdAndProductId]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierIdAndProductId]
     @product_id INT,
@@ -314,7 +314,7 @@ CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierIdAndProductId]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -415,12 +415,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierIdAndProductName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierIdAndProductName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierIdAndProductName]
     @product_name NVARCHAR(50),
@@ -428,7 +427,7 @@ CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierIdAndProductName]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -529,12 +528,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierNameAndProductBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierNameAndProductBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierNameAndProductBarcode]
     @product_barcode INT,
@@ -542,7 +540,7 @@ CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierNameAndProductBarcode]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -643,12 +641,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierNameAndProductId]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierNameAndProductId]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierNameAndProductId]
     @product_id INT,
@@ -656,7 +653,7 @@ CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierNameAndProductId]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -757,12 +754,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierNameAndProductName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewPurchaseBySupplierNameAndProductName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierNameAndProductName]
     @product_name NVARCHAR(50),
@@ -770,7 +766,7 @@ CREATE PROCEDURE [dbo].[AddNewPurchaseBySupplierNameAndProductName]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -871,12 +867,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerIdAndProductBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerIdAndProductBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleByCustomerIdAndProductBarcode]
     @product_barcode INT,
@@ -884,7 +879,7 @@ CREATE PROCEDURE [dbo].[AddNewSaleByCustomerIdAndProductBarcode]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -986,12 +981,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerIdAndProductId]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerIdAndProductId]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleByCustomerIdAndProductId]
     @product_id INT,
@@ -999,7 +993,7 @@ CREATE PROCEDURE [dbo].[AddNewSaleByCustomerIdAndProductId]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -1101,12 +1095,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerIdAndProductName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerIdAndProductName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleByCustomerIdAndProductName]
     @product_name NVARCHAR(50),
@@ -1114,7 +1107,7 @@ CREATE PROCEDURE [dbo].[AddNewSaleByCustomerIdAndProductName]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -1216,12 +1209,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerNameAndProductBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerNameAndProductBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleByCustomerNameAndProductBarcode]
     @product_barcode INT,
@@ -1229,7 +1221,7 @@ CREATE PROCEDURE [dbo].[AddNewSaleByCustomerNameAndProductBarcode]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -1332,12 +1324,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerNameAndProductID]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerNameAndProductID]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleByCustomerNameAndProductID]
     @product_id INT,
@@ -1345,7 +1336,7 @@ CREATE PROCEDURE [dbo].[AddNewSaleByCustomerNameAndProductID]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -1448,12 +1439,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerNameAndProductName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleByCustomerNameAndProductName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleByCustomerNameAndProductName]
     @product_name NVARCHAR(50),
@@ -1461,7 +1451,7 @@ CREATE PROCEDURE [dbo].[AddNewSaleByCustomerNameAndProductName]
     @date DATE,
     @product_quantity INT,
     @status NVARCHAR(50),
-    @price INT
+    @price FLOAT
 AS
 BEGIN
     BEGIN TRY
@@ -1564,19 +1554,18 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerIdAndProductBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerIdAndProductBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleLogByCustomerIdAndProductBarcode]
     @product_barcode INT,
     @Customer_id INT,
     @date DATE,
     @product_quantity INT,
-    @price INT
+    @price FLOAT
 AS
 BEGIN
         INSERT INTO SaleLog (
@@ -1606,19 +1595,18 @@ BEGIN
             Product p ON (p.barcode = @product_barcode AND c.id = @customer_id);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerIdAndProductId]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerIdAndProductId]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleLogByCustomerIdAndProductId]
     @product_id INT,
     @Customer_id INT,
     @date DATE,
     @product_quantity INT,
-    @price INT
+    @price FLOAT
 AS
 BEGIN
         INSERT INTO SaleLog (
@@ -1648,19 +1636,18 @@ BEGIN
             Product p ON (p.id = @product_id AND c.id = @customer_id);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerIdAndProductName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerIdAndProductName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleLogByCustomerIdAndProductName]
     @product_name NVARCHAR(50),
     @Customer_id INT,
     @date DATE,
     @product_quantity INT,
-    @price INT
+    @price FLOAT
 AS
 BEGIN
         INSERT INTO SaleLog (
@@ -1690,19 +1677,18 @@ BEGIN
             Product p ON (p.name = @product_name AND c.id = @customer_id);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerNameAndProductBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerNameAndProductBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleLogByCustomerNameAndProductBarcode]
     @product_barcode INT,
     @Customer_name NVARCHAR(50),
     @date DATE,
     @product_quantity INT,
-    @price INT
+    @price FLOAT
 AS
 BEGIN
         INSERT INTO SaleLog (
@@ -1732,19 +1718,18 @@ BEGIN
             Product p ON (p.barcode = @product_barcode AND c.name = @customer_name);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerNameAndProductID]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerNameAndProductID]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleLogByCustomerNameAndProductID]
     @product_id INT,
     @Customer_name NVARCHAR(50),
     @date DATE,
     @product_quantity INT,
-    @price INT
+    @price FLOAT
 AS
 BEGIN
         INSERT INTO SaleLog (
@@ -1774,19 +1759,18 @@ BEGIN
             Product p ON (p.id = @product_id AND c.name = @customer_name);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerNameAndProductName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSaleLogByCustomerNameAndProductName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSaleLogByCustomerNameAndProductName]
     @product_name NVARCHAR(50),
     @Customer_name NVARCHAR(50),
     @date DATE,
     @product_quantity INT,
-    @price INT
+    @price FLOAT
 AS
 BEGIN
         INSERT INTO SaleLog (
@@ -1816,12 +1800,11 @@ BEGIN
             Product p ON (p.name = @product_name AND c.name = @customer_name);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewSupplier]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewSupplier]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewSupplier] 
     @name NVARCHAR(50)
@@ -1831,12 +1814,11 @@ BEGIN
     VALUES (@name);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddNewUser]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[AddNewUser]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[AddNewUser]
     @username NVARCHAR(50),
@@ -1849,12 +1831,11 @@ BEGIN
     VALUES (@username, @password, @usertype, @date);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteCustomerById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteCustomerById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteCustomerById]
     @id INT 
@@ -1864,12 +1845,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteCustomerByName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteCustomerByName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteCustomerByName]
     @name NVARCHAR(50) 
@@ -1879,12 +1859,11 @@ BEGIN
     WHERE name = @name;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteProductByBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteProductByBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteProductByBarcode]
     @barcode INT 
@@ -1894,12 +1873,11 @@ BEGIN
     WHERE barcode = @barcode;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteProductById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteProductById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteProductById]
     @id INT 
@@ -1909,12 +1887,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteProductByName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteProductByName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteProductByName]
     @name NVARCHAR(50)
@@ -1924,12 +1901,11 @@ BEGIN
     WHERE name = @name;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeletePurchase]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeletePurchase]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeletePurchase]
     @id INT,
@@ -1980,12 +1956,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteSale]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteSale]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteSale]
     @id INT,
@@ -2034,12 +2009,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteSaleLog]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteSaleLog]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteSaleLog]
     @id INT
@@ -2048,12 +2022,11 @@ BEGIN
         DELETE FROM SaleLog WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteSupplierById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteSupplierById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteSupplierById]
     @id INT 
@@ -2063,12 +2036,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteSupplierByName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteSupplierByName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteSupplierByName]
     @name NVARCHAR(50) 
@@ -2078,12 +2050,11 @@ BEGIN
     WHERE name = @name;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteUser]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DeleteUser]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DeleteUser]
     @username NVARCHAR(50)
@@ -2093,12 +2064,11 @@ BEGIN
     WHERE username = @username;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DoesUserExist]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[DoesUserExist]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[DoesUserExist]
     @usrname NVARCHAR(50)
@@ -2116,12 +2086,11 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditCurrentUserPassword]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditCurrentUserPassword]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditCurrentUserPassword]
     @password NVARCHAR(MAX),
@@ -2135,12 +2104,11 @@ BEGIN
 			AND username = @username
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditCustomerName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditCustomerName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditCustomerName] 
     @id INT,
@@ -2152,12 +2120,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditProductNameByBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditProductNameByBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditProductNameByBarcode] 
     @barcode INT, 
@@ -2186,12 +2153,11 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[EditProductNameById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditProductNameById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditProductNameById] 
     @id INT, 
@@ -2220,12 +2186,11 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[EditPurchase]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditPurchase]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditPurchase]
     @id INT,
@@ -2274,56 +2239,24 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditPurchaseCost]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditPurchaseCost]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 CREATE PROCEDURE [dbo].[EditPurchaseCost]
 	@id INT ,
-	@product_cost INT
+	@product_cost FLOAT
 AS
 	UPDATE Purchase
 	SET Price = @product_cost
 	WHERE ID = @id
 GO
-/****** Object:  StoredProcedure [dbo].[EditSaleCost]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditSaleLogQuantity]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-CREATE PROCEDURE [dbo].[EditSaleCost]
-	@id INT,
-	@product_cost INT
-AS 
-	UPDATE Sale
-	SET Price = @product_cost ,
-	[Total Price] = Quantity * @product_cost
-	WHERE ID = @id;
-GO
-/****** Object:  StoredProcedure [dbo].[EditSaleLogCost]    Script Date: 21/03/2025 03:33:09 م ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE [dbo].[EditSaleLogCost]
-	@id INT,
-	@product_cost INT
-AS 
-	UPDATE SaleLog
-	SET Price = @product_cost ,
-	[Total Price] = Quantity * @product_cost
-	WHERE ID = @id;
-GO
-/****** Object:  StoredProcedure [dbo].[EditSaleLogQuantity]    Script Date: 21/03/2025 03:33:09 م ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 
 CREATE PROCEDURE [dbo].[EditSaleLogQuantity]
     @id INT,
@@ -2339,12 +2272,11 @@ BEGIN
         WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditSaleQuantity]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditSaleQuantity]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditSaleQuantity]
     @id INT,
@@ -2395,12 +2327,11 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditSpecificationByBarcode]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditSpecificationByBarcode]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditSpecificationByBarcode]
     @barcode INT,
@@ -2412,12 +2343,11 @@ BEGIN
     WHERE barcode = @barcode;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditSpecificationById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditSpecificationById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditSpecificationById] 
     @id INT,
@@ -2429,12 +2359,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditSpecificationByName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditSpecificationByName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditSpecificationByName]
     @name NVARCHAR(50),
@@ -2446,12 +2375,11 @@ BEGIN
     WHERE name = @name;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditSupplierName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditSupplierName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditSupplierName]
     @id INT,
@@ -2463,12 +2391,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[EditUserPassword]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[EditUserPassword]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[EditUserPassword]
     @pass NVARCHAR(MAX),
@@ -2482,12 +2409,11 @@ BEGIN
     WHERE username = @username;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedCustomersNumberById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedCustomersNumberById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedCustomersNumberById] 
     @id INT
@@ -2498,12 +2424,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedCustomersNumberByName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedCustomersNumberByName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedCustomersNumberByName] 
     @name NVARCHAR(50)
@@ -2514,12 +2439,11 @@ BEGIN
     WHERE name = @name;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedCustomersNumberByNameOrId]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedCustomersNumberByNameOrId]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedCustomersNumberByNameOrId]
     @id INT,
@@ -2532,12 +2456,11 @@ BEGIN
        OR id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedProductsNumberByBarcodeOrName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedProductsNumberByBarcodeOrName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedProductsNumberByBarcodeOrName] 
     @name NVARCHAR(50), 
@@ -2550,12 +2473,11 @@ BEGIN
        OR barcode = @barcode;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedProductsNumberByIdBarcodeName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedProductsNumberByIdBarcodeName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedProductsNumberByIdBarcodeName] 
     @id INT, 
@@ -2570,12 +2492,11 @@ BEGIN
        OR name = @name;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedPurchasesNumberById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedPurchasesNumberById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedPurchasesNumberById] 
     @id INT
@@ -2586,12 +2507,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedSalesLogNumberById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedSalesLogNumberById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedSalesLogNumberById] 
     @id INT
@@ -2602,12 +2522,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedSalesNumberById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedSalesNumberById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedSalesNumberById] 
     @id INT
@@ -2618,12 +2537,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedSuppliersByName]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedSuppliersByName]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedSuppliersByName] 
     @name NVARCHAR(50)
@@ -2634,12 +2552,11 @@ BEGIN
     WHERE name = @name;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedSuppliersNumberById]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedSuppliersNumberById]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedSuppliersNumberById]
     @id INT
@@ -2650,12 +2567,11 @@ BEGIN
     WHERE id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetExistedSuppliersNumberByNameOrId]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetExistedSuppliersNumberByNameOrId]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetExistedSuppliersNumberByNameOrId]
     @id INT, 
@@ -2668,12 +2584,11 @@ BEGIN
        OR id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetPrefValue]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetPrefValue]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 CREATE PROCEDURE [dbo].[GetPrefValue]
 	@name nvarchar(80)
 AS
@@ -2681,12 +2596,11 @@ AS
 	FROM Preference
 	WHERE name = @name
 GO
-/****** Object:  StoredProcedure [dbo].[GetUserRole]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[GetUserRole]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetUserRole]
     @username NVARCHAR(50) ,
@@ -2699,12 +2613,11 @@ BEGIN
 			AND Password = @password
 END
 GO
-/****** Object:  StoredProcedure [dbo].[IsPasswordCorrect]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[IsPasswordCorrect]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[IsPasswordCorrect]
     @username NVARCHAR(50) ,
@@ -2719,12 +2632,11 @@ BEGIN
 				 SELECT 'false'
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SetPrefValue]    Script Date: 21/03/2025 03:33:09 م ******/
+/****** Object:  StoredProcedure [dbo].[SetPrefValue]    Script Date: 26/03/2025 03:59:13 م ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 CREATE PROCEDURE [dbo].[SetPrefValue]
 	@name nvarchar(80) ,
 	@value nvarchar(500)
