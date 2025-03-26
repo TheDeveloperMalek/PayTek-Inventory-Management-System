@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Preferences));
             this.CompanyHeaderRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.pdfcompanyheader = new System.Windows.Forms.Label();
-            this.pdfpaymentinfo = new System.Windows.Forms.Label();
+            this.wordcompanyheader = new System.Windows.Forms.Label();
+            this.wordpaymentinfo = new System.Windows.Forms.Label();
             this.PaymentMethodRichTextBox = new System.Windows.Forms.RichTextBox();
             this.WordDate = new System.Windows.Forms.Label();
             this.PDFDateTimePicker = new Guna.UI2.WinForms.Guna2DateTimePicker();
@@ -48,27 +48,27 @@
             this.CompanyHeaderRichTextBox.TabIndex = 0;
             this.CompanyHeaderRichTextBox.Text = "";
             // 
-            // pdfcompanyheader
+            // wordcompanyheader
             // 
-            this.pdfcompanyheader.AutoSize = true;
-            this.pdfcompanyheader.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pdfcompanyheader.ForeColor = System.Drawing.Color.White;
-            this.pdfcompanyheader.Location = new System.Drawing.Point(12, 9);
-            this.pdfcompanyheader.Name = "pdfcompanyheader";
-            this.pdfcompanyheader.Size = new System.Drawing.Size(226, 24);
-            this.pdfcompanyheader.TabIndex = 4;
-            this.pdfcompanyheader.Text = "PDF Company Header";
+            this.wordcompanyheader.AutoSize = true;
+            this.wordcompanyheader.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wordcompanyheader.ForeColor = System.Drawing.Color.White;
+            this.wordcompanyheader.Location = new System.Drawing.Point(12, 9);
+            this.wordcompanyheader.Name = "wordcompanyheader";
+            this.wordcompanyheader.Size = new System.Drawing.Size(238, 24);
+            this.wordcompanyheader.TabIndex = 4;
+            this.wordcompanyheader.Text = "Word Company Header";
             // 
-            // pdfpaymentinfo
+            // wordpaymentinfo
             // 
-            this.pdfpaymentinfo.AutoSize = true;
-            this.pdfpaymentinfo.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pdfpaymentinfo.ForeColor = System.Drawing.Color.White;
-            this.pdfpaymentinfo.Location = new System.Drawing.Point(12, 153);
-            this.pdfpaymentinfo.Name = "pdfpaymentinfo";
-            this.pdfpaymentinfo.Size = new System.Drawing.Size(226, 24);
-            this.pdfpaymentinfo.TabIndex = 6;
-            this.pdfpaymentinfo.Text = "PDF Payment Method";
+            this.wordpaymentinfo.AutoSize = true;
+            this.wordpaymentinfo.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wordpaymentinfo.ForeColor = System.Drawing.Color.White;
+            this.wordpaymentinfo.Location = new System.Drawing.Point(12, 153);
+            this.wordpaymentinfo.Name = "wordpaymentinfo";
+            this.wordpaymentinfo.Size = new System.Drawing.Size(238, 24);
+            this.wordpaymentinfo.TabIndex = 6;
+            this.wordpaymentinfo.Text = "Word Payment Method";
             // 
             // PaymentMethodRichTextBox
             // 
@@ -142,9 +142,9 @@
             this.Controls.Add(this.EditPrefBtn);
             this.Controls.Add(this.PDFDateTimePicker);
             this.Controls.Add(this.WordDate);
-            this.Controls.Add(this.pdfpaymentinfo);
+            this.Controls.Add(this.wordpaymentinfo);
             this.Controls.Add(this.PaymentMethodRichTextBox);
-            this.Controls.Add(this.pdfcompanyheader);
+            this.Controls.Add(this.wordcompanyheader);
             this.Controls.Add(this.CompanyHeaderRichTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Preferences";
@@ -159,8 +159,8 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox CompanyHeaderRichTextBox;
-        private System.Windows.Forms.Label pdfcompanyheader;
-        private System.Windows.Forms.Label pdfpaymentinfo;
+        private System.Windows.Forms.Label wordcompanyheader;
+        private System.Windows.Forms.Label wordpaymentinfo;
         private System.Windows.Forms.RichTextBox PaymentMethodRichTextBox;
         private System.Windows.Forms.Label WordDate;
         private Guna.UI2.WinForms.Guna2DateTimePicker PDFDateTimePicker;
