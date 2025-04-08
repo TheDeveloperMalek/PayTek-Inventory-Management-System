@@ -41,48 +41,48 @@ namespace Inventory_Manager
             this.sidebar = new System.Windows.Forms.FlowLayoutPanel();
             this.BtnsPanel = new System.Windows.Forms.Panel();
             this.MenuLabel = new System.Windows.Forms.Label();
+            this.ShowBtnsNamesBtn = new System.Windows.Forms.Button();
             this.ProductsPanel = new System.Windows.Forms.Panel();
+            this.ProductsBtn = new System.Windows.Forms.Button();
             this.PurchasesPanel = new System.Windows.Forms.Panel();
+            this.PurchasesBtn = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.SalesBtn = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.SaleLogBtn = new System.Windows.Forms.Button();
             this.OffersLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.SuppliersBtn = new System.Windows.Forms.Button();
             this.SuppliersLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.CustomersBtn = new System.Windows.Forms.Button();
             this.CustomerLabel = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.ProductReportBtn = new System.Windows.Forms.Button();
             this.ProductsReportLabel = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.InventoryReportBtn = new System.Windows.Forms.Button();
             this.InventoryReportLabel = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.HomepageBtn = new System.Windows.Forms.Button();
             this.HomepageLabel = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.PrefButton = new System.Windows.Forms.Button();
+            this.PrefLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.RolesBtn = new System.Windows.Forms.Button();
             this.RolesLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.TerminalBtn = new System.Windows.Forms.Button();
             this.TerminalLabel = new System.Windows.Forms.Label();
             this.sideBarTimer = new System.Windows.Forms.Timer(this.components);
             this.NoticeLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.ChangePasswordBtn = new System.Windows.Forms.Button();
-            this.ViewFormPanel = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.PrefLabel = new System.Windows.Forms.Label();
-            this.RolesBtn = new System.Windows.Forms.Button();
-            this.TerminalBtn = new System.Windows.Forms.Button();
             this.CompanyLogoPicture = new System.Windows.Forms.PictureBox();
             this.NoticeArrowPicture = new System.Windows.Forms.PictureBox();
-            this.ShowBtnsNamesBtn = new System.Windows.Forms.Button();
-            this.ProductsBtn = new System.Windows.Forms.Button();
-            this.PurchasesBtn = new System.Windows.Forms.Button();
-            this.SalesBtn = new System.Windows.Forms.Button();
-            this.SaleLogBtn = new System.Windows.Forms.Button();
-            this.SuppliersBtn = new System.Windows.Forms.Button();
-            this.CustomersBtn = new System.Windows.Forms.Button();
-            this.ProductReportBtn = new System.Windows.Forms.Button();
-            this.InventoryReportBtn = new System.Windows.Forms.Button();
-            this.HomepageBtn = new System.Windows.Forms.Button();
-            this.PrefButton = new System.Windows.Forms.Button();
             this.AsideCubesPicture = new System.Windows.Forms.PictureBox();
+            this.ViewFormPanel = new System.Windows.Forms.Panel();
             this.sidebar.SuspendLayout();
             this.BtnsPanel.SuspendLayout();
             this.ProductsPanel.SuspendLayout();
@@ -94,9 +94,9 @@ namespace Inventory_Manager
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompanyLogoPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NoticeArrowPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AsideCubesPicture)).BeginInit();
@@ -106,10 +106,10 @@ namespace Inventory_Manager
             // 
             this.ProgramNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.ProgramNameLabel.AutoSize = true;
-            this.ProgramNameLabel.Font = new System.Drawing.Font("Showcard Gothic", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProgramNameLabel.Font = new System.Drawing.Font("Bauhaus 93", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProgramNameLabel.Location = new System.Drawing.Point(296, 9);
             this.ProgramNameLabel.Name = "ProgramNameLabel";
-            this.ProgramNameLabel.Size = new System.Drawing.Size(465, 106);
+            this.ProgramNameLabel.Size = new System.Drawing.Size(412, 98);
             this.ProgramNameLabel.TabIndex = 9;
             this.ProgramNameLabel.Text = " Paytek Inventory \r\nManagement System";
             // 
@@ -231,6 +231,21 @@ namespace Inventory_Manager
             this.MenuLabel.Text = "Menu";
             this.MenuLabel.Click += new System.EventHandler(this.MenuLabel_Click);
             // 
+            // ShowBtnsNamesBtn
+            // 
+            this.ShowBtnsNamesBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ShowBtnsNamesBtn.BackgroundImage = global::Inventory_Manager.Properties.Resources.menu;
+            this.ShowBtnsNamesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ShowBtnsNamesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ShowBtnsNamesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ShowBtnsNamesBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.ShowBtnsNamesBtn.Location = new System.Drawing.Point(3, 8);
+            this.ShowBtnsNamesBtn.Name = "ShowBtnsNamesBtn";
+            this.ShowBtnsNamesBtn.Size = new System.Drawing.Size(56, 47);
+            this.ShowBtnsNamesBtn.TabIndex = 0;
+            this.ShowBtnsNamesBtn.UseVisualStyleBackColor = false;
+            this.ShowBtnsNamesBtn.Click += new System.EventHandler(this.Menu_Click);
+            // 
             // ProductsPanel
             // 
             this.ProductsPanel.Controls.Add(this.ProductsBtn);
@@ -239,6 +254,23 @@ namespace Inventory_Manager
             this.ProductsPanel.Name = "ProductsPanel";
             this.ProductsPanel.Size = new System.Drawing.Size(224, 48);
             this.ProductsPanel.TabIndex = 2;
+            // 
+            // ProductsBtn
+            // 
+            this.ProductsBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ProductsBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ProductsBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ProductsBtn.BackgroundImage")));
+            this.ProductsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ProductsBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ProductsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ProductsBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.ProductsBtn.Location = new System.Drawing.Point(2, 2);
+            this.ProductsBtn.Name = "ProductsBtn";
+            this.ProductsBtn.Size = new System.Drawing.Size(56, 47);
+            this.ProductsBtn.TabIndex = 1;
+            this.ProductsBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ProductsBtn.UseVisualStyleBackColor = false;
+            this.ProductsBtn.Click += new System.EventHandler(this.ProductsBtn_Click);
             // 
             // PurchasesPanel
             // 
@@ -249,6 +281,23 @@ namespace Inventory_Manager
             this.PurchasesPanel.Size = new System.Drawing.Size(224, 48);
             this.PurchasesPanel.TabIndex = 5;
             // 
+            // PurchasesBtn
+            // 
+            this.PurchasesBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.PurchasesBtn.BackColor = System.Drawing.Color.Transparent;
+            this.PurchasesBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PurchasesBtn.BackgroundImage")));
+            this.PurchasesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PurchasesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PurchasesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PurchasesBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.PurchasesBtn.Location = new System.Drawing.Point(0, 1);
+            this.PurchasesBtn.Name = "PurchasesBtn";
+            this.PurchasesBtn.Size = new System.Drawing.Size(56, 47);
+            this.PurchasesBtn.TabIndex = 28;
+            this.PurchasesBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.PurchasesBtn.UseVisualStyleBackColor = false;
+            this.PurchasesBtn.Click += new System.EventHandler(this.PurchasesBtn_Click);
+            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.SalesBtn);
@@ -258,6 +307,24 @@ namespace Inventory_Manager
             this.panel6.Size = new System.Drawing.Size(224, 48);
             this.panel6.TabIndex = 6;
             // 
+            // SalesBtn
+            // 
+            this.SalesBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SalesBtn.AutoSize = true;
+            this.SalesBtn.BackColor = System.Drawing.Color.Transparent;
+            this.SalesBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SalesBtn.BackgroundImage")));
+            this.SalesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.SalesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SalesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SalesBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.SalesBtn.Location = new System.Drawing.Point(2, -1);
+            this.SalesBtn.Name = "SalesBtn";
+            this.SalesBtn.Size = new System.Drawing.Size(56, 47);
+            this.SalesBtn.TabIndex = 2;
+            this.SalesBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.SalesBtn.UseVisualStyleBackColor = false;
+            this.SalesBtn.Click += new System.EventHandler(this.SalesBtn_Click);
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.SaleLogBtn);
@@ -266,6 +333,23 @@ namespace Inventory_Manager
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(224, 48);
             this.panel5.TabIndex = 47;
+            // 
+            // SaleLogBtn
+            // 
+            this.SaleLogBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SaleLogBtn.BackColor = System.Drawing.Color.Transparent;
+            this.SaleLogBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SaleLogBtn.BackgroundImage")));
+            this.SaleLogBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.SaleLogBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SaleLogBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SaleLogBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.SaleLogBtn.Location = new System.Drawing.Point(0, 0);
+            this.SaleLogBtn.Name = "SaleLogBtn";
+            this.SaleLogBtn.Size = new System.Drawing.Size(56, 47);
+            this.SaleLogBtn.TabIndex = 4;
+            this.SaleLogBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.SaleLogBtn.UseVisualStyleBackColor = false;
+            this.SaleLogBtn.Click += new System.EventHandler(this.OffersBtn_Click);
             // 
             // OffersLabel
             // 
@@ -292,6 +376,23 @@ namespace Inventory_Manager
             this.panel4.Size = new System.Drawing.Size(224, 48);
             this.panel4.TabIndex = 4;
             // 
+            // SuppliersBtn
+            // 
+            this.SuppliersBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SuppliersBtn.BackColor = System.Drawing.Color.Transparent;
+            this.SuppliersBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SuppliersBtn.BackgroundImage")));
+            this.SuppliersBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.SuppliersBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SuppliersBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SuppliersBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.SuppliersBtn.Location = new System.Drawing.Point(2, -2);
+            this.SuppliersBtn.Name = "SuppliersBtn";
+            this.SuppliersBtn.Size = new System.Drawing.Size(56, 47);
+            this.SuppliersBtn.TabIndex = 27;
+            this.SuppliersBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.SuppliersBtn.UseVisualStyleBackColor = false;
+            this.SuppliersBtn.Click += new System.EventHandler(this.SuppliersBtn_Click);
+            // 
             // SuppliersLabel
             // 
             this.SuppliersLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -316,6 +417,23 @@ namespace Inventory_Manager
             this.panel3.Size = new System.Drawing.Size(224, 48);
             this.panel3.TabIndex = 3;
             // 
+            // CustomersBtn
+            // 
+            this.CustomersBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CustomersBtn.BackColor = System.Drawing.Color.Transparent;
+            this.CustomersBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CustomersBtn.BackgroundImage")));
+            this.CustomersBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.CustomersBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CustomersBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CustomersBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.CustomersBtn.Location = new System.Drawing.Point(2, 2);
+            this.CustomersBtn.Name = "CustomersBtn";
+            this.CustomersBtn.Size = new System.Drawing.Size(56, 47);
+            this.CustomersBtn.TabIndex = 3;
+            this.CustomersBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.CustomersBtn.UseVisualStyleBackColor = false;
+            this.CustomersBtn.Click += new System.EventHandler(this.CustomersBtn_Click);
+            // 
             // CustomerLabel
             // 
             this.CustomerLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -338,6 +456,24 @@ namespace Inventory_Manager
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(224, 48);
             this.panel8.TabIndex = 8;
+            // 
+            // ProductReportBtn
+            // 
+            this.ProductReportBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ProductReportBtn.AutoSize = true;
+            this.ProductReportBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ProductReportBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ProductReportBtn.BackgroundImage")));
+            this.ProductReportBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ProductReportBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ProductReportBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ProductReportBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.ProductReportBtn.Location = new System.Drawing.Point(4, 0);
+            this.ProductReportBtn.Name = "ProductReportBtn";
+            this.ProductReportBtn.Size = new System.Drawing.Size(56, 47);
+            this.ProductReportBtn.TabIndex = 5;
+            this.ProductReportBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ProductReportBtn.UseVisualStyleBackColor = false;
+            this.ProductReportBtn.Click += new System.EventHandler(this.ProductsReportBtn_Click);
             // 
             // ProductsReportLabel
             // 
@@ -364,6 +500,23 @@ namespace Inventory_Manager
             this.panel7.Size = new System.Drawing.Size(224, 48);
             this.panel7.TabIndex = 19;
             // 
+            // InventoryReportBtn
+            // 
+            this.InventoryReportBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.InventoryReportBtn.BackColor = System.Drawing.Color.Transparent;
+            this.InventoryReportBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("InventoryReportBtn.BackgroundImage")));
+            this.InventoryReportBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.InventoryReportBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.InventoryReportBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.InventoryReportBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.InventoryReportBtn.Location = new System.Drawing.Point(2, 0);
+            this.InventoryReportBtn.Name = "InventoryReportBtn";
+            this.InventoryReportBtn.Size = new System.Drawing.Size(56, 47);
+            this.InventoryReportBtn.TabIndex = 4;
+            this.InventoryReportBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.InventoryReportBtn.UseVisualStyleBackColor = false;
+            this.InventoryReportBtn.Click += new System.EventHandler(this.InventoryReportBtn_Click);
+            // 
             // InventoryReportLabel
             // 
             this.InventoryReportLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -389,6 +542,24 @@ namespace Inventory_Manager
             this.panel9.Size = new System.Drawing.Size(224, 48);
             this.panel9.TabIndex = 21;
             // 
+            // HomepageBtn
+            // 
+            this.HomepageBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.HomepageBtn.AutoSize = true;
+            this.HomepageBtn.BackColor = System.Drawing.Color.White;
+            this.HomepageBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HomepageBtn.BackgroundImage")));
+            this.HomepageBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.HomepageBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.HomepageBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.HomepageBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.HomepageBtn.Location = new System.Drawing.Point(3, -4);
+            this.HomepageBtn.Name = "HomepageBtn";
+            this.HomepageBtn.Size = new System.Drawing.Size(56, 47);
+            this.HomepageBtn.TabIndex = 5;
+            this.HomepageBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.HomepageBtn.UseVisualStyleBackColor = false;
+            this.HomepageBtn.Click += new System.EventHandler(this.HomepageBtn_Click);
+            // 
             // HomepageLabel
             // 
             this.HomepageLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -405,6 +576,48 @@ namespace Inventory_Manager
             this.HomepageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.HomepageLabel.Click += new System.EventHandler(this.HomepageLabel_Click);
             // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.PrefButton);
+            this.panel10.Controls.Add(this.PrefLabel);
+            this.panel10.Location = new System.Drawing.Point(3, 553);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(224, 48);
+            this.panel10.TabIndex = 48;
+            // 
+            // PrefButton
+            // 
+            this.PrefButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.PrefButton.BackColor = System.Drawing.Color.Transparent;
+            this.PrefButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PrefButton.BackgroundImage")));
+            this.PrefButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PrefButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PrefButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PrefButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.PrefButton.Location = new System.Drawing.Point(0, -1);
+            this.PrefButton.Name = "PrefButton";
+            this.PrefButton.Size = new System.Drawing.Size(56, 47);
+            this.PrefButton.TabIndex = 4;
+            this.PrefButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.PrefButton.UseVisualStyleBackColor = false;
+            this.PrefButton.Click += new System.EventHandler(this.PrefButton_Click);
+            // 
+            // PrefLabel
+            // 
+            this.PrefLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.PrefLabel.AutoSize = true;
+            this.PrefLabel.BackColor = System.Drawing.Color.Transparent;
+            this.PrefLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PrefLabel.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PrefLabel.ForeColor = System.Drawing.Color.White;
+            this.PrefLabel.Location = new System.Drawing.Point(74, 15);
+            this.PrefLabel.Name = "PrefLabel";
+            this.PrefLabel.Size = new System.Drawing.Size(121, 21);
+            this.PrefLabel.TabIndex = 19;
+            this.PrefLabel.Text = "Preferences";
+            this.PrefLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PrefLabel.Click += new System.EventHandler(this.PrefLabel_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.RolesBtn);
@@ -413,6 +626,23 @@ namespace Inventory_Manager
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(224, 48);
             this.panel1.TabIndex = 45;
+            // 
+            // RolesBtn
+            // 
+            this.RolesBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RolesBtn.BackColor = System.Drawing.Color.Transparent;
+            this.RolesBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RolesBtn.BackgroundImage")));
+            this.RolesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.RolesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RolesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RolesBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.RolesBtn.Location = new System.Drawing.Point(0, -1);
+            this.RolesBtn.Name = "RolesBtn";
+            this.RolesBtn.Size = new System.Drawing.Size(56, 47);
+            this.RolesBtn.TabIndex = 4;
+            this.RolesBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.RolesBtn.UseVisualStyleBackColor = false;
+            this.RolesBtn.Click += new System.EventHandler(this.RolesBtn_Click);
             // 
             // RolesLabel
             // 
@@ -438,6 +668,23 @@ namespace Inventory_Manager
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(224, 48);
             this.panel2.TabIndex = 46;
+            // 
+            // TerminalBtn
+            // 
+            this.TerminalBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TerminalBtn.BackColor = System.Drawing.Color.Transparent;
+            this.TerminalBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TerminalBtn.BackgroundImage")));
+            this.TerminalBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.TerminalBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TerminalBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TerminalBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.TerminalBtn.Location = new System.Drawing.Point(0, 0);
+            this.TerminalBtn.Name = "TerminalBtn";
+            this.TerminalBtn.Size = new System.Drawing.Size(56, 47);
+            this.TerminalBtn.TabIndex = 4;
+            this.TerminalBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.TerminalBtn.UseVisualStyleBackColor = false;
+            this.TerminalBtn.Click += new System.EventHandler(this.TerminalBtn_Click);
             // 
             // TerminalLabel
             // 
@@ -465,10 +712,10 @@ namespace Inventory_Manager
             this.NoticeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NoticeLabel.AutoSize = true;
             this.NoticeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.NoticeLabel.Font = new System.Drawing.Font("MV Boli", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NoticeLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NoticeLabel.Location = new System.Drawing.Point(431, 238);
             this.NoticeLabel.Name = "NoticeLabel";
-            this.NoticeLabel.Size = new System.Drawing.Size(474, 138);
+            this.NoticeLabel.Size = new System.Drawing.Size(408, 120);
             this.NoticeLabel.TabIndex = 35;
             this.NoticeLabel.Text = "On the left  you will find\r\nessential buttons for \r\nmanaging";
             // 
@@ -499,74 +746,6 @@ namespace Inventory_Manager
             this.ChangePasswordBtn.UseVisualStyleBackColor = false;
             this.ChangePasswordBtn.Click += new System.EventHandler(this.ChangeUserPasswordBtn_Click);
             // 
-            // ViewFormPanel
-            // 
-            this.ViewFormPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ViewFormPanel.Location = new System.Drawing.Point(67, 0);
-            this.ViewFormPanel.Name = "ViewFormPanel";
-            this.ViewFormPanel.Size = new System.Drawing.Size(1010, 706);
-            this.ViewFormPanel.TabIndex = 47;
-            this.ViewFormPanel.Visible = false;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.PrefButton);
-            this.panel10.Controls.Add(this.PrefLabel);
-            this.panel10.Location = new System.Drawing.Point(3, 553);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(224, 48);
-            this.panel10.TabIndex = 48;
-            // 
-            // PrefLabel
-            // 
-            this.PrefLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.PrefLabel.AutoSize = true;
-            this.PrefLabel.BackColor = System.Drawing.Color.Transparent;
-            this.PrefLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PrefLabel.Font = new System.Drawing.Font("Lucida Calligraphy", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrefLabel.ForeColor = System.Drawing.Color.White;
-            this.PrefLabel.Location = new System.Drawing.Point(74, 15);
-            this.PrefLabel.Name = "PrefLabel";
-            this.PrefLabel.Size = new System.Drawing.Size(121, 21);
-            this.PrefLabel.TabIndex = 19;
-            this.PrefLabel.Text = "Preferences";
-            this.PrefLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.PrefLabel.Click += new System.EventHandler(this.PrefLabel_Click);
-            // 
-            // RolesBtn
-            // 
-            this.RolesBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RolesBtn.BackColor = System.Drawing.Color.Transparent;
-            this.RolesBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RolesBtn.BackgroundImage")));
-            this.RolesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.RolesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RolesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RolesBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.RolesBtn.Location = new System.Drawing.Point(0, -1);
-            this.RolesBtn.Name = "RolesBtn";
-            this.RolesBtn.Size = new System.Drawing.Size(56, 47);
-            this.RolesBtn.TabIndex = 4;
-            this.RolesBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.RolesBtn.UseVisualStyleBackColor = false;
-            this.RolesBtn.Click += new System.EventHandler(this.RolesBtn_Click);
-            // 
-            // TerminalBtn
-            // 
-            this.TerminalBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.TerminalBtn.BackColor = System.Drawing.Color.Transparent;
-            this.TerminalBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TerminalBtn.BackgroundImage")));
-            this.TerminalBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.TerminalBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.TerminalBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TerminalBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.TerminalBtn.Location = new System.Drawing.Point(0, 0);
-            this.TerminalBtn.Name = "TerminalBtn";
-            this.TerminalBtn.Size = new System.Drawing.Size(56, 47);
-            this.TerminalBtn.TabIndex = 4;
-            this.TerminalBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.TerminalBtn.UseVisualStyleBackColor = false;
-            this.TerminalBtn.Click += new System.EventHandler(this.TerminalBtn_Click);
-            // 
             // CompanyLogoPicture
             // 
             this.CompanyLogoPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -590,194 +769,6 @@ namespace Inventory_Manager
             this.NoticeArrowPicture.TabIndex = 34;
             this.NoticeArrowPicture.TabStop = false;
             // 
-            // ShowBtnsNamesBtn
-            // 
-            this.ShowBtnsNamesBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ShowBtnsNamesBtn.BackgroundImage = global::Inventory_Manager.Properties.Resources.menu;
-            this.ShowBtnsNamesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ShowBtnsNamesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ShowBtnsNamesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShowBtnsNamesBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.ShowBtnsNamesBtn.Location = new System.Drawing.Point(3, 8);
-            this.ShowBtnsNamesBtn.Name = "ShowBtnsNamesBtn";
-            this.ShowBtnsNamesBtn.Size = new System.Drawing.Size(56, 47);
-            this.ShowBtnsNamesBtn.TabIndex = 0;
-            this.ShowBtnsNamesBtn.UseVisualStyleBackColor = false;
-            this.ShowBtnsNamesBtn.Click += new System.EventHandler(this.Menu_Click);
-            // 
-            // ProductsBtn
-            // 
-            this.ProductsBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ProductsBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ProductsBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ProductsBtn.BackgroundImage")));
-            this.ProductsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ProductsBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ProductsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProductsBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.ProductsBtn.Location = new System.Drawing.Point(2, 2);
-            this.ProductsBtn.Name = "ProductsBtn";
-            this.ProductsBtn.Size = new System.Drawing.Size(56, 47);
-            this.ProductsBtn.TabIndex = 1;
-            this.ProductsBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.ProductsBtn.UseVisualStyleBackColor = false;
-            this.ProductsBtn.Click += new System.EventHandler(this.ProductsBtn_Click);
-            // 
-            // PurchasesBtn
-            // 
-            this.PurchasesBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.PurchasesBtn.BackColor = System.Drawing.Color.Transparent;
-            this.PurchasesBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PurchasesBtn.BackgroundImage")));
-            this.PurchasesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PurchasesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PurchasesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PurchasesBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.PurchasesBtn.Location = new System.Drawing.Point(0, 1);
-            this.PurchasesBtn.Name = "PurchasesBtn";
-            this.PurchasesBtn.Size = new System.Drawing.Size(56, 47);
-            this.PurchasesBtn.TabIndex = 28;
-            this.PurchasesBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.PurchasesBtn.UseVisualStyleBackColor = false;
-            this.PurchasesBtn.Click += new System.EventHandler(this.PurchasesBtn_Click);
-            // 
-            // SalesBtn
-            // 
-            this.SalesBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SalesBtn.AutoSize = true;
-            this.SalesBtn.BackColor = System.Drawing.Color.Transparent;
-            this.SalesBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SalesBtn.BackgroundImage")));
-            this.SalesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.SalesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SalesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SalesBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.SalesBtn.Location = new System.Drawing.Point(2, -1);
-            this.SalesBtn.Name = "SalesBtn";
-            this.SalesBtn.Size = new System.Drawing.Size(56, 47);
-            this.SalesBtn.TabIndex = 2;
-            this.SalesBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.SalesBtn.UseVisualStyleBackColor = false;
-            this.SalesBtn.Click += new System.EventHandler(this.SalesBtn_Click);
-            // 
-            // SaleLogBtn
-            // 
-            this.SaleLogBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SaleLogBtn.BackColor = System.Drawing.Color.Transparent;
-            this.SaleLogBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SaleLogBtn.BackgroundImage")));
-            this.SaleLogBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.SaleLogBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SaleLogBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SaleLogBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.SaleLogBtn.Location = new System.Drawing.Point(0, 0);
-            this.SaleLogBtn.Name = "SaleLogBtn";
-            this.SaleLogBtn.Size = new System.Drawing.Size(56, 47);
-            this.SaleLogBtn.TabIndex = 4;
-            this.SaleLogBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.SaleLogBtn.UseVisualStyleBackColor = false;
-            this.SaleLogBtn.Click += new System.EventHandler(this.OffersBtn_Click);
-            // 
-            // SuppliersBtn
-            // 
-            this.SuppliersBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SuppliersBtn.BackColor = System.Drawing.Color.Transparent;
-            this.SuppliersBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SuppliersBtn.BackgroundImage")));
-            this.SuppliersBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.SuppliersBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SuppliersBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SuppliersBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.SuppliersBtn.Location = new System.Drawing.Point(2, -2);
-            this.SuppliersBtn.Name = "SuppliersBtn";
-            this.SuppliersBtn.Size = new System.Drawing.Size(56, 47);
-            this.SuppliersBtn.TabIndex = 27;
-            this.SuppliersBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.SuppliersBtn.UseVisualStyleBackColor = false;
-            this.SuppliersBtn.Click += new System.EventHandler(this.SuppliersBtn_Click);
-            // 
-            // CustomersBtn
-            // 
-            this.CustomersBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CustomersBtn.BackColor = System.Drawing.Color.Transparent;
-            this.CustomersBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CustomersBtn.BackgroundImage")));
-            this.CustomersBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.CustomersBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CustomersBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CustomersBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.CustomersBtn.Location = new System.Drawing.Point(2, 2);
-            this.CustomersBtn.Name = "CustomersBtn";
-            this.CustomersBtn.Size = new System.Drawing.Size(56, 47);
-            this.CustomersBtn.TabIndex = 3;
-            this.CustomersBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.CustomersBtn.UseVisualStyleBackColor = false;
-            this.CustomersBtn.Click += new System.EventHandler(this.CustomersBtn_Click);
-            // 
-            // ProductReportBtn
-            // 
-            this.ProductReportBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ProductReportBtn.AutoSize = true;
-            this.ProductReportBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ProductReportBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ProductReportBtn.BackgroundImage")));
-            this.ProductReportBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ProductReportBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ProductReportBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProductReportBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.ProductReportBtn.Location = new System.Drawing.Point(4, 0);
-            this.ProductReportBtn.Name = "ProductReportBtn";
-            this.ProductReportBtn.Size = new System.Drawing.Size(56, 47);
-            this.ProductReportBtn.TabIndex = 5;
-            this.ProductReportBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.ProductReportBtn.UseVisualStyleBackColor = false;
-            this.ProductReportBtn.Click += new System.EventHandler(this.ProductsReportBtn_Click);
-            // 
-            // InventoryReportBtn
-            // 
-            this.InventoryReportBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.InventoryReportBtn.BackColor = System.Drawing.Color.Transparent;
-            this.InventoryReportBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("InventoryReportBtn.BackgroundImage")));
-            this.InventoryReportBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.InventoryReportBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.InventoryReportBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.InventoryReportBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.InventoryReportBtn.Location = new System.Drawing.Point(2, 0);
-            this.InventoryReportBtn.Name = "InventoryReportBtn";
-            this.InventoryReportBtn.Size = new System.Drawing.Size(56, 47);
-            this.InventoryReportBtn.TabIndex = 4;
-            this.InventoryReportBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.InventoryReportBtn.UseVisualStyleBackColor = false;
-            this.InventoryReportBtn.Click += new System.EventHandler(this.InventoryReportBtn_Click);
-            // 
-            // HomepageBtn
-            // 
-            this.HomepageBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.HomepageBtn.AutoSize = true;
-            this.HomepageBtn.BackColor = System.Drawing.Color.White;
-            this.HomepageBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HomepageBtn.BackgroundImage")));
-            this.HomepageBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.HomepageBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.HomepageBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HomepageBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.HomepageBtn.Location = new System.Drawing.Point(3, -4);
-            this.HomepageBtn.Name = "HomepageBtn";
-            this.HomepageBtn.Size = new System.Drawing.Size(56, 47);
-            this.HomepageBtn.TabIndex = 5;
-            this.HomepageBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.HomepageBtn.UseVisualStyleBackColor = false;
-            this.HomepageBtn.Click += new System.EventHandler(this.HomepageBtn_Click);
-            // 
-            // PrefButton
-            // 
-            this.PrefButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.PrefButton.BackColor = System.Drawing.Color.Transparent;
-            this.PrefButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PrefButton.BackgroundImage")));
-            this.PrefButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PrefButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PrefButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PrefButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.PrefButton.Location = new System.Drawing.Point(0, -1);
-            this.PrefButton.Name = "PrefButton";
-            this.PrefButton.Size = new System.Drawing.Size(56, 47);
-            this.PrefButton.TabIndex = 4;
-            this.PrefButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.PrefButton.UseVisualStyleBackColor = false;
-            this.PrefButton.Click += new System.EventHandler(this.PrefButton_Click);
-            // 
             // AsideCubesPicture
             // 
             this.AsideCubesPicture.BackColor = System.Drawing.Color.Transparent;
@@ -789,6 +780,15 @@ namespace Inventory_Manager
             this.AsideCubesPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.AsideCubesPicture.TabIndex = 21;
             this.AsideCubesPicture.TabStop = false;
+            // 
+            // ViewFormPanel
+            // 
+            this.ViewFormPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ViewFormPanel.Location = new System.Drawing.Point(67, 0);
+            this.ViewFormPanel.Name = "ViewFormPanel";
+            this.ViewFormPanel.Size = new System.Drawing.Size(1010, 706);
+            this.ViewFormPanel.TabIndex = 48;
+            this.ViewFormPanel.Visible = false;
             // 
             // Homepage
             // 
@@ -808,6 +808,7 @@ namespace Inventory_Manager
             this.Controls.Add(this.label9);
             this.Controls.Add(this.AsideCubesPicture);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(1153, 726);
             this.Name = "Homepage";
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -835,12 +836,12 @@ namespace Inventory_Manager
             this.panel7.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompanyLogoPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NoticeArrowPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AsideCubesPicture)).EndInit();
@@ -897,10 +898,10 @@ namespace Inventory_Manager
         private Panel panel2;
         private Button TerminalBtn;
         private Label TerminalLabel;
-        private Panel ViewFormPanel;
         private Panel panel10;
         private Button PrefButton;
         private Label PrefLabel;
+        private Panel ViewFormPanel;
     }
 }
 

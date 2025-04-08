@@ -21,7 +21,7 @@ namespace Inventory_Manager
 
         private void ChangeUsersPassword_Load(object sender, EventArgs e)
         {
-            CurrentUserPassword.Text = TextCustomizer(Shared.currentUserPassword);
+            CurrentUserPassword.Text = TextFormatter(Shared.currentUserPassword);
         }
 
         #endregion
@@ -31,7 +31,7 @@ namespace Inventory_Manager
         private void KeysShortcuts(object sender, KeyEventArgs e)
         {
             Shared.KeysShortcuts(sender, e, this, false);
-            if (e.KeyCode == Keys.Enter) //change password
+            if (e.KeyCode == Keys.Enter)
             {
                 LogintBtn_Click(sender, e);
                 return;
@@ -39,7 +39,7 @@ namespace Inventory_Manager
         }
 
 
-        string TextCustomizer(string input)
+        string TextFormatter(string input)
         {
             var output = "";
             if (input.Length > 20)
@@ -64,7 +64,7 @@ namespace Inventory_Manager
 
         private void LogintBtn_Click(object sender, EventArgs e)
         {
-            CurrentUserPassword.Text = TextCustomizer(Shared.currentUserPassword);
+            CurrentUserPassword.Text = TextFormatter(Shared.currentUserPassword);
 
             if (Shared.ArePasswordConditionsFulfilled(NewPasswordTextBox.Text))
             {
@@ -80,7 +80,7 @@ namespace Inventory_Manager
                         cmd.ExecuteNonQuery();
                         Shared.ProcessIsDoneMessageBox("password", "changed");
                         Shared.currentUserPassword = NewPasswordTextBox.Text;
-                        CurrentUserPassword.Text = TextCustomizer(Shared.currentUserPassword);
+                        CurrentUserPassword.Text = TextFormatter(Shared.currentUserPassword);
                     }
                 }
                 catch (Exception exc)

@@ -85,21 +85,33 @@ namespace Inventory_Manager
             {
                 case 0:
                     UsernameTextBox.Text = text;
+                    Shared.SearchCommandAssembler(dataGridView1, UsernameTextBox, "Roles", "username", "username", excludeRow: true, excludedBy: "UserType", excludedValue: "Developer");
+                    ShowDecryptedPasswords();
                     break;
                 case 1:
                     PasswordTextBox.Text = text;
+                    var encryptedTextBox = new TextBox();
+                    encryptedTextBox.Text = Shared.Encrypt(PasswordTextBox.Text);
+                    Shared.SearchCommandAssembler(dataGridView1, encryptedTextBox, "Roles", "password", "username", excludeRow: true, excludedBy: "UserType", excludedValue: "Developer");
+                    ShowDecryptedPasswords();
                     break;
             }
         }
 
         private void PasswordTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            Shared.SearchCommandAssembler(dataGridView1, PasswordTextBox, "Roles", "password", "username", excludeRow: true, excludedBy: "UserType", excludedValue: "Developer");
+            var encryptedTextBox = new TextBox
+            {
+                Text = Shared.Encrypt(PasswordTextBox.Text)
+            };
+            Shared.SearchCommandAssembler(dataGridView1, encryptedTextBox, "Roles", "password", "username", excludeRow: true, excludedBy: "UserType", excludedValue: "Developer");
+                    ShowDecryptedPasswords();
         }
 
         private void UsernameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             Shared.SearchCommandAssembler(dataGridView1, UsernameTextBox, "Roles", "username", "username", excludeRow: true, excludedBy: "UserType", excludedValue: "Developer");
+                    ShowDecryptedPasswords();
         }
 
         #endregion

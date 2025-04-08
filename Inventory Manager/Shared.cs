@@ -66,7 +66,6 @@ namespace Inventory_Manager
         #region Sale Word Variables
         static string customerName = "";
         static string headertitle = "";
-        static double totalBill = 0;
         static decimal discountPercentage = 0;
         static readonly List<string> customersNames = new List<string>() { };
 
@@ -148,7 +147,7 @@ namespace Inventory_Manager
                     else
                     {
                         CurrentSNO = Preferences.GetPrefValue("CurrentSaleNO");
-                        targetCopyFolderPath += @"\الفواتير";
+                        targetCopyFolderPath += @"\الفواتير";   
                         if (!Directory.Exists(targetCopyFolderPath))
                             Directory.CreateDirectory(targetCopyFolderPath);
                         Preferences.SetPrefValue("CurrentSaleNO", (int.Parse(CurrentSNO) + 1).ToString("D4"));
@@ -156,7 +155,6 @@ namespace Inventory_Manager
                     var wordCopyFilePath = $@"{targetCopyFolderPath}\{headertitle} {customerName} NO{CurrentSNO}.docx";
                     doc.SaveAs2(wordCopyFilePath);
                     discountPercentage = 0;
-                    totalBill = 0;
                     customerName = "";
                     headertitle = "";
                     customersNames.Clear();
@@ -425,17 +423,16 @@ namespace Inventory_Manager
 
             e.SuppressKeyPress = false;
         }
-        public static void ShowToast(string message, object window)
+        public static void ShowToast(string message, Form window)
         {
-            var thisWindow = window as Form;
             ToolTip toast = new ToolTip();
             int screenWidth = Screen.PrimaryScreen.Bounds.Width,
             screenHeight = Screen.PrimaryScreen.Bounds.Height,
             toastWidth = 110,
             toastHeight = 50,
-            x = (screenWidth - toastWidth) / 2,
+            x = (screenWidth - toastWidth) / 2 - 75,
             y = screenHeight - toastHeight - 150;
-            toast.Show(message, thisWindow, x, y, 2500);
+            toast.Show(message, window, x, y, 2500);
         }
 
         public static string ProductBarcodeGetter(string targetColumn, TextBox tb)
@@ -948,6 +945,7 @@ to: {endDate.Value.ToShortDateString()} ";
             if (sound != null)
                 using (SoundPlayer player = new SoundPlayer(sound))
                     player.Play();
+            
         }
 
         public static void ProcessIsDoneMessageBox(string target, string doneProcess)

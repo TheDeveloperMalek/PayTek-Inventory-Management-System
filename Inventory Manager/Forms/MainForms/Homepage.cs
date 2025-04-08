@@ -67,7 +67,7 @@ namespace Inventory_Manager
             }
         }
 
-        private void Auth_FormClosed(object sender, EventArgs e) //event when the auth is closed
+        private void Auth_FormClosed(object sender, EventArgs e)
         {
             this.Close();
         }

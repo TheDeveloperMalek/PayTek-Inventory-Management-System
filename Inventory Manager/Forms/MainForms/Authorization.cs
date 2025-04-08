@@ -34,7 +34,7 @@ namespace Inventory_Manager
         private void KeysShortcuts(object sender, KeyEventArgs e)
         {
             Shared.KeysShortcuts(sender, e, this, false);
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && PasswordTextBox.Text != "" && UserNameTextBox.Text != "")
             {
                 e.SuppressKeyPress = true;
                 LogintBtn_Click(sender, e);
@@ -87,7 +87,7 @@ namespace Inventory_Manager
                 var h = new Homepage();
                 h.FormClosed += Homepage_FormClosed;
                 h.Show();
-                Shared.defaultUserType = UserType.User;
+            Shared.defaultUserType = UserType.User;
         }
 
         #endregion
@@ -111,7 +111,7 @@ namespace Inventory_Manager
                     else
                         errorMessage = "Password is not correct!";
                 else
-                    errorMessage = "Username is not exists!";
+                    errorMessage = "Username does not exist!";
             await ShowErrorMessageWhileLogin();
             }
             catch (Exception exc)
